@@ -53,23 +53,57 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
         free(ll_input_cmd_node);
  
         int msg_length = strlen(outgoing_cmd->message) + 1; // +1 to account for null terminator 
+        //print msg_length
+        
         if (msg_length > FRAME_PAYLOAD_SIZE) {
             // Do something about messages that exceed the frame size
             printf(
                 "<SEND_%d>: sending messages of length greater than %d is not "
                 "implemented\n",
                 host->id, MAX_FRAME_SIZE);
+            
+            
+            //mimic the else part, but deal with storing first 64 bytes into buffer[0] and next 64 into buffer[1]
+            //and so on
+
+            int num_frames = ceil((double)msg_length / FRAME_PAYLOAD_SIZE);
+           
+            for (int i = 0; i < num_frames; i++) {
+                Frame* outgoing_frame = malloc(sizeof(Frame));
+                assert(outgoing_frame);
+                outgoing_frame->src_id = outgoing_cmd->src_id;
+                outgoing_frame->dst_id = outgoing_cmd->dst_id;
+                outgoing_frame->remaining_msg_bytes = msg_length - i * FRAME_PAYLOAD_SIZE;
+                if (outgoing_frame->remaining_msg_bytes > FRAME_PAYLOAD_SIZE) {
+                    outgoing_frame->remaining_msg_bytes = FRAME_PAYLOAD_SIZE;
+                }
+                memcpy(outgoing_frame->data, outgoing_cmd->message + i * FRAME_PAYLOAD_SIZE, outgoing_frame->remaining_msg_bytes);
+                //print outgoing_frame->data
+                //print outgoing_frame->remaining_msg_bytes
+                //print outgoing_frame->seq_num
+                //print outgoing_frame->src_id
+                //print outgoing_frame->dst_id
+                ll_append_node(&host->buffered_outframes_head, outgoing_frame);
+                
+            } 
+           
+           
         } else {
             Frame* outgoing_frame = malloc(sizeof(Frame));
+            
             assert(outgoing_frame);
             strcpy(outgoing_frame->data, outgoing_cmd->message);
+            //print outgoing_frame->data
+           
             outgoing_frame->src_id = outgoing_cmd->src_id;
             outgoing_frame->dst_id = outgoing_cmd->dst_id;
             // At this point, we don't need the outgoing_cmd
             free(outgoing_cmd->message);
             free(outgoing_cmd);
-
+            
+            
             ll_append_node(&host->buffered_outframes_head, outgoing_frame);
+            
         }
     }
 }

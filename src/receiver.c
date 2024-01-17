@@ -13,18 +13,37 @@ void handle_incoming_frames(Host* host) {
     //    6) Implement the cumulative acknowledgement part of the sliding window protocol
     //    7) Append acknowledgement frames to the outgoing_frames_head queue
     int incoming_frames_length = ll_get_length(host->incoming_frames_head);
-    while (incoming_frames_length > 0) {
+    //print income_frames_length to stederr
+
+    //printf("incoming_frames_length: %d\n", incoming_frames_length);
+    if (incoming_frames_length > 0) {
+        char temp[incoming_frames_length + 1][59];
         // Pop a node off the front of the link list and update the count
-        LLnode* ll_inmsg_node = ll_pop_node(&host->incoming_frames_head);
-        incoming_frames_length = ll_get_length(host->incoming_frames_head);
+        int t = incoming_frames_length;
+        while (incoming_frames_length > 0){
+            LLnode* ll_inmsg_node = ll_pop_node(&host->incoming_frames_head);
+            incoming_frames_length = ll_get_length(host->incoming_frames_head);
+        //print incoming_frames_length to stederr
 
-        Frame* inframe = ll_inmsg_node->value; 
+        
+            Frame* inframe = ll_inmsg_node->value; 
+            
+            strcpy(temp[incoming_frames_length], inframe->data); // Copy inframe->data into temp
+            
+            
+            free(inframe);
+        }
+        char combinedString[150];
+        for (int i = t - 1; i >= 0;i--){
+            strcat(combinedString, temp[i]);
+        }
+        
 
-        printf("<RECV_%d>:[%s]\n", host->id, inframe->data);
-
-        free(inframe);
-        free(ll_inmsg_node);
+    // Print the result
+        printf("<RECV_%d>:[%s]\n", host->id, combinedString);
+        
     }
+
 }
 
 void run_receivers() {
