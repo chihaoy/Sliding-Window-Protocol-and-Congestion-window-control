@@ -44,7 +44,6 @@ void ll_append_node(LLnode** head_ptr, void* value) {
         (*head_ptr) = new_node;
         new_node->prev = new_node;
         new_node->next = new_node;
-
     } else {
         // Node exists by itself
         prev_last_node = head->prev;

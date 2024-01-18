@@ -33,7 +33,7 @@ void handle_incoming_frames(Host* host) {
             
             free(inframe);
         }
-        char combinedString[150];
+        char combinedString[(incoming_frames_length + 1) * 59];
         for (int i = t - 1; i >= 0;i--){
             strcat(combinedString, temp[i]);
         }
