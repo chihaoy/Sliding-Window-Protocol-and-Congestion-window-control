@@ -145,10 +145,15 @@ void handle_input() {
 // Exit the program only if the user inputted exit and 
 // all the senders are not active
 void graceful_exit() {
+    //print glb_exit_main
+    
     if (glb_exit_main) {
+        //print random string
+        printf("glb_exit_frefrefefffffffffffffmain: %d\n", glb_exit_main);
         int i; 
         for (i = 0; i < glb_num_hosts; i++) {
             if ((&glb_hosts_array[i])->active) {
+                fprintf(stderr,"Host %d is still active\n", i);
                 return; 
             }
         }

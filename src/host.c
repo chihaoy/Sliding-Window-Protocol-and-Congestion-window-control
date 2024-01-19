@@ -40,5 +40,6 @@ void run_hosts() {
     run_senders(); 
     send_data_frames(); 
     run_receivers(); 
+   
     send_ack_frames(); 
 }

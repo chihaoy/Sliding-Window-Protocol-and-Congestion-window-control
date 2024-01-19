@@ -101,7 +101,7 @@ void send_frame(Frame* incoming_frame, double glb_corrupt_prob) {
 
     ll_append_node(&dst_host->incoming_frames_head,
                     (void*) corrupted_frame);
-
+    
     free(incoming_frame);
     free(recv_char_buffer); 
 }
@@ -131,6 +131,7 @@ void send_data_frames() {
             // host_in_dataframe_num[incoming_frame->dst_id] += 1; 
             // ******** END OF TESTING SECTION ************
             send_frame(incoming_frame, glb_sysconfig.corrupt_prob);
+            
             incoming_frames_accept[i] += 1; 
 
             free(ll_buffered_node);
@@ -157,6 +158,8 @@ void send_data_frames() {
             Host* host = &glb_hosts_array[sender_id]; 
 
             if (ll_get_length(host->outgoing_frames_head) > 0) {
+                //print ll_get_length(host->outgoing_frames_head)
+            
                 LLnode* ll_outframe_node = ll_pop_node(&host->outgoing_frames_head);
                 Frame* outgoing_frame = ll_outframe_node->value;
 
@@ -226,10 +229,20 @@ void send_ack_frames() {
     for (int i = 0; i < glb_num_hosts; i++) {
         Host* host = &glb_hosts_array[i]; 
         while (ll_get_length(host->outgoing_frames_head) > 0) {
+            //print ll_get_length(host->outgoing_frames_head)
+            
             LLnode* ll_outframe_node = ll_pop_node(&host->outgoing_frames_head);
-            Frame* outgoing_frame = ll_outframe_node->value;
+            
+            //print address of outgoing_frame_head
 
+            
+            Frame* outgoing_frame = ll_outframe_node->value;
+            //print src_id of outgoing_frame
+           
+            //print string ok
+            //printf("outgoing_frame->data: %s\n", outgoing_frame->src_id);
             frame_sanity_check(outgoing_frame); 
+           
             // ******** SECTION FOR TESTING ****************
             // Count ack frames accepted
             // host_out_ackframe_num[outgoing_frame->src_id] += 1; 

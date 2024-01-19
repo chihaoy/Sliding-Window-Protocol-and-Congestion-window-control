@@ -28,7 +28,17 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
     //    3) Check if the ack is valid i.e. within the window slot 
     //    4) Implement logic as per sliding window protocol to track ACK for what frame is expected,
     //       and what to do when ACK for expected frame is received
-
+    if (ll_get_length(host->incoming_frames_head) != 0) {
+        LLnode* ll_input_cmd_node = ll_pop_node(&host->incoming_frames_head);
+        Frame* inframe = (Frame*) ll_input_cmd_node->value;
+        //print inframe->src_id and inframe->dst_id
+        printf("inframe->src_id: %d\n", inframe->src_id);
+        printf("inframe->dst_id: %d\n", inframe->dst_id);
+    }
+    
+    
+    //print inframe->src_id and inframe->dst_id
+    
     if (host->id == glb_sysconfig.host_send_cc_id) {
         fprintf(cc_diagnostics,"%d,%d,%d,",host->round_trip_num, num_acks_received[glb_sysconfig.host_recv_cc_id], num_dup_acks_for_this_rtt[glb_sysconfig.host_recv_cc_id]); 
     }
@@ -57,7 +67,10 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
         
         if (msg_length > FRAME_PAYLOAD_SIZE) {
             // Do something about messages that exceed the frame size
-            
+            printf(
+                "<SEND_%d>: sending messages of length greater than %d is not "
+                "implemented\n",
+                host->id, MAX_FRAME_SIZE);
             
             
             //mimic the else part, but deal with storing first 64 bytes into buffer[0] and next 64 into buffer[1]
@@ -75,16 +88,10 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
                     outgoing_frame->remaining_msg_bytes = FRAME_PAYLOAD_SIZE;
                 }
                 memcpy(outgoing_frame->data, outgoing_cmd->message + i * FRAME_PAYLOAD_SIZE, outgoing_frame->remaining_msg_bytes);
-                //print outgoing_frame->data
-                //print outgoing_frame->remaining_msg_bytes
-                //print outgoing_frame->seq_num
-                //print outgoing_frame->src_id
-                //print outgoing_frame->dst_id
-                
                 ll_append_node(&host->buffered_outframes_head, outgoing_frame);
                 
             } 
-            
+           
            
         } else {
             Frame* outgoing_frame = malloc(sizeof(Frame));
@@ -129,15 +136,13 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
     //TODO: The code is incomplete and needs to be changed to have a correct behavior
     //Suggested steps: 
     //1) Within the for loop, check if the window is not full and there's space to send more frames 
-    
-    
     //2) If there is, pop from the buffered_outframes_head queue and fill your send_window_slot data structure with appropriate fields. 
     //3) Append the popped frame to the host->outgoing_frames_head
     for (int i = 0; i < glb_sysconfig.window_size && ll_get_length(host->buffered_outframes_head) > 0; i++) {
         if (host->send_window[i].frame == NULL) {
             LLnode* ll_outframe_node = ll_pop_node(&host->buffered_outframes_head);
             Frame* outgoing_frame = ll_outframe_node->value; 
-            host->send_window[i].frame = outgoing_frame;
+
             ll_append_node(&host->outgoing_frames_head, outgoing_frame); 
             
             //Set a timeout for this frame
