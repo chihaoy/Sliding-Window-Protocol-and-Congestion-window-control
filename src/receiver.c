@@ -13,10 +13,11 @@ void handle_incoming_frames(Host* host) {
     //    6) Implement the cumulative acknowledgement part of the sliding window protocol
     //    7) Append acknowledgement frames to the outgoing_frames_head queue
     int incoming_frames_length = ll_get_length(host->incoming_frames_head);
-    //print income_frames_length to stederr
-
+    //print income_frames_length
+    
     //printf("incoming_frames_length: %d\n", incoming_frames_length);
     if (incoming_frames_length > 0) {
+        printf("incoming_frames_length: %d\n", incoming_frames_length);
         char temp[incoming_frames_length + 1][59];
         // Pop a node off the front of the link list and update the count
         int t = incoming_frames_length;
@@ -30,8 +31,12 @@ void handle_incoming_frames(Host* host) {
             
             strcpy(temp[incoming_frames_length], inframe->data); // Copy inframe->data into temp
             
-            
+            //print inframe->data
+            printf("inframe->data: %s\n", inframe->data);
             free(inframe);
+            free(ll_inmsg_node);
+            //print random string
+            printf("random string: %s\n", "AAAA");
         }
         char combinedString[(incoming_frames_length + 1) * 59];
         for (int i = t - 1; i >= 0;i--){

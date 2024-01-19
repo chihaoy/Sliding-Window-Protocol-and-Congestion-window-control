@@ -57,10 +57,7 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
         
         if (msg_length > FRAME_PAYLOAD_SIZE) {
             // Do something about messages that exceed the frame size
-            printf(
-                "<SEND_%d>: sending messages of length greater than %d is not "
-                "implemented\n",
-                host->id, MAX_FRAME_SIZE);
+            
             
             
             //mimic the else part, but deal with storing first 64 bytes into buffer[0] and next 64 into buffer[1]
@@ -83,10 +80,11 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
                 //print outgoing_frame->seq_num
                 //print outgoing_frame->src_id
                 //print outgoing_frame->dst_id
+                
                 ll_append_node(&host->buffered_outframes_head, outgoing_frame);
                 
             } 
-           
+            
            
         } else {
             Frame* outgoing_frame = malloc(sizeof(Frame));
@@ -131,13 +129,15 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
     //TODO: The code is incomplete and needs to be changed to have a correct behavior
     //Suggested steps: 
     //1) Within the for loop, check if the window is not full and there's space to send more frames 
+    
+    
     //2) If there is, pop from the buffered_outframes_head queue and fill your send_window_slot data structure with appropriate fields. 
     //3) Append the popped frame to the host->outgoing_frames_head
     for (int i = 0; i < glb_sysconfig.window_size && ll_get_length(host->buffered_outframes_head) > 0; i++) {
         if (host->send_window[i].frame == NULL) {
             LLnode* ll_outframe_node = ll_pop_node(&host->buffered_outframes_head);
             Frame* outgoing_frame = ll_outframe_node->value; 
-
+            host->send_window[i].frame = outgoing_frame;
             ll_append_node(&host->outgoing_frames_head, outgoing_frame); 
             
             //Set a timeout for this frame
