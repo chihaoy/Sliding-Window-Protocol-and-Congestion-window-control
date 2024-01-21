@@ -19,31 +19,32 @@ void handle_incoming_frames(Host* host) {
     char temp[incoming_frames_length + 1][59];
     while (incoming_frames_length > 0) {
         // Pop a node off the front of the link list and update the count
+        //print incoming_frames sequence number to stderr
         
         LLnode* ll_inmsg_node = ll_pop_node(&host->incoming_frames_head);
         incoming_frames_length = ll_get_length(host->incoming_frames_head);
         //print incoming_frames_length to stederr
         Frame* inframe = ll_inmsg_node->value; 
+        //print inframe->seq_num
+        printf("inframe->seq_num in receiver.c: %d\n", inframe->seq_num);
+        //print inframe-> seq
         strcpy(temp[incoming_frames_length], inframe->data); // Copy inframe->data into temp
         //print inframe->data
-        printf("inframe->data: %s\n", inframe->data);
         //print temp[incoming_frames_length]
         //printf("temp[%d]: %s\n", incoming_frames_length, temp[incoming_frames_length]);
         //free(inframe);
         if (incoming_frames_length == 0){
             char combinedString[(t + 1) * 59];
-            memset(combinedString, 0, sizeof(combinedString));
+            memset(combinedString, 0, sizeof(combinedString));//so that no garbage character is present
             for (int i = t - 1; i >= 0;i--){
                 
                 strcat(combinedString, temp[i]);
-                //print combinedString
-                //print temp[i]
-                printf("temp[%d]: %s\n", i, temp[i]);
-                printf("combinedString: %s\n", combinedString);
             }
             Frame* outgoing_frame = (Frame*)malloc(sizeof(Frame));
             outgoing_frame->src_id = inframe->dst_id;
             outgoing_frame->dst_id = inframe->src_id;
+            outgoing_frame->is_ack = 1;
+            outgoing_frame->seq_num = inframe->seq_num;
             //print outgoing_frame->src_id and outgoing_frame->dst_id to stderr
             ll_append_node(&host->outgoing_frames_head, outgoing_frame);
             printf("<RECV_%d>:[%s]\n", host->id, combinedString);

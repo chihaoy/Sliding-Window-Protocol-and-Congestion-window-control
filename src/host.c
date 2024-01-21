@@ -10,7 +10,8 @@ void init_host(Host* host, int id) {
     host->awaiting_ack = 0; 
     host->round_trip_num = 0; 
     host->csv_out = 0; 
-    
+    host->LAR = -1;
+    host->LFS = -1;
     host->input_cmdlist_head = NULL;
     host->incoming_frames_head = NULL; 
     host->buffered_outframes_head = NULL; 

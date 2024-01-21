@@ -1,3 +1,29 @@
-<RECV_0>:[Msg2Msg4Msg5Msg3]
-<RECV_1>:[Msg1Msg6]
+host->buffered_outframes_f32head: 1
+i: 0
+host->buffered_outframes_f32head: 1
+i: 0
+host->buffered_outframes_f32head: 3
+i: 0
+i: 1
+i: 2
+host->buffered_outframes_f32head: 2
+i: 0
+i: 1
+inframe->seq_num in receiver.c: 0
+inframe->seq_num in receiver.c: 0
+inframe->seq_num in receiver.c: 0
+inframe->seq_num in receiver.c: 1
+<RECV_0>:[Msg4Msg5Msg2Msg3]
+inframe->seq_num in receiver.c: 2
 <RECV_3>:[Msg7]
+inframe->seq_num in receiver.c: 0
+inframe->seq_num in receiver.c: 1
+<RECV_1>:[Msg1Msg6]
+host->buffered_outframes_f32head: 0
+inframe->seq_num: 1
+packet num 1
+inframe->seq_num: 2
+packet num 2
+host->buffered_outframes_f32head: 0
+inframe->seq_num: 1
+packet num 1

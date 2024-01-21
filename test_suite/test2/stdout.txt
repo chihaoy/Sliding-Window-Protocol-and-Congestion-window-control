@@ -1,1 +1,7 @@
+host->buffered_outframes_f32head: 1
+i: 0
+inframe->seq_num in receiver.c: 0
 <RECV_1>:[Hello World!]
+host->buffered_outframes_f32head: 0
+inframe->seq_num: 0
+packet num 0

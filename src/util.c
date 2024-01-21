@@ -85,6 +85,8 @@ LLnode* ll_pop_node(LLnode** head_ptr) {
 }
 
 void ll_destroy_node(LLnode* node) {
+    //print node->type
+    
     if (node->type == llt_string) {
         free((char*) node->value);
     }

@@ -13,7 +13,7 @@ struct timeval* host_get_next_expiring_timeval(Host* host) {
 }
 
 void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
-
+    //print "hello"
     // Num of acks received from each receiver
     uint8_t num_acks_received[glb_num_hosts]; 
     memset(num_acks_received, 0, glb_num_hosts); 
@@ -28,12 +28,33 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
     //    3) Check if the ack is valid i.e. within the window slot 
     //    4) Implement logic as per sliding window protocol to track ACK for what frame is expected,
     //       and what to do when ACK for expected frame is received
-    if (ll_get_length(host->incoming_frames_head) != 0) {
+    //print host->window_size[0]->frame->data
+        //printf("host->window_size[0]->frame->data in sender.c: %s\n", host->send_window[0].frame->data);
+        
+
+        
+        //ll_destroy_node(host->send_window[0].frame);
+        
+
+    while (ll_get_length(host->incoming_frames_head) != 0) {
         LLnode* ll_input_cmd_node = ll_pop_node(&host->incoming_frames_head);
         Frame* inframe = (Frame*) ll_input_cmd_node->value;
         //print inframe->src_id and inframe->dst_id
-        printf("inframe->src_id: %d\n", inframe->src_id);
-        printf("inframe->dst_id: %d\n", inframe->dst_id);
+        printf("inframe->seq_num: %d\n", inframe->seq_num);
+        //print inframe->is_ack
+        if (inframe -> is_ack == 1){
+            host -> LAR += 1;
+            
+            free(host->send_window[(host -> LAR) % glb_sysconfig.window_size].frame);
+            host->send_window[(host -> LAR) % glb_sysconfig.window_size].frame = NULL;
+        }
+        //print inframe -> seq_num
+        printf("packet num %d\n", inframe -> seq_num);
+        //print ost -> send_window[(host->LAR) - 1].frame
+        //print host->id
+        if (host -> LAR == inframe -> seq_num){
+            break;
+        }
     }
     
     
@@ -52,16 +73,15 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
     //    4) Append each frame to host->buffered_outframes_head
 
     int input_cmd_length = ll_get_length(host->input_cmdlist_head);
-
     while (input_cmd_length > 0) {
         // Pop a node off and update the input_cmd_length
         LLnode* ll_input_cmd_node = ll_pop_node(&host->input_cmdlist_head);
         input_cmd_length = ll_get_length(host->input_cmdlist_head);
-
         // Cast to Cmd type and free up the memory for the node
+        
         Cmd* outgoing_cmd = (Cmd*) ll_input_cmd_node->value;
         free(ll_input_cmd_node);
- 
+        
         int msg_length = strlen(outgoing_cmd->message) + 1; // +1 to account for null terminator 
         //print msg_length
         
@@ -95,7 +115,6 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
            
         } else {
             Frame* outgoing_frame = malloc(sizeof(Frame));
-            
             assert(outgoing_frame);
             strcpy(outgoing_frame->data, outgoing_cmd->message);
             //print outgoing_frame->data
@@ -111,6 +130,7 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
             
         }
     }
+    printf("host->buffered_outframes_f32head: %d\n", ll_get_length(host->buffered_outframes_head));
 }
 
 void handle_timedout_frames(Host* host, struct timeval curr_timeval) {
@@ -138,12 +158,24 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
     //1) Within the for loop, check if the window is not full and there's space to send more frames 
     //2) If there is, pop from the buffered_outframes_head queue and fill your send_window_slot data structure with appropriate fields. 
     //3) Append the popped frame to the host->outgoing_frames_head
+    
+    //print ll_get_length(host->buffered_outframes_head)
+    
     for (int i = 0; i < glb_sysconfig.window_size && ll_get_length(host->buffered_outframes_head) > 0; i++) {
+        printf("i: %d\n", i);
         if (host->send_window[i].frame == NULL) {
+            //print i
+            
             LLnode* ll_outframe_node = ll_pop_node(&host->buffered_outframes_head);
             Frame* outgoing_frame = ll_outframe_node->value; 
-
-            ll_append_node(&host->outgoing_frames_head, outgoing_frame); 
+            //print outgoing_frame->data
+            host->LFS = host->LFS + 1;
+            outgoing_frame->seq_num = host->LFS;
+            outgoing_frame -> is_ack = 0;
+            char * outgoing_charbuf = convert_frame_to_char(outgoing_frame);
+            host->send_window[i].frame = outgoing_frame;
+            
+            ll_append_node(&host->outgoing_frames_head, outgoing_charbuf); 
             
             //Set a timeout for this frame
             //NOTE: Each dataframe(not ack frame) that is appended to the 
@@ -236,17 +268,25 @@ void run_senders() {
             // Implement this
             handle_outgoing_frames(host, curr_timeval); 
         }
-
+        
         //Check if we are waiting for acks
         for (int j = 0; j < glb_sysconfig.window_size; j++) {
+            
             if (host->send_window[j].frame != NULL) {
+                //print random string
+                //print random string
+                //print host->id
+                
                 host->awaiting_ack = 1; 
                 break; 
             }
         }
-
+        //print host->id
         //Condition to indicate that the host is active 
         if (host->awaiting_ack || ll_get_length(host->buffered_outframes_head) > 0) {
+            //printf host -> awaiting_ack
+            
+            //printf("host->window_size[0]->frame->data in sender.c: %s\n", host->send_window[0].frame->data);
             host->active = 1; 
         }
     }
