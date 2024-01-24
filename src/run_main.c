@@ -151,7 +151,9 @@ void graceful_exit() {
         int i; 
         for (i = 0; i < glb_num_hosts; i++) {
             if ((&glb_hosts_array[i])->active) {
-                fprintf(stderr,"Host %d is still active\n", i);
+                //print i
+                
+                //fprintf(stderr,"Host %d is still active\n", i);
                 return; 
             }
         }

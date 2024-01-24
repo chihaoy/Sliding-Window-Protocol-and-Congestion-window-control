@@ -4,5 +4,4 @@ Available host id(s):
    host_id=0
    host_id=1
    host_id=2
-Host 0 is still active
 The program has been successfully closed.

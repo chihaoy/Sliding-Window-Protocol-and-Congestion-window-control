@@ -17,54 +17,68 @@ void handle_incoming_frames(Host* host) {
     //print income_frames_length to stederr
     int t = incoming_frames_length;
     //printf("incoming_frames_length: %d\n", incoming_frames_length);
-    char temp[incoming_frames_length + 1][57];
+    //char temp[incoming_frames_length + 1][57];
+    //memset(temp, 0, sizeof(temp));
     while (incoming_frames_length > 0) {
+        //printf("incoming_frames_length in recvewfewfewfeweiver.c: %d\n", incoming_frames_length);
         // Pop a node off the front of the link list and update the count
         //print incoming_frames sequence number to stderr
         //print incoming_frames_length
-        printf("incoming_frames_length in receiver.c: %d\n", t);
         LLnode* ll_inmsg_node = ll_pop_node(&host->incoming_frames_head);
         incoming_frames_length = ll_get_length(host->incoming_frames_head);
+
         //print incoming_frames_length to stederr
-        Frame* inframe = ll_inmsg_node->value; 
+        Frame* inframe = ll_inmsg_node->value;
+        //print(inframe->data) to stderr
+        printf("infdasdasrame->data in receiver.c>>>: %s\n", inframe->data);
+        if (inframe -> seq_num < host -> LFR ){
+            
+            return;
+        }
+        //printf("%s\n",inframe->data);
         //print inframe->seq_num
-        printf("inframe->seq_num in receiver.c: %d\n", inframe->seq_num);
+       // printf("inframe->seq_num in receiver.c: %d\n", inframe->seq_num);
         //print inframe-> seq
-        strcpy(temp[incoming_frames_length], inframe->data); // Copy inframe->data into temp
+        printf("infdasdasrame->data in receiver.c: %s\n", inframe->data);
+        strcat(host -> emptyCharArray, inframe->data); // Copy inframe->data into temp
+        //print host -> emptyCharArray
+      //  printf("host -> emptyCharArray: %s\n", host -> emptyCharArray);
+        //print temp[incoming_frames_length]
         //print inframe->data
         //print temp[incoming_frames_length]
         //printf("temp[%d]: %s\n", incoming_frames_length, temp[incoming_frames_length]);
         //free(inframe);
         //print inframe -> remaining_msg_bytes
-        printf("inframe->remaining_msg_bytes in receiver.c: %d\n", inframe->remaining_msg_bytes);
-        
+        //printf("inframe->remaining_msg_bytes in receiver.c: %d\n", inframe->remaining_msg_bytes);
+       // 
        // if (inframe -> remaining_msg_bytes > 0){
             //host -> recvArray[1].sendQ[0].frame = inframe;
        // }
+        host -> LFR += 1;
         if (incoming_frames_length == 0){
-           Frame* outgoing_frame = (Frame*)malloc(sizeof(Frame));
+            //print inframe -> data
+            
+            Frame* outgoing_frame = (Frame*)malloc(sizeof(Frame));
             outgoing_frame->src_id = inframe->dst_id;
             outgoing_frame->dst_id = inframe->src_id;
             outgoing_frame->is_ack = 1;
             outgoing_frame->seq_num = inframe->seq_num;
-            
+           // printf("infrfewfefame->seq_num in receiver.c: %d\n", inframe->seq_num);
             ll_append_node(&host->outgoing_frames_head, outgoing_frame);
         }
         if (inframe -> remaining_msg_bytes == 0){
-            
             //print host -> recvArray[1].sendQ[0].frame -> data
             //printf("host -> recvArray[1].sendQ[0].frame -> data: %s\n", host -> recvArray[1].sendQ[0].frame -> data);
+            //print temp[1]
             char combinedString[(t + 1) * 57];
             memset(combinedString, 0, sizeof(combinedString));//so that no garbage character is present
             //strcat(combinedString, host -> recvArray[1].sendQ[0].frame -> data);
-            for (int i = t - 1; i >= 0;i--){
-                
-                strcat(combinedString, temp[i]);
-            }
+            strcat(combinedString, host -> emptyCharArray);
             
             //print outgoing_frame->src_id and outgoing_frame->dst_id to stderr
             printf("<RECV_%d>:[%s]\n", host->id, combinedString);
             memset(temp, 0, sizeof(temp));
+            host -> emptyCharArray[0] = '\0';
         }
     }
 }

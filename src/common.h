@@ -157,8 +157,12 @@ struct Host_t {
     int csv_out; 
     LLnode* input_cmdlist_head;
     LLnode* incoming_frames_head; 
+    char emptyCharArray[100];
     uint8_t LAR; //last ack recieved
     uint8_t LFS; //last frame sent
+    uint8_t NFE; // next frame expected
+    uint8_t LFR; // last frame recieved
+    uint8_t LAF; // last acceptable frame
     LLnode* buffered_outframes_head; 
     LLnode* outgoing_frames_head;
     struct send_window_slot* send_window;

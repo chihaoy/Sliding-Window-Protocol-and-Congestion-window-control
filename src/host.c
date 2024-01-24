@@ -10,8 +10,9 @@ void init_host(Host* host, int id) {
     host->awaiting_ack = 0; 
     host->round_trip_num = 0; 
     host->csv_out = 0; 
-    host->LAR = -1;
+    host->LAR = 0;
     host->LFS = -1;
+    host->LFR = 0;
     host->input_cmdlist_head = NULL;
     host->incoming_frames_head = NULL; 
     host->buffered_outframes_head = NULL; 
@@ -23,7 +24,7 @@ void init_host(Host* host, int id) {
     }
     host->latest_timeout = malloc(sizeof(struct timeval));
     gettimeofday(host->latest_timeout, NULL);
-
+    
     // TODO: You should fill in this function as necessary to initialize variables
     //host->recvArray[0].sendQ[0]->frame = NULL;
     for (int i = 0; i < glb_num_hosts; i++) {

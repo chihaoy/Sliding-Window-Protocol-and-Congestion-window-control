@@ -1,26 +1,12 @@
-host->buffered_outframes_head in handle_input_cmds: 2
-i: 0
-testing: "A"
-host->send_window[i].frame->data in sender.c: "A"
-i: 1
-testing: "B"
-host->send_window[i].frame->data in sender.c: "B"
-host->buffered_outframes_head in handle_outgoing_frames: 0
-incoming_frames_length in receiver.c: 2
-inframe->seq_num in receiver.c: 0
-inframe->remaining_msg_bytes in receiver.c: 0
-<RECV_1>:["A"]
-incoming_frames_length in receiver.c: 2
-inframe->seq_num in receiver.c: 1
-inframe->remaining_msg_bytes in receiver.c: 0
-<RECV_1>:["B"]
-host->buffered_outframes_head in handle_input_cmds: 0
-inframe->seq_nfewfewfewum: 1
-host -> LAR before if: 255
-inframe -> is_ack: 1
-host -> LAR: inside if0
-k: 1
-host -> LAR: inside if1
-k: 2
-packet num 1
-AAAhost->buffered_outframes_head in handle_outgoing_frames: 0
+hellooutgoing_frame->data in sender.c: "AA"
+host->send_window[i].frame->data in sender.c: "AA"
+hellooutgoing_frame->data in sender.c: "BBdw"
+host->send_window[i].frame->data in sender.c: "BBdw"
+infdasdasrame->data in receiver.c>>>: "AA"
+infdasdasrame->data in receiver.c: "AA"
+<RECV_1>:["AA"]
+hellooutgoing_frame->data in sender.c: "CdwC"
+host->send_window[i].frame->data in sender.c: "CdwC"
+infdasdasrame->data in receiver.c>>>: "CdwC"
+infdasdasrame->data in receiver.c: "CdwC"
+<RECV_1>:["CdwC"]

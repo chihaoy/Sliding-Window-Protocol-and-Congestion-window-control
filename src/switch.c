@@ -124,7 +124,6 @@ void send_data_frames() {
             ingress_port->buffer_queue_size -= 1; 
 
             Frame* incoming_frame = ll_buffered_node->value;
-            
             frame_sanity_check(incoming_frame);
             // ******** SECTION FOR TESTING ****************
             // Count data frames accepted

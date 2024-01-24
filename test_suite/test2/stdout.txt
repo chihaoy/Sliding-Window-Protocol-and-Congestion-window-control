@@ -1,17 +1,5 @@
-host->buffered_outframes_head in handle_input_cmds: 1
-i: 0
-testing: Hello World!
+hellooutgoing_frame->data in sender.c: Hello World!
 host->send_window[i].frame->data in sender.c: Hello World!
-host->buffered_outframes_head in handle_outgoing_frames: 0
-incoming_frames_length in receiver.c: 1
-inframe->seq_num in receiver.c: 0
-inframe->remaining_msg_bytes in receiver.c: 0
+infdasdasrame->data in receiver.c>>>: Hello World!
+infdasdasrame->data in receiver.c: Hello World!
 <RECV_1>:[Hello World!]
-host->buffered_outframes_head in handle_input_cmds: 0
-inframe->seq_nfewfewfewum: 0
-host -> LAR before if: 255
-inframe -> is_ack: 1
-host -> LAR: inside if0
-k: 1
-packet num 0
-AAAhost->buffered_outframes_head in handle_outgoing_frames: 0
