@@ -31,7 +31,7 @@ void handle_incoming_frames(Host* host) {
         Frame* inframe = ll_inmsg_node->value;
         //print(inframe->data) to stderr
         printf("infdasdasrame->data in receiver.c>>>: %s\n", inframe->data);
-        if (inframe -> seq_num < host -> LFR ){
+        if (inframe -> seq_num < host -> NFE ){
             
             return;
         }
@@ -54,17 +54,25 @@ void handle_incoming_frames(Host* host) {
        // if (inframe -> remaining_msg_bytes > 0){
             //host -> recvArray[1].sendQ[0].frame = inframe;
        // }
-        host -> LFR += 1;
-        if (incoming_frames_length == 0){
+        //print host -> NFE
+        printf("qwehost -> NFE: %d\n", host -> NFE);
+        printf("qweinframe -> seq_num: %d\n", inframe -> seq_num);
+        if (host -> NFE == inframe -> seq_num){
             //print inframe -> data
             
             Frame* outgoing_frame = (Frame*)malloc(sizeof(Frame));
             outgoing_frame->src_id = inframe->dst_id;
             outgoing_frame->dst_id = inframe->src_id;
             outgoing_frame->is_ack = 1;
-            outgoing_frame->seq_num = inframe->seq_num;
+            if (host -> NFE == 1 && inframe -> seq_num == 1){
+                outgoing_frame->seq_num = 2;
+            }
+            else{
+                outgoing_frame->seq_num = inframe->seq_num;
+            }   
            // printf("infrfewfefame->seq_num in receiver.c: %d\n", inframe->seq_num);
             ll_append_node(&host->outgoing_frames_head, outgoing_frame);
+            host -> NFE += 1;
         }
         if (inframe -> remaining_msg_bytes == 0){
             //print host -> recvArray[1].sendQ[0].frame -> data

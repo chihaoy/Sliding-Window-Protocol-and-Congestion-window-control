@@ -58,8 +58,10 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
         
     //prit tac->seq_num
 
-    //print 
+    //print
+    printf("ll_get_length(host->incoming_frames_head) %d\n", ll_get_length(host->incoming_frames_head)); 
     while (ll_get_length(host->incoming_frames_head) != 0) {
+        printf("HERE??");
         //print inframe->seq_num
         //print ll_get_length(host->incoming_frames_head)
         LLnode* ll_input_cmd_node = ll_pop_node(&host->incoming_frames_head);
@@ -71,28 +73,18 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
       //  printf("host -> LAR before if: %d\n", host -> LAR);
         //print inframe -> is_ack
         //printf("acdinframe -> is_ack: %d\n", inframe -> is_ack);
-        uint8_t k = 0;
-        if (inframe -> seq_num == 2){
-            k = 2;
-        }
-        else if (inframe -> seq_num == 1){
-            k = 1;
-        }
-        else{
-            k = 0;
-        }
-        
         //print inframe ->seq_num
-       printf("acdinframe -> seq_num: %d\n", inframe -> seq_num);
+        printf("acdhost -> LAR %d\n", host -> LAR);
+        printf("acdinframe -> seq_num: %d\n", inframe -> seq_num);
 
       //  printf("acdwe waht %d",k);
-        while (k <= inframe->seq_num){
-           // printf("we waht %d",k);
+        while (host -> LAR <= inframe->seq_num){
+            printf("bye");
             if (inframe -> is_ack == 1){
                 printf("host -> LAR: inside if%d\n", (host -> LAR) % glb_sysconfig.window_size);
                 free(host->send_window[(host -> LAR) % glb_sysconfig.window_size].frame);
                 host->send_window[(host -> LAR) % glb_sysconfig.window_size].frame = NULL;
-                host -> LAR = host -> LAR + 1;
+                host -> LAR +=1;
                
             //print (host -> LAR) % glb_sysconfig.window_size
             //printf("host -> LAR: %d\n", host -> LAR);
@@ -101,9 +93,6 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
                 //printf("host->send_window[i].frame->data in sender.c: %s\n", host->send_window[1].frame -> data);
                 
             }
-            k= k + 1;
-            //print k
-          //  printf("k: %d\n", k);
         }
         //print inframe -> seq_num
        // printf("packet num %d\n", inframe -> seq_num);
@@ -271,6 +260,8 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
             host->LFS = host->LFS + 1;
             outgoing_frame->seq_num = host->LFS;
             outgoing_frame -> is_ack = 0;
+            //print host -> outgoing_frames
+            printf("outgoing_frame->seq_num: %d\n", outgoing_frame->seq_num);
             char * outgoing_charbuf = convert_frame_to_char(outgoing_frame);
           //  printf("testing: %s\n", outgoing_frame -> data);
             Frame * cop = (Frame *) malloc (sizeof(Frame));

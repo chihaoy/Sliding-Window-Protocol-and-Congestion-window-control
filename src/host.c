@@ -13,7 +13,7 @@ void init_host(Host* host, int id) {
     host->LAR = 0;
     host->LFS = -1;
     host->LFR = 0;
-    host->bad = 0;
+    host->NFE = 0;
     host->input_cmdlist_head = NULL;
     host->incoming_frames_head = NULL; 
     host->buffered_outframes_head = NULL; 

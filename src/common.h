@@ -161,6 +161,7 @@ struct Host_t {
     char emptyCharArray[100];
     uint8_t LAR; //last ack recieved
     uint8_t LFS; //last frame sent
+    //as a receiver
     uint8_t NFE; // next frame expected
     uint8_t LFR; // last frame recieved
     uint8_t LAF; // last acceptable frame
