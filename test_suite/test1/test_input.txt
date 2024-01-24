@@ -1,4 +1,4 @@
-msg 0 1 "AA"
-msg 0 1 "BBdw"
-msg 0 1 "CdwC"
+msg 0 1 A
+msg 0 1 B
+msg 0 1 C
 exit

@@ -69,6 +69,7 @@ int main(int argc, char* argv[]) {
     // Run the program until you get the exit signal
     while (1) {
         if (!glb_exit_main) {
+            printf("NOT EXITING MAIN\n");
             handle_input(); 
         }
         run_hosts(); 

@@ -77,7 +77,7 @@ void handle_incoming_frames(Host* host) {
             
             //print outgoing_frame->src_id and outgoing_frame->dst_id to stderr
             printf("<RECV_%d>:[%s]\n", host->id, combinedString);
-            memset(temp, 0, sizeof(temp));
+            //memset(temp, 0, sizeof(temp));
             host -> emptyCharArray[0] = '\0';
         }
     }

@@ -1,5 +1,12 @@
+NOT EXITING MAIN
+curr_timeval in sender.c: 1706119176382906
 hellooutgoing_frame->data in sender.c: Hello World!
 host->send_window[i].frame->data in sender.c: Hello World!
+host->send_window[i].timeout in sender.c: 1706119176482906
 infdasdasrame->data in receiver.c>>>: Hello World!
 infdasdasrame->data in receiver.c: Hello World!
 <RECV_1>:[Hello World!]
+next_timeout in sender.c: 1706119176482906
+acdinframe -> seq_num: 0
+host -> LAR: inside if0
+curr_timeval in sender.c: 1706119176383241

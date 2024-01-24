@@ -102,8 +102,8 @@ void send_frame(Frame* incoming_frame, double glb_corrupt_prob) {
     ll_append_node(&dst_host->incoming_frames_head,
                     (void*) corrupted_frame);
     
-    free(incoming_frame);
-    free(recv_char_buffer); 
+   // free(incoming_frame);
+    //free(recv_char_buffer); 
 }
 
 

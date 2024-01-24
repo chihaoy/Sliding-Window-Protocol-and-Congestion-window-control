@@ -150,6 +150,7 @@ struct Host_t {
         8) latest_timeout
         9) Any of the fields in cc and cc itself
     */   
+    int bad;
     int id;
     int awaiting_ack; 
     int active;  
