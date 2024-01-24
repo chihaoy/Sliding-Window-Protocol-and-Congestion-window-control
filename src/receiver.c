@@ -55,30 +55,28 @@ void handle_incoming_frames(Host* host) {
             //host -> recvArray[1].sendQ[0].frame = inframe;
        // }
         //print host -> NFE
+        //print inframe ->data
+        
         printf("qwehost -> NFE: %d\n", host -> NFE);
         printf("qweinframe -> seq_num: %d\n", inframe -> seq_num);
         if (host -> NFE == inframe -> seq_num){
-            //print inframe -> data
-            
+            host -> NFE += 1;
+            printf("Should have something here");
+            while (host -> send_window[host -> NFE].frame != NULL){//still should check the case for window_size of 8
+                host -> NFE += 1;
+            }
             Frame* outgoing_frame = (Frame*)malloc(sizeof(Frame));
             outgoing_frame->src_id = inframe->dst_id;
             outgoing_frame->dst_id = inframe->src_id;
             outgoing_frame->is_ack = 1;
-            if (host -> NFE == 1 && inframe -> seq_num == 1){
-                outgoing_frame->seq_num = 2;
-            }
-            else{
-                outgoing_frame->seq_num = inframe->seq_num;
-            }   
-           // printf("infrfewfefame->seq_num in receiver.c: %d\n", inframe->seq_num);
+            outgoing_frame->ack_num = host -> NFE - 1;
             ll_append_node(&host->outgoing_frames_head, outgoing_frame);
-            host -> NFE += 1;
         }
         if (inframe -> remaining_msg_bytes == 0){
             //print host -> recvArray[1].sendQ[0].frame -> data
             //printf("host -> recvArray[1].sendQ[0].frame -> data: %s\n", host -> recvArray[1].sendQ[0].frame -> data);
             //print temp[1]
-            char combinedString[(t + 1) * 57];
+            char combinedString[(t + 1) * FRAME_PAYLOAD_SIZE];
             memset(combinedString, 0, sizeof(combinedString));//so that no garbage character is present
             //strcat(combinedString, host -> recvArray[1].sendQ[0].frame -> data);
             strcat(combinedString, host -> emptyCharArray);

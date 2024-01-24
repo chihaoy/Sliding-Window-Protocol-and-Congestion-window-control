@@ -1,4 +1,3 @@
 msg 0 1 AAAAAAAAAA
 msg 0 1 B
-msg 0 1 C
 exit

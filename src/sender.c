@@ -78,14 +78,15 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
         printf("acdinframe -> seq_num: %d\n", inframe -> seq_num);
 
       //  printf("acdwe waht %d",k);
-        while (host -> LAR <= inframe->seq_num){
+        while (host -> LAR <= inframe->ack_num){
             printf("bye");
             if (inframe -> is_ack == 1){
                 printf("host -> LAR: inside if%d\n", (host -> LAR) % glb_sysconfig.window_size);
                 free(host->send_window[(host -> LAR) % glb_sysconfig.window_size].frame);
                 host->send_window[(host -> LAR) % glb_sysconfig.window_size].frame = NULL;
                 host -> LAR +=1;
-               
+                //print host -> LAR
+                printf("host -> LAR after adding: %d\n", host -> LAR);
             //print (host -> LAR) % glb_sysconfig.window_size
             //printf("host -> LAR: %d\n", host -> LAR);
                 
@@ -137,28 +138,28 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
             printf(
                 "<SEND_%d>: sending messages of length greater than %d is not "
                 "implemented\n",
-                host->id, 57);
+                host->id, FRAME_PAYLOAD_SIZE);
             
             
             //mimic the else part, but deal with storing first 64 bytes into buffer[0] and next 64 into buffer[1]
             //and so on
 
-            int num_frames = ceil((double)msg_length / 57);
+            int num_frames = ceil((double)msg_length / FRAME_PAYLOAD_SIZE);
             //print num_frames
             for (int i = 0; i < num_frames; i++) {
                 Frame* outgoing_frame = malloc(sizeof(Frame));
                 assert(outgoing_frame);
                 outgoing_frame->src_id = outgoing_cmd->src_id;
                 outgoing_frame->dst_id = outgoing_cmd->dst_id;
-                outgoing_frame->remaining_msg_bytes = max(msg_length - (i + 1) * 57,0);
+                outgoing_frame->remaining_msg_bytes = max(msg_length - (i + 1)* FRAME_PAYLOAD_SIZE,0);
                 uint16_t numbytes = 0;
                 if (outgoing_frame->remaining_msg_bytes > 0) {
-                    numbytes = 57;
+                    numbytes = FRAME_PAYLOAD_SIZE;
                 } else {
-                    numbytes = msg_length - i * 57;
+                    numbytes = msg_length - i * FRAME_PAYLOAD_SIZE;
                 }
               //  printf("outgoing_frame->remaining_msg_bytes in handle_input_cmds: %d\n", outgoing_frame->remaining_msg_bytes);
-                memcpy(outgoing_frame->data, outgoing_cmd->message + i * 57, numbytes);
+                memcpy(outgoing_frame->data, outgoing_cmd->message + i * FRAME_PAYLOAD_SIZE, numbytes);
                 ll_append_node(&host->buffered_outframes_head, outgoing_frame);
                 
                 

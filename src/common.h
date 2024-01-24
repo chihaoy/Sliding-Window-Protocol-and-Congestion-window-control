@@ -96,7 +96,7 @@ typedef struct EgressPort_t Egress;
    you want. However, MAX_FRAME_SIZE is fixed (i.e. 64 bytes).
 */
 
-#define FRAME_PAYLOAD_SIZE 57
+#define FRAME_PAYLOAD_SIZE 56
 struct __attribute__((packed)) Frame_t {
     /* DO NOT CHANGE:
         1) remaining_msg_bytes
@@ -110,6 +110,7 @@ struct __attribute__((packed)) Frame_t {
     uint8_t dst_id; 
     uint8_t src_id; 
     uint8_t seq_num; 
+    uint8_t ack_num;
     uint8_t is_ack;//adding this field 0 means data frame 1 means ack frame
     char crc;//adding for corruption check
     char data[FRAME_PAYLOAD_SIZE]; 
