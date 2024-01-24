@@ -8,7 +8,22 @@ struct timeval* host_get_next_expiring_timeval(Host* host) {
     // 
     // 1) Check your send_window for the timeouts of the frames. 
     // 2) Return the timeout of a single frame. 
+    
     // HINT: It's not the frame with the furtherst/latest timeout. 
+    //return the earliest timeout from the send_window
+    /*
+    struct timeval* next_timeout = NULL;
+    for (int i = 0; i < glb_sysconfig.window_size; i++) {
+        if (host->send_window[i].timeout != NULL) {
+            if (next_timeout == NULL) {
+                next_timeout = host->send_window[i].timeout;
+            } else if (timeval_usecdiff(host->send_window[i].timeout, next_timeout) < 0) {
+                next_timeout = host->send_window[i].timeout;
+            }
+        }
+    }
+    return next_timeout;
+    */
     return NULL;
 }
 
@@ -35,24 +50,41 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
         
         //ll_destroy_node(host->send_window[0].frame);
         
+    //prit tac->seq_num
 
+    //print 
     while (ll_get_length(host->incoming_frames_head) != 0) {
+        //print inframe->seq_num
+        //print ll_get_length(host->incoming_frames_head)
         LLnode* ll_input_cmd_node = ll_pop_node(&host->incoming_frames_head);
         Frame* inframe = (Frame*) ll_input_cmd_node->value;
         //print inframe->src_id and inframe->dst_id
-        printf("inframe->seq_num: %d\n", inframe->seq_num);
+        
+        printf("inframe->seq_nfewfewfewum: %d\n", inframe->seq_num);
         //print inframe->is_ack
-        if (inframe -> is_ack == 1){
-            host -> LAR += 1;
-            
-            free(host->send_window[(host -> LAR) % glb_sysconfig.window_size].frame);
-            host->send_window[(host -> LAR) % glb_sysconfig.window_size].frame = NULL;
+        printf("host -> LAR before if: %d\n", host -> LAR);
+        //print inframe -> is_ack
+        printf("inframe -> is_ack: %d\n", inframe -> is_ack);
+        uint8_t k = 0;
+        while (k <= inframe->seq_num){
+            if (inframe -> is_ack == 1){
+                host -> LAR = host -> LAR + 1;
+                printf("host -> LAR: inside if%d\n", host -> LAR);
+            //print (host -> LAR) % glb_sysconfig.window_size
+            //printf("host -> LAR: %d\n", host -> LAR);
+                free(host->send_window[(host -> LAR) % glb_sysconfig.window_size].frame);
+                host->send_window[(host -> LAR) % glb_sysconfig.window_size].frame = NULL;
+            }
+            k= k + 1;
+            //print k
+            printf("k: %d\n", k);
         }
         //print inframe -> seq_num
         printf("packet num %d\n", inframe -> seq_num);
         //print ost -> send_window[(host->LAR) - 1].frame
         //print host->id
         if (host -> LAR == inframe -> seq_num){
+            printf("AAA");
             break;
         }
     }
@@ -90,35 +122,41 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
             printf(
                 "<SEND_%d>: sending messages of length greater than %d is not "
                 "implemented\n",
-                host->id, MAX_FRAME_SIZE);
+                host->id, 57);
             
             
             //mimic the else part, but deal with storing first 64 bytes into buffer[0] and next 64 into buffer[1]
             //and so on
 
-            int num_frames = ceil((double)msg_length / FRAME_PAYLOAD_SIZE);
-           
+            int num_frames = ceil((double)msg_length / 57);
+            //print num_frames
             for (int i = 0; i < num_frames; i++) {
                 Frame* outgoing_frame = malloc(sizeof(Frame));
                 assert(outgoing_frame);
                 outgoing_frame->src_id = outgoing_cmd->src_id;
                 outgoing_frame->dst_id = outgoing_cmd->dst_id;
-                outgoing_frame->remaining_msg_bytes = msg_length - i * FRAME_PAYLOAD_SIZE;
-                if (outgoing_frame->remaining_msg_bytes > FRAME_PAYLOAD_SIZE) {
-                    outgoing_frame->remaining_msg_bytes = FRAME_PAYLOAD_SIZE;
+                outgoing_frame->remaining_msg_bytes = max(msg_length - (i + 1) * 57,0);
+                uint16_t numbytes = 0;
+                if (outgoing_frame->remaining_msg_bytes > 0) {
+                    numbytes = 57;
+                } else {
+                    numbytes = msg_length - i * 57;
                 }
-                memcpy(outgoing_frame->data, outgoing_cmd->message + i * FRAME_PAYLOAD_SIZE, outgoing_frame->remaining_msg_bytes);
+                printf("outgoing_frame->remaining_msg_bytes in handle_input_cmds: %d\n", outgoing_frame->remaining_msg_bytes);
+                memcpy(outgoing_frame->data, outgoing_cmd->message + i * 57, numbytes);
                 ll_append_node(&host->buffered_outframes_head, outgoing_frame);
+                //print outgoing_frame->data
+                
                 
             } 
-           
+           //print ll_get_length(host->buffered_outframes_head)
            
         } else {
             Frame* outgoing_frame = malloc(sizeof(Frame));
             assert(outgoing_frame);
             strcpy(outgoing_frame->data, outgoing_cmd->message);
             //print outgoing_frame->data
-           
+            outgoing_frame->remaining_msg_bytes = 0;
             outgoing_frame->src_id = outgoing_cmd->src_id;
             outgoing_frame->dst_id = outgoing_cmd->dst_id;
             // At this point, we don't need the outgoing_cmd
@@ -130,7 +168,7 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
             
         }
     }
-    printf("host->buffered_outframes_f32head: %d\n", ll_get_length(host->buffered_outframes_head));
+    printf("host->buffered_outframes_head in handle_input_cmds: %d\n", ll_get_length(host->buffered_outframes_head));
 }
 
 void handle_timedout_frames(Host* host, struct timeval curr_timeval) {
@@ -138,6 +176,14 @@ void handle_timedout_frames(Host* host, struct timeval curr_timeval) {
     // TODO: Detect frames that have timed out
     // Check your send_window for the frames that have timed out and set send_window[i]->timeout = NULL
     // You will re-send the actual frames and set the timeout in handle_outgoing_frames()
+    /*
+    for (int i = 0; i < glb_sysconfig.window_size; i++) {
+        if (host->send_window[i].timeout != NULL && timeval_usecdiff(&curr_timeval, host->send_window[i].timeout) > 0) {
+            free(host->send_window[i].timeout);
+            host->send_window[i].timeout = NULL;
+        }
+    }
+    */
 }
 
 void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
@@ -149,10 +195,17 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
     }
 
     //TODO: Send out the frames that have timed out(i.e. timeout = NULL)
+    /*
     for (int i = 0; i < glb_sysconfig.window_size; i++) {
-
+        if (host->send_window[i].timeout == NULL){
+            struct timeval* next_timeout = malloc(sizeof(struct timeval));
+            memcpy(next_timeout, &curr_timeval, sizeof(struct timeval)); 
+            timeval_usecplus(next_timeout, TIMEOUT_INTERVAL_USEC + additional_ts);
+            additional_ts += 10000; //ADD ADDITIONAL 10ms
+            host->send_window[i].timeout = next_timeout;//(this is what I add)
+        }
     }
-
+    */
     //TODO: The code is incomplete and needs to be changed to have a correct behavior
     //Suggested steps: 
     //1) Within the for loop, check if the window is not full and there's space to send more frames 
@@ -173,10 +226,16 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
             outgoing_frame->seq_num = host->LFS;
             outgoing_frame -> is_ack = 0;
             char * outgoing_charbuf = convert_frame_to_char(outgoing_frame);
-            host->send_window[i].frame = outgoing_frame;
-            
+            printf("testing: %s\n", outgoing_frame -> data);
+            Frame * cop = (Frame *) malloc (sizeof(Frame));
+            memset(cop, 0, sizeof(Frame));
+            strcpy(cop->data, outgoing_frame->data);
             ll_append_node(&host->outgoing_frames_head, outgoing_charbuf); 
-            
+            //print host->send_window[i].frame
+            host->send_window[i].frame = cop;
+            printf("host->send_window[i].frame->data in sender.c: %s\n", host->send_window[i].frame -> data);
+
+
             //Set a timeout for this frame
             //NOTE: Each dataframe(not ack frame) that is appended to the 
             //host->outgoing_frames_head has to have a 10ms offset from 
@@ -186,11 +245,12 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
             memcpy(next_timeout, &curr_timeval, sizeof(struct timeval)); 
             timeval_usecplus(next_timeout, TIMEOUT_INTERVAL_USEC + additional_ts);
             additional_ts += 10000; //ADD ADDITIONAL 10ms
-
+            //host->send_window[i].timeout = next_timeout;//(this is what I add)
+            //print host->send_window[i].timeout
             free(ll_outframe_node);
         }
     }
-
+    printf("host->buffered_outframes_head in handle_outgoing_frames: %d\n", ll_get_length(host->buffered_outframes_head));
     memcpy(host->latest_timeout, &curr_timeval, sizeof(struct timeval)); 
     timeval_usecplus(host->latest_timeout, additional_ts);
     

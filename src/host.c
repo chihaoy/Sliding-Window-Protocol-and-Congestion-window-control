@@ -25,8 +25,17 @@ void init_host(Host* host, int id) {
     gettimeofday(host->latest_timeout, NULL);
 
     // TODO: You should fill in this function as necessary to initialize variables
-
-
+    //host->recvArray[0].sendQ[0]->frame = NULL;
+    for (int i = 0; i < glb_num_hosts; i++) {
+        host->recvArray[i].sendQ = calloc(8,sizeof(struct send_window_slot));
+        
+    }
+    for (int i = 0; i < glb_num_hosts; i++) {
+        for (int j = 0; j < 8; j++) {
+            host->recvArray[i].sendQ[j].frame = NULL;
+            host->recvArray[i].sendQ[j].timeout = NULL;
+        }
+    }
     // *********** PA1b ONLY ***********
     host->cc = calloc(glb_num_hosts, sizeof(CongestionControl));
     for (int i = 0; i < glb_num_hosts; i++) {

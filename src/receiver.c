@@ -13,14 +13,16 @@ void handle_incoming_frames(Host* host) {
     //    6) Implement the cumulative acknowledgement part of the sliding window protocol
     //    7) Append acknowledgement frames to the outgoing_frames_head queue
     int incoming_frames_length = ll_get_length(host->incoming_frames_head);
+    //print incoming_frames_length to stederr
     //print income_frames_length to stederr
     int t = incoming_frames_length;
     //printf("incoming_frames_length: %d\n", incoming_frames_length);
-    char temp[incoming_frames_length + 1][59];
+    char temp[incoming_frames_length + 1][57];
     while (incoming_frames_length > 0) {
         // Pop a node off the front of the link list and update the count
         //print incoming_frames sequence number to stderr
-        
+        //print incoming_frames_length
+        printf("incoming_frames_length in receiver.c: %d\n", t);
         LLnode* ll_inmsg_node = ll_pop_node(&host->incoming_frames_head);
         incoming_frames_length = ll_get_length(host->incoming_frames_head);
         //print incoming_frames_length to stederr
@@ -33,22 +35,36 @@ void handle_incoming_frames(Host* host) {
         //print temp[incoming_frames_length]
         //printf("temp[%d]: %s\n", incoming_frames_length, temp[incoming_frames_length]);
         //free(inframe);
+        //print inframe -> remaining_msg_bytes
+        printf("inframe->remaining_msg_bytes in receiver.c: %d\n", inframe->remaining_msg_bytes);
+        
+       // if (inframe -> remaining_msg_bytes > 0){
+            //host -> recvArray[1].sendQ[0].frame = inframe;
+       // }
         if (incoming_frames_length == 0){
-            char combinedString[(t + 1) * 59];
-            memset(combinedString, 0, sizeof(combinedString));//so that no garbage character is present
-            for (int i = t - 1; i >= 0;i--){
-                
-                strcat(combinedString, temp[i]);
-            }
-            Frame* outgoing_frame = (Frame*)malloc(sizeof(Frame));
+           Frame* outgoing_frame = (Frame*)malloc(sizeof(Frame));
             outgoing_frame->src_id = inframe->dst_id;
             outgoing_frame->dst_id = inframe->src_id;
             outgoing_frame->is_ack = 1;
             outgoing_frame->seq_num = inframe->seq_num;
-            //print outgoing_frame->src_id and outgoing_frame->dst_id to stderr
+            
             ll_append_node(&host->outgoing_frames_head, outgoing_frame);
+        }
+        if (inframe -> remaining_msg_bytes == 0){
+            
+            //print host -> recvArray[1].sendQ[0].frame -> data
+            //printf("host -> recvArray[1].sendQ[0].frame -> data: %s\n", host -> recvArray[1].sendQ[0].frame -> data);
+            char combinedString[(t + 1) * 57];
+            memset(combinedString, 0, sizeof(combinedString));//so that no garbage character is present
+            //strcat(combinedString, host -> recvArray[1].sendQ[0].frame -> data);
+            for (int i = t - 1; i >= 0;i--){
+                
+                strcat(combinedString, temp[i]);
+            }
+            
+            //print outgoing_frame->src_id and outgoing_frame->dst_id to stderr
             printf("<RECV_%d>:[%s]\n", host->id, combinedString);
-        
+            memset(temp, 0, sizeof(temp));
         }
     }
 }

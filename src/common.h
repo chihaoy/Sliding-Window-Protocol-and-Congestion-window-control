@@ -96,7 +96,7 @@ typedef struct EgressPort_t Egress;
    you want. However, MAX_FRAME_SIZE is fixed (i.e. 64 bytes).
 */
 
-#define FRAME_PAYLOAD_SIZE 58
+#define FRAME_PAYLOAD_SIZE 57
 struct __attribute__((packed)) Frame_t {
     /* DO NOT CHANGE:
         1) remaining_msg_bytes
@@ -111,6 +111,7 @@ struct __attribute__((packed)) Frame_t {
     uint8_t src_id; 
     uint8_t seq_num; 
     uint8_t is_ack;//adding this field 0 means data frame 1 means ack frame
+    char crc;//adding for corruption check
     char data[FRAME_PAYLOAD_SIZE]; 
 };
 typedef struct Frame_t Frame; 
@@ -129,7 +130,13 @@ struct CongestionControl_t {
     enum CCState state;
 }; 
 typedef struct CongestionControl_t CongestionControl;
-
+struct receive_windows {
+    uint8_t NFE; // next frame expected
+    uint8_t LFR; // last frame recieved
+    uint8_t LAF; // last acceptable frame
+    struct send_window_slot* sendQ;
+};
+typedef struct receive_windows recvArray1;//size of 256
 //Host data structure
 struct Host_t {
     /* DO NOT CHANGE:
@@ -152,17 +159,15 @@ struct Host_t {
     LLnode* incoming_frames_head; 
     uint8_t LAR; //last ack recieved
     uint8_t LFS; //last frame sent
-    uint8_t NFE; // next frame expected
-    uint8_t LFR; // last frame recieved
-    uint8_t LAF; // last acceptable frame
     LLnode* buffered_outframes_head; 
     LLnode* outgoing_frames_head;
     struct send_window_slot* send_window;
     struct timeval* latest_timeout; 
-
+    recvArray1 recvArray[256];
     CongestionControl* cc; //PA1b ONLY
 };
 typedef struct Host_t Host;
+
 /*
 Global variables declared below.
 DO NOT CHANGE:
