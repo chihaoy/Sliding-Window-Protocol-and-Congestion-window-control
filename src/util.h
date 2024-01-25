@@ -13,7 +13,7 @@
 #include <sys/time.h>
 #include <sys/types.h>
 #include <unistd.h>
-
+#include <stdbool.h>
 // Linked list functions
 int ll_get_length(LLnode*);
 void* ll_peek_node(LLnode*); 
@@ -43,4 +43,6 @@ int min(int, int);
 double min_double(double, double); 
 int max(int, int); 
 double max_double(double, double); 
+bool swpInWindow(uint8_t seqno, uint8_t min,
+                        uint8_t max);
 #endif

@@ -159,7 +159,7 @@ struct Host_t {
     int csv_out; 
     LLnode* input_cmdlist_head;
     LLnode* incoming_frames_head; 
-    char emptyCharArray[100];
+    char emptyCharArray[65535];
     uint8_t LAR; //last ack recieved
     uint8_t LFS; //last frame sent
     //as a receiver
@@ -172,6 +172,7 @@ struct Host_t {
     struct timeval* latest_timeout; 
     recvArray1 recvArray[256];
     CongestionControl* cc; //PA1b ONLY
+    struct send_window_slot* receive_window;
 };
 typedef struct Host_t Host;
 

@@ -1,5 +1,5 @@
 #include "util.h"
-
+#include <stdbool.h>
 // Linked list functions
 int ll_get_length(LLnode* head) {
     LLnode* tmp;
@@ -235,4 +235,13 @@ double max_double(double a, double b) {
     else {
         return b; 
     }
+}
+
+bool swpInWindow(uint8_t seqno, uint8_t min,
+                        uint8_t max)
+{
+    unsigned char pos, maxpos;
+    pos = seqno - min;
+    maxpos = max - min + 1;
+    return pos < maxpos;
 }

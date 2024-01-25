@@ -1,6 +1,7 @@
 #include "host.h"
 #include <assert.h>
 #include "switch.h"
+#include <stdbool.h>
 
 struct timeval* host_get_next_expiring_timeval(Host* host) {
     // TODO: You should fill in this function so that it returns the 
@@ -25,11 +26,13 @@ struct timeval* host_get_next_expiring_timeval(Host* host) {
             }
         }
     }
+    /*
     //print next_timeout
     if (next_timeout != NULL) {
         printf("next_timeout in sender.c: %ld\n", next_timeout->tv_usec + next_timeout->tv_sec * 1000000);
     }
     //printf("next_timeout in sender.c: %ld\n", next_timeout->tv_usec + next_timeout->tv_sec * 1000000);
+    */
     return next_timeout;
 }
 
@@ -66,43 +69,19 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
         //print ll_get_length(host->incoming_frames_head)
         LLnode* ll_input_cmd_node = ll_pop_node(&host->incoming_frames_head);
         Frame* inframe = (Frame*) ll_input_cmd_node->value;
-        //print inframe->src_id and inframe->dst_id
-        
-       // printf("inframe->seq_nfewfewfewum: %d\n", inframe->seq_num);
-        //print inframe->is_ack
-      //  printf("host -> LAR before if: %d\n", host -> LAR);
-        //print inframe -> is_ack
-        //printf("acdinframe -> is_ack: %d\n", inframe -> is_ack);
-        //print inframe ->seq_num
-        printf("acdhost -> LAR %d\n", host -> LAR);
-        printf("acdinframe -> seq_num: %d\n", inframe -> seq_num);
+        if(!swpInWindow(inframe->ack_num, host->LAR+1, host->LFS)){
+            return;
+        }
 
-      //  printf("acdwe waht %d",k);
-        while (host -> LAR <= inframe->ack_num){
-            printf("bye");
-            if (inframe -> is_ack == 1){
-                printf("host -> LAR: inside if%d\n", (host -> LAR) % glb_sysconfig.window_size);
-                free(host->send_window[(host -> LAR) % glb_sysconfig.window_size].frame);
-                host->send_window[(host -> LAR) % glb_sysconfig.window_size].frame = NULL;
-                host -> LAR +=1;
-                //print host -> LAR
-                printf("host -> LAR after adding: %d\n", host -> LAR);
-            //print (host -> LAR) % glb_sysconfig.window_size
-            //printf("host -> LAR: %d\n", host -> LAR);
-                
-                //print host->send_window[(host->LAR) % glb_sysconfig.window_size].frame
-                //printf("host->send_window[i].frame->data in sender.c: %s\n", host->send_window[1].frame -> data);
-                
+        for (int i = 0; i < glb_sysconfig.window_size; i++){
+            if (host->send_window[i].frame != NULL && host->send_window[i].frame->seq_num > inframe->ack_num && inframe -> is_ack == 1){
+                //free(host->send_window[(host -> LAR) % glb_sysconfig.window_size].frame);
+                host->send_window[i].frame = NULL;
+                host->send_window[i].timeout = NULL;
             }
         }
-        //print inframe -> seq_num
-       // printf("packet num %d\n", inframe -> seq_num);
-        //print ost -> send_window[(host->LAR) - 1].frame
-        //print host->id
-        if (host -> LAR == inframe -> seq_num){
-            //printf("AAA");
-            break;
-        }
+        host -> LAR = inframe -> ack_num;
+      //  printf("acdwe waht %d",k);
     }
     
     
@@ -161,7 +140,7 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
               //  printf("outgoing_frame->remaining_msg_bytes in handle_input_cmds: %d\n", outgoing_frame->remaining_msg_bytes);
                 memcpy(outgoing_frame->data, outgoing_cmd->message + i * FRAME_PAYLOAD_SIZE, numbytes);
                 ll_append_node(&host->buffered_outframes_head, outgoing_frame);
-                
+                printf("outgoing_frame->data in handle_input_cmds: %s\n", outgoing_frame->data);
                 
             } 
            //print ll_get_length(host->buffered_outframes_head)

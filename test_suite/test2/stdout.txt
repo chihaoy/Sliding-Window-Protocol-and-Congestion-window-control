@@ -1,19 +1,19 @@
 NOT EXITING MAIN
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706129791601800
+curr_timeval in sender.c: 1706131095513092
 outgoing_frame->seq_num: 0
 hellooutgoing_frame->data in sender.c: Hello World!
 host->send_window[i].frame->data in sender.c: Hello World!
-host->send_window[i].timeout in sender.c: 1706129791701800
+host->send_window[i].timeout in sender.c: 1706131095613092
 infdasdasrame->data in receiver.c>>>: Hello World!
 infdasdasrame->data in receiver.c: Hello World!
 qwehost -> NFE: 0
 qweinframe -> seq_num: 0
 Should have something here<RECV_1>:[Hello World!]
-next_timeout in sender.c: 1706129791701800
+next_timeout in sender.c: 1706131095613092
 ll_get_length(host->incoming_frames_head) 1
 HERE??acdhost -> LAR 0
-acdinframe -> seq_num: 209
+acdinframe -> seq_num: 0
 byehost -> LAR: inside if0
 host -> LAR after adding: 1
-curr_timeval in sender.c: 1706129791602082
+curr_timeval in sender.c: 1706131095513379

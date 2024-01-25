@@ -10,7 +10,7 @@ void init_host(Host* host, int id) {
     host->awaiting_ack = 0; 
     host->round_trip_num = 0; 
     host->csv_out = 0; 
-    host->LAR = 0;
+    host->LAR = -1;
     host->LFS = -1;
     host->LFR = 0;
     host->NFE = 0;
@@ -19,10 +19,14 @@ void init_host(Host* host, int id) {
     host->buffered_outframes_head = NULL; 
     host->outgoing_frames_head = NULL; 
     host->send_window = calloc(glb_sysconfig.window_size, sizeof(struct send_window_slot)); 
+    host->receive_window = calloc(glb_sysconfig.window_size, sizeof(struct send_window_slot)); 
     for (int i = 0; i < glb_sysconfig.window_size; i++) {
         host->send_window[i].frame = NULL;
         host->send_window[i].timeout = NULL;
+        host->receive_window[i].frame = NULL;
+        host->receive_window[i].timeout = NULL;
     }
+    memset(host->emptyCharArray, 0, sizeof(host->emptyCharArray));
     host->latest_timeout = malloc(sizeof(struct timeval));
     gettimeofday(host->latest_timeout, NULL);
     

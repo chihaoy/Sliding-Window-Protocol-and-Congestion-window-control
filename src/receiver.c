@@ -1,6 +1,7 @@
 #include "host.h"
 #include <assert.h>
 #include "switch.h"
+#include <stdbool.h>
 
 void handle_incoming_frames(Host* host) {
     // TODO: Suggested steps for handling incoming frames
@@ -20,7 +21,7 @@ void handle_incoming_frames(Host* host) {
     //char temp[incoming_frames_length + 1][57];
     //memset(temp, 0, sizeof(temp));
     while (incoming_frames_length > 0) {
-        //printf("incoming_frames_length in recvewfewfewfeweiver.c: %d\n", incoming_frames_length);
+        printf("incoming_frames_length in recvewfewfewfeweiver.c: %d\n", incoming_frames_length);
         // Pop a node off the front of the link list and update the count
         //print incoming_frames sequence number to stderr
         //print incoming_frames_length
@@ -29,64 +30,47 @@ void handle_incoming_frames(Host* host) {
 
         //print incoming_frames_length to stederr
         Frame* inframe = ll_inmsg_node->value;
-        //print(inframe->data) to stderr
-        printf("infdasdasrame->data in receiver.c>>>: %s\n", inframe->data);
-        if (inframe -> seq_num < host -> NFE ){
-            
+        //print inframe->seq_num to stderr
+        printf("helloinframe -> data:%s\n",inframe->data);
+        printf("helloinframe -> seq_num:%d\n",inframe->seq_num);
+        if (!swpInWindow(inframe -> seq_num,host -> NFE,host -> NFE + glb_sysconfig.window_size - 1)){
+            printf("NOdasdsadwqdqwdw");
             return;
         }
-        //printf("%s\n",inframe->data);
-        //print inframe->seq_num
-       // printf("inframe->seq_num in receiver.c: %d\n", inframe->seq_num);
-        //print inframe-> seq
-        printf("infdasdasrame->data in receiver.c: %s\n", inframe->data);
-        strcat(host -> emptyCharArray, inframe->data); // Copy inframe->data into temp
-        //print host -> emptyCharArray
-      //  printf("host -> emptyCharArray: %s\n", host -> emptyCharArray);
-        //print temp[incoming_frames_length]
-        //print inframe->data
-        //print temp[incoming_frames_length]
-        //printf("temp[%d]: %s\n", incoming_frames_length, temp[incoming_frames_length]);
-        //free(inframe);
-        //print inframe -> remaining_msg_bytes
-        //printf("inframe->remaining_msg_bytes in receiver.c: %d\n", inframe->remaining_msg_bytes);
-       // 
-       // if (inframe -> remaining_msg_bytes > 0){
-            //host -> recvArray[1].sendQ[0].frame = inframe;
-       // }
-        //print host -> NFE
-        //print inframe ->data
-        
-        printf("qwehost -> NFE: %d\n", host -> NFE);
-        printf("qweinframe -> seq_num: %d\n", inframe -> seq_num);
+        Frame * cop = (Frame *) malloc (sizeof(Frame));
+        memset(cop, 0, sizeof(Frame));
+        memcpy(cop, inframe, sizeof(Frame));
+        host -> receive_window[inframe -> seq_num % glb_sysconfig.window_size].frame = cop;
+        printf("helloabcdinframe -> data:%s\n",host -> receive_window[inframe -> seq_num % glb_sysconfig.window_size].frame->data);
         if (host -> NFE == inframe -> seq_num){
-            host -> NFE += 1;
-            printf("Should have something here");
-            while (host -> send_window[host -> NFE].frame != NULL){//still should check the case for window_size of 8
+            printf("Should have something here\n");
+            while (host -> receive_window[host -> NFE].frame != NULL){//still should check the case for window_size of 8
+                strcat(host -> emptyCharArray, host -> receive_window[host -> NFE].frame -> data); // Copy inframe->data into temp
+                printf("emptyCharArray:%s\n",host -> emptyCharArray);
+                if (inframe -> remaining_msg_bytes == 0){
+                    char combinedString[(t + 1) * FRAME_PAYLOAD_SIZE];
+                    memset(combinedString, 0, sizeof(combinedString));//so that no garbage character is present
+                    //strcat(combinedString, host -> recvArray[1].sendQ[0].frame -> data);
+                    strcat(combinedString, host -> emptyCharArray);
+                    //print outgoing_frame->src_id and outgoing_frame->dst_id to stderr
+                    printf("<RECV_%d>:[%s]\n", host->id, combinedString);
+                    //memset(temp, 0, sizeof(temp));
+                    host -> emptyCharArray[0] = '\0';
+                }
                 host -> NFE += 1;
             }
+            //print host -> emptyCharArray to stderr
+            
             Frame* outgoing_frame = (Frame*)malloc(sizeof(Frame));
             outgoing_frame->src_id = inframe->dst_id;
             outgoing_frame->dst_id = inframe->src_id;
             outgoing_frame->is_ack = 1;
             outgoing_frame->ack_num = host -> NFE - 1;
             ll_append_node(&host->outgoing_frames_head, outgoing_frame);
-        }
-        if (inframe -> remaining_msg_bytes == 0){
-            //print host -> recvArray[1].sendQ[0].frame -> data
-            //printf("host -> recvArray[1].sendQ[0].frame -> data: %s\n", host -> recvArray[1].sendQ[0].frame -> data);
-            //print temp[1]
-            char combinedString[(t + 1) * FRAME_PAYLOAD_SIZE];
-            memset(combinedString, 0, sizeof(combinedString));//so that no garbage character is present
-            //strcat(combinedString, host -> recvArray[1].sendQ[0].frame -> data);
-            strcat(combinedString, host -> emptyCharArray);
-            
-            //print outgoing_frame->src_id and outgoing_frame->dst_id to stderr
-            printf("<RECV_%d>:[%s]\n", host->id, combinedString);
-            //memset(temp, 0, sizeof(temp));
-            host -> emptyCharArray[0] = '\0';
+            printf("outgoing_frame -> ack_num:%d\n",outgoing_frame->ack_num);
         }
     }
+
 }
 void run_receivers() {
     int recv_order[glb_num_hosts]; 
