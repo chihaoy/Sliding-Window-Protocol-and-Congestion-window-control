@@ -70,11 +70,12 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
         LLnode* ll_input_cmd_node = ll_pop_node(&host->incoming_frames_head);
         Frame* inframe = (Frame*) ll_input_cmd_node->value;
         if(!swpInWindow(inframe->ack_num, host->LAR+1, host->LFS)){
+            printf("NONONO");
             return;
         }
 
         for (int i = 0; i < glb_sysconfig.window_size; i++){
-            if (host->send_window[i].frame != NULL && host->send_window[i].frame->seq_num > inframe->ack_num && inframe -> is_ack == 1){
+            if (host->send_window[i].frame != NULL && host->send_window[i].frame->seq_num <= inframe->ack_num && inframe -> is_ack == 1){
                 //free(host->send_window[(host -> LAR) % glb_sysconfig.window_size].frame);
                 host->send_window[i].frame = NULL;
                 host->send_window[i].timeout = NULL;

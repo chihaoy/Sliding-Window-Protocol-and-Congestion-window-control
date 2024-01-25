@@ -34,7 +34,7 @@ void handle_incoming_frames(Host* host) {
         printf("helloinframe -> data:%s\n",inframe->data);
         printf("helloinframe -> seq_num:%d\n",inframe->seq_num);
         if (!swpInWindow(inframe -> seq_num,host -> NFE,host -> NFE + glb_sysconfig.window_size - 1)){
-            printf("NOdasdsadwqdqwdw");
+            //dasdsadwqdqwdw");
             return;
         }
         Frame * cop = (Frame *) malloc (sizeof(Frame));

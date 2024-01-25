@@ -1,0 +1,42 @@
+<SEND_0>: sending messages of length greater than 56 is not implemented
+outgoing_frame->data in handle_input_cmds: BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+outgoing_frame->data in handle_input_cmds: BBBBBBBBBBBBBBBBB
+ll_get_length(host->incoming_frames_head) 0
+curr_timeval in sender.c: 1706180567456489
+outgoing_frame->seq_num: 0
+hellooutgoing_frame->data in sender.c: A
+host->send_window[i].frame->data in sender.c: A
+host->send_window[i].timeout in sender.c: 1706180567556489
+outgoing_frame->seq_num: 1
+hellooutgoing_frame->data in sender.c: BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+host->send_window[i].frame->data in sender.c: BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+host->send_window[i].timeout in sender.c: 1706180567566489
+outgoing_frame->seq_num: 2
+hellooutgoing_frame->data in sender.c: BBBBBBBBBBBBBBBBB
+host->send_window[i].frame->data in sender.c: BBBBBBBBBBBBBBBBB
+host->send_window[i].timeout in sender.c: 1706180567576489
+incoming_frames_length in recvewfewfewfeweiver.c: 3
+helloinframe -> data:A
+helloinframe -> seq_num:0
+helloabcdinframe -> data:A
+Should have something here
+emptyCharArray:A
+<RECV_1>:[A]
+outgoing_frame -> ack_num:0
+incoming_frames_length in recvewfewfewfeweiver.c: 2
+helloinframe -> data:BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+helloinframe -> seq_num:1
+helloabcdinframe -> data:BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+Should have something here
+emptyCharArray:BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+outgoing_frame -> ack_num:1
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+helloinframe -> data:BBBBBBBBBBBBBBBBB
+helloinframe -> seq_num:2
+helloabcdinframe -> data:BBBBBBBBBBBBBBBBB
+Should have something here
+emptyCharArray:BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+<RECV_1>:[BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB]
+outgoing_frame -> ack_num:2
+ll_get_length(host->incoming_frames_head) 3
+HERE??HERE??HERE??curr_timeval in sender.c: 1706180567457394
