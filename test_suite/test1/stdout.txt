@@ -1,5 +1,10 @@
+<SEND_0>: sending messages of length greater than 56 is not implemented
+outgoing_frame->remaining_msg_bytes in handle_input_cmds in sender.c: 39
+outgoing_frame->data in handle_input_cmds: CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+outgoing_frame->remaining_msg_bytes in handle_input_cmds in sender.c: 0
+outgoing_frame->data in handle_input_cmds: CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706204083640575
+curr_timeval in sender.c: 1706209823556431
 QAZoutgoing_frame->seq_num: 0
 QAZoutgoing_frame->data in sender.c: A
 QAZoutgoing_frame->src_id in sender.c: 0
@@ -11,6 +16,16 @@ QAZoutgoing_frame->src_id in sender.c: 0
 hellooutgoing_frame->data in sender.c: 0
 host->send_wincsacsadow[1].frame->data in sender.c: B
 incoming_frames_length in recvewfewfewfeweiver.c: 1
+CRC8 is not 0
+compute_crc8(inframe):57
+ll_get_length(host->incoming_frames_head) 0
+curr_timeval in sender.c: 1706209823656431
+Herethere
+BCGDDAA
+0
+BCGDDAA
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+great
 helloinframe -> data:0
 helloinframe -> seq_num:0
 helloabcdinframe -> data:A
@@ -26,23 +41,119 @@ specialhost -> NFE:1
 I want to see this!outgoing_frame -> ack_num:0
 ll_get_length(host->incoming_frames_head) 1
 HERE??inframe->ack_num: 0
-curr_timeval in sender.c: 1706204083642082
+curr_timeval in sender.c: 1706209823657135
 QAZoutgoing_frame->seq_num: 2
-QAZoutgoing_frame->data in sender.c: C
-QAZoutgoing_frame->src_id in sender.c: 0
-hellooutgoing_frame->data in sender.c: 0
-host->send_wincsacsadow[0].frame->data in sender.c: C
+QAZoutgoing_frame->data in sender.c: CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+QAZoutgoing_frame->src_id in sender.c: 39
+hellooutgoing_frame->data in sender.c: 39
+host->send_wincsacsadow[0].frame->data in sender.c: CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCB
 incoming_frames_length in recvewfewfewfeweiver.c: 1
-helloinframe -> data:0
+great
+helloinframe -> data:39
 helloinframe -> seq_num:2
-helloabcdinframe -> data:C
+helloabcdinframe -> data:CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCB
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706204083750575
+curr_timeval in sender.c: 1706209823666431
 Herethere
 BCGDDAA
 1
 BCGDDAA
 incoming_frames_length in recvewfewfewfeweiver.c: 1
+CRC8 is not 0
+compute_crc8(inframe):68
+ll_get_length(host->incoming_frames_head) 0
+curr_timeval in sender.c: 1706209823766431
+Herethere
+BCGDDAA
+0
+BCGDDAA
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+CRC8 is not 0
+compute_crc8(inframe):10
+ll_get_length(host->incoming_frames_head) 0
+curr_timeval in sender.c: 1706209823776431
+Herethere
+BCGDDAA
+1
+BCGDDAA
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+CRC8 is not 0
+compute_crc8(inframe):15
+ll_get_length(host->incoming_frames_head) 0
+curr_timeval in sender.c: 1706209823866431
+Herethere
+BCGDDAA
+0
+BCGDDAA
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+great
+helloinframe -> data:39
+helloinframe -> seq_num:2
+helloabcdinframe -> data:CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCB
+ll_get_length(host->incoming_frames_head) 0
+curr_timeval in sender.c: 1706209823876431
+Herethere
+BCGDDAA
+1
+BCGDDAA
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+CRC8 is not 0
+compute_crc8(inframe):77
+ll_get_length(host->incoming_frames_head) 0
+curr_timeval in sender.c: 1706209823966431
+Herethere
+BCGDDAA
+0
+BCGDDAA
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+CRC8 is not 0
+compute_crc8(inframe):219
+ll_get_length(host->incoming_frames_head) 0
+curr_timeval in sender.c: 1706209823976431
+Herethere
+BCGDDAA
+1
+BCGDDAA
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+CRC8 is not 0
+compute_crc8(inframe):142
+ll_get_length(host->incoming_frames_head) 0
+curr_timeval in sender.c: 1706209824066431
+Herethere
+BCGDDAA
+0
+BCGDDAA
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+great
+helloinframe -> data:39
+helloinframe -> seq_num:2
+helloabcdinframe -> data:CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCB
+ll_get_length(host->incoming_frames_head) 0
+curr_timeval in sender.c: 1706209824076431
+Herethere
+BCGDDAA
+1
+BCGDDAA
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+CRC8 is not 0
+compute_crc8(inframe):43
+ll_get_length(host->incoming_frames_head) 0
+curr_timeval in sender.c: 1706209824166431
+Herethere
+BCGDDAA
+0
+BCGDDAA
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+CRC8 is not 0
+compute_crc8(inframe):114
+ll_get_length(host->incoming_frames_head) 0
+curr_timeval in sender.c: 1706209824176431
+Herethere
+BCGDDAA
+1
+BCGDDAA
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+great
 helloinframe -> data:0
 helloinframe -> seq_num:1
 helloabcdinframe -> data:B
@@ -56,63 +167,43 @@ YAY
 <RECV_1>:[B]
 specialhost -> NFE:2
 howareyouhost -> NFE in receiver.c:2
-emptyCharArray:C
-host -> receive_windo -> remain:0
+emptyCharArray:CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCB
+host -> receive_windo -> remain:39
 inframe -> remaining_msg_bytes in okk:0
-YAY
-<RECV_1>:[C]
 specialhost -> NFE:3
 I want to see this!outgoing_frame -> ack_num:2
 ll_get_length(host->incoming_frames_head) 1
 HERE??inframe->ack_num: 2
-curr_timeval in sender.c: 1706204083751370
+curr_timeval in sender.c: 1706209824177030
 QAZoutgoing_frame->seq_num: 3
-QAZoutgoing_frame->data in sender.c: D
+QAZoutgoing_frame->data in sender.c: CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 QAZoutgoing_frame->src_id in sender.c: 0
 hellooutgoing_frame->data in sender.c: 0
-host->send_wincsacsadow[0].frame->data in sender.c: D
-QAZoutgoing_frame->seq_num: 4
-QAZoutgoing_frame->data in sender.c: E
-QAZoutgoing_frame->src_id in sender.c: 0
-hellooutgoing_frame->data in sender.c: 0
-host->send_wincsacsadow[1].frame->data in sender.c: E
+host->send_wincsacsadow[0].frame->data in sender.c: CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 incoming_frames_length in recvewfewfewfeweiver.c: 1
+CRC8 is not 0
+compute_crc8(inframe):129
+ll_get_length(host->incoming_frames_head) 0
+curr_timeval in sender.c: 1706209824286431
+Herethere
+BCGDDAA
+0
+BCGDDAA
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+great
 helloinframe -> data:0
 helloinframe -> seq_num:3
-helloabcdinframe -> data:D
+helloabcdinframe -> data:CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 Should have something here
 host ->NFE in receiver.c:3
 howareyouhost -> NFE in receiver.c:3
-emptyCharArray:D
+emptyCharArray:CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 host -> receive_windo -> remain:0
 inframe -> remaining_msg_bytes in okk:0
 YAY
-<RECV_1>:[D]
+<RECV_1>:[CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC]
 specialhost -> NFE:4
 I want to see this!outgoing_frame -> ack_num:3
 ll_get_length(host->incoming_frames_head) 1
 HERE??inframe->ack_num: 3
-curr_timeval in sender.c: 1706204083752084
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706204083870575
-Herethere
-BCGDDAA
-1
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-helloinframe -> data:0
-helloinframe -> seq_num:4
-helloabcdinframe -> data:E
-Should have something here
-host ->NFE in receiver.c:4
-howareyouhost -> NFE in receiver.c:4
-emptyCharArray:E
-host -> receive_windo -> remain:0
-inframe -> remaining_msg_bytes in okk:0
-YAY
-<RECV_1>:[E]
-specialhost -> NFE:5
-I want to see this!outgoing_frame -> ack_num:4
-ll_get_length(host->incoming_frames_head) 1
-HERE??inframe->ack_num: 4
-curr_timeval in sender.c: 1706204083871142
+curr_timeval in sender.c: 1706209824287257

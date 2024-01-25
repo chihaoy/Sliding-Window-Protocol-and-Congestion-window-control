@@ -129,7 +129,7 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
             int num_frames = ceil((double)msg_length / FRAME_PAYLOAD_SIZE);
             //print num_frames
             for (int i = 0; i < num_frames; i++) {
-                Frame* outgoing_frame = malloc(sizeof(Frame));
+                Frame* outgoing_frame = calloc(1,sizeof(Frame));
                 assert(outgoing_frame);
                 outgoing_frame->src_id = outgoing_cmd->src_id;
                 outgoing_frame->dst_id = outgoing_cmd->dst_id;
@@ -151,7 +151,7 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
            //print ll_get_length(host->buffered_outframes_head)
            
         } else {
-            Frame* outgoing_frame = malloc(sizeof(Frame));
+            Frame* outgoing_frame = calloc(1,sizeof(Frame));
             assert(outgoing_frame);
             strcpy(outgoing_frame->data, outgoing_cmd->message);
             //print outgoing_frame->data
@@ -213,7 +213,7 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
             struct timeval* next_timeout = malloc(sizeof(struct timeval));
             memcpy(next_timeout, &curr_timeval, sizeof(struct timeval)); 
             timeval_usecplus(next_timeout, TIMEOUT_INTERVAL_USEC + additional_ts);
-            Frame * cop = (Frame *) malloc (sizeof(Frame));
+            Frame * cop = calloc (1,sizeof(Frame));
             memset(cop, 0, sizeof(Frame));
             host->send_window[i].timeout = next_timeout;//(this is what I add)
             memcpy(cop, host->send_window[i].frame, sizeof(Frame));
@@ -251,7 +251,9 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
             printf("QAZoutgoing_frame->src_id in sender.c: %d\n", outgoing_frame->remaining_msg_bytes);
             char * outgoing_charbuf = convert_frame_to_char(outgoing_frame);
           //  printf("testing: %s\n", outgoing_frame -> data);
-            Frame * cop = (Frame *) malloc (sizeof(Frame));
+          //use calloc to create cop
+          Frame* cop = calloc(1, sizeof(Frame));
+            //Frame * cop = (Frame *) malloc (sizeof(Frame));
             memset(cop, 0, sizeof(Frame));
           //  printf("qwaaaerthost->send_window[i].frame->data in seawernder.c src_id: %d\n", outgoing_frame -> src_id);
          //   printf("qwaaaerthost->send_window[i].frame->data in seawernder.c dst_id: %d\n", outgoing_frame -> dst_id);
@@ -261,6 +263,9 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
             //print outgoing_frame->data
             printf("hellooutgoing_frame->data in sender.c: %i\n", outgoing_frame->remaining_msg_bytes);
             host->send_window[i].frame = cop;
+            outgoing_frame -> crc = compute_crc8(outgoing_charbuf);
+            outgoing_charbuf = convert_frame_to_char(outgoing_frame);
+            host->send_window[i].frame -> crc = outgoing_frame -> crc;
             ll_append_node(&host->outgoing_frames_head, outgoing_charbuf); 
             //print host->send_window[i].frame
            

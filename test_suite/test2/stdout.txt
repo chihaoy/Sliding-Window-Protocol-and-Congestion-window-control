@@ -1,11 +1,21 @@
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706204083916950
+curr_timeval in sender.c: 1706209824350265
 QAZoutgoing_frame->seq_num: 0
 QAZoutgoing_frame->data in sender.c: Hello World!
 QAZoutgoing_frame->src_id in sender.c: 0
 hellooutgoing_frame->data in sender.c: 0
 host->send_wincsacsadow[0].frame->data in sender.c: Hello World!
 incoming_frames_length in recvewfewfewfeweiver.c: 1
+CRC8 is not 0
+compute_crc8(inframe):141
+ll_get_length(host->incoming_frames_head) 0
+curr_timeval in sender.c: 1706209824450265
+Herethere
+BCGDDAA
+0
+BCGDDAA
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+great
 helloinframe -> data:0
 helloinframe -> seq_num:0
 helloabcdinframe -> data:Hello World!
@@ -21,4 +31,4 @@ specialhost -> NFE:1
 I want to see this!outgoing_frame -> ack_num:0
 ll_get_length(host->incoming_frames_head) 1
 HERE??inframe->ack_num: 0
-curr_timeval in sender.c: 1706204083918013
+curr_timeval in sender.c: 1706209824451210

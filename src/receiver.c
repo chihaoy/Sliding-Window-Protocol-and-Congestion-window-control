@@ -30,6 +30,16 @@ void handle_incoming_frames(Host* host) {
 
         //print incoming_frames_length to stederr
         Frame* inframe = ll_inmsg_node->value;
+        char* temp = convert_frame_to_char(inframe);
+        if (compute_crc8(temp) != 0){
+            printf("CRC8 is not 0\n");
+            //print compute_crc8(inframe)
+            printf("compute_crc8(inframe):%d\n",compute_crc8(temp));
+            continue;
+        }
+        else{
+            printf("great\n");
+        }
         //print inframe->seq_num to stderr
         printf("helloinframe -> data:%i\n",inframe->remaining_msg_bytes);
         printf("helloinframe -> seq_num:%d\n",inframe->seq_num);
