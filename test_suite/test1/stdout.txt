@@ -1,42 +1,50 @@
-<SEND_0>: sending messages of length greater than 56 is not implemented
-outgoing_frame->data in handle_input_cmds: BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-outgoing_frame->data in handle_input_cmds: BBBBBBBBBBBBBBBBB
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706180567456489
+curr_timeval in sender.c: 1706195134038842
 outgoing_frame->seq_num: 0
-hellooutgoing_frame->data in sender.c: A
-host->send_window[i].frame->data in sender.c: A
-host->send_window[i].timeout in sender.c: 1706180567556489
+hellooutgoing_frame->data in sender.c: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+host->send_wincsacsadow[0].frame->data in sender.c: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 outgoing_frame->seq_num: 1
-hellooutgoing_frame->data in sender.c: BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-host->send_window[i].frame->data in sender.c: BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-host->send_window[i].timeout in sender.c: 1706180567566489
-outgoing_frame->seq_num: 2
-hellooutgoing_frame->data in sender.c: BBBBBBBBBBBBBBBBB
-host->send_window[i].frame->data in sender.c: BBBBBBBBBBBBBBBBB
-host->send_window[i].timeout in sender.c: 1706180567576489
-incoming_frames_length in recvewfewfewfeweiver.c: 3
-helloinframe -> data:A
-helloinframe -> seq_num:0
-helloabcdinframe -> data:A
-Should have something here
-emptyCharArray:A
-<RECV_1>:[A]
-outgoing_frame -> ack_num:0
-incoming_frames_length in recvewfewfewfeweiver.c: 2
-helloinframe -> data:BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-helloinframe -> seq_num:1
-helloabcdinframe -> data:BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-Should have something here
-emptyCharArray:BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-outgoing_frame -> ack_num:1
+hellooutgoing_frame->data in sender.c: B
+host->send_wincsacsadow[1].frame->data in sender.c: B
 incoming_frames_length in recvewfewfewfeweiver.c: 1
-helloinframe -> data:BBBBBBBBBBBBBBBBB
-helloinframe -> seq_num:2
-helloabcdinframe -> data:BBBBBBBBBBBBBBBBB
+helloinframe -> data:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+helloinframe -> seq_num:0
+helloabcdinframe -> data:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 Should have something here
-emptyCharArray:BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-<RECV_1>:[BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB]
-outgoing_frame -> ack_num:2
-ll_get_length(host->incoming_frames_head) 3
-HERE??HERE??HERE??curr_timeval in sender.c: 1706180567457394
+host ->NFE in receiver.c:0
+emptyCharArray:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+<RECV_1>:[AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]
+specialhost -> NFE:1
+I want to see this!outgoing_frame -> ack_num:0
+ll_get_length(host->incoming_frames_head) 1
+HERE??inframe->ack_num: 0
+curr_timeval in sender.c: 1706195134039286
+outgoing_frame->seq_num: 2
+hellooutgoing_frame->data in sender.c: C
+host->send_wincsacsadow[0].frame->data in sender.c: C
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+helloinframe -> data:C
+helloinframe -> seq_num:2
+helloabcdinframe -> data:C
+ll_get_length(host->incoming_frames_head) 0
+curr_timeval in sender.c: 1706195134148842
+Herethere
+BCGDDAA
+1
+BCGDDAA
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+helloinframe -> data:B
+helloinframe -> seq_num:1
+helloabcdinframe -> data:B
+Should have something here
+host ->NFE in receiver.c:1
+emptyCharArray:B
+<RECV_1>:[B]
+specialhost -> NFE:2
+emptyCharArray:C
+<RECV_1>:[C]
+specialhost -> NFE:3
+I want to see this!outgoing_frame -> ack_num:2
+ll_get_length(host->incoming_frames_head) 1
+HERE??inframe->ack_num: 2
+curr_timeval in sender.c: 1706195134149810

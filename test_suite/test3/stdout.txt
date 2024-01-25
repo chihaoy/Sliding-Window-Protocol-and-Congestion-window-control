@@ -1,100 +1,94 @@
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706180567541893
-outgoing_frame->seq_num: 0
-hellooutgoing_frame->data in sender.c: Msg1
-host->send_window[i].frame->data in sender.c: Msg1
-host->send_window[i].timeout in sender.c: 1706180567641893
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706180567542240
+curr_timeval in sender.c: 1706195134270905
 outgoing_frame->seq_num: 0
 hellooutgoing_frame->data in sender.c: Msg4
-host->send_window[i].frame->data in sender.c: Msg4
-host->send_window[i].timeout in sender.c: 1706180567642240
+host->send_wincsacsadow[0].frame->data in sender.c: Msg4
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706180567542241
+curr_timeval in sender.c: 1706195134271290
 outgoing_frame->seq_num: 0
 hellooutgoing_frame->data in sender.c: Msg5
-host->send_window[i].frame->data in sender.c: Msg5
-host->send_window[i].timeout in sender.c: 1706180567642241
+host->send_wincsacsadow[0].frame->data in sender.c: Msg5
 outgoing_frame->seq_num: 1
 hellooutgoing_frame->data in sender.c: Msg6
-host->send_window[i].frame->data in sender.c: Msg6
-host->send_window[i].timeout in sender.c: 1706180567652241
+host->send_wincsacsadow[1].frame->data in sender.c: Msg6
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706180567542242
+curr_timeval in sender.c: 1706195134271294
 outgoing_frame->seq_num: 0
 hellooutgoing_frame->data in sender.c: Msg2
-host->send_window[i].frame->data in sender.c: Msg2
-host->send_window[i].timeout in sender.c: 1706180567642242
+host->send_wincsacsadow[0].frame->data in sender.c: Msg2
 outgoing_frame->seq_num: 1
 hellooutgoing_frame->data in sender.c: Msg3
-host->send_window[i].frame->data in sender.c: Msg3
-host->send_window[i].timeout in sender.c: 1706180567652242
+host->send_wincsacsadow[1].frame->data in sender.c: Msg3
 outgoing_frame->seq_num: 2
 hellooutgoing_frame->data in sender.c: Msg7
-host->send_window[i].frame->data in sender.c: Msg7
-host->send_window[i].timeout in sender.c: 1706180567662242
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-helloinframe -> data:Msg7
-helloinframe -> seq_num:2
-helloabcdinframe -> data:Msg7
+host->send_wincsacsadow[2].frame->data in sender.c: Msg7
+ll_get_length(host->incoming_frames_head) 0
+curr_timeval in sender.c: 1706195134271298
+outgoing_frame->seq_num: 0
+hellooutgoing_frame->data in sender.c: Msg1
+host->send_wincsacsadow[0].frame->data in sender.c: Msg1
 incoming_frames_length in recvewfewfewfeweiver.c: 4
-helloinframe -> data:Msg2
-helloinframe -> seq_num:0
-helloabcdinframe -> data:Msg2
-Should have something here
-emptyCharArray:Msg2
-<RECV_0>:[Msg2]
-outgoing_frame -> ack_num:0
-incoming_frames_length in recvewfewfewfeweiver.c: 3
 helloinframe -> data:Msg5
+helloinframe -> seq_num:0
+helloabcdinframe -> data:Msg5
+Should have something here
+host ->NFE in receiver.c:0
+emptyCharArray:Msg5
+<RECV_0>:[Msg5]
+specialhost -> NFE:1
+I want to see this!outgoing_frame -> ack_num:0
+incoming_frames_length in recvewfewfewfeweiver.c: 3
+helloinframe -> data:Msg4
 helloinframe -> seq_num:0
 incoming_frames_length in recvewfewfewfeweiver.c: 2
 helloinframe -> data:Msg1
 helloinframe -> seq_num:0
 helloabcdinframe -> data:Msg1
 Should have something here
+host ->NFE in receiver.c:0
 emptyCharArray:Msg1
 <RECV_1>:[Msg1]
-outgoing_frame -> ack_num:0
+specialhost -> NFE:1
+I want to see this!outgoing_frame -> ack_num:0
 incoming_frames_length in recvewfewfewfeweiver.c: 1
 helloinframe -> data:Msg6
 helloinframe -> seq_num:1
 helloabcdinframe -> data:Msg6
 Should have something here
+host ->NFE in receiver.c:1
 emptyCharArray:Msg6
 <RECV_1>:[Msg6]
-outgoing_frame -> ack_num:1
+specialhost -> NFE:2
+I want to see this!outgoing_frame -> ack_num:1
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+helloinframe -> data:Msg7
+helloinframe -> seq_num:2
+helloabcdinframe -> data:Msg7
 ll_get_length(host->incoming_frames_head) 3
-HERE??NONONOcurr_timeval in sender.c: 1706180567542452
-ll_get_length(host->incoming_frames_head) 1
-HERE??curr_timeval in sender.c: 1706180567542453
-ll_get_length(host->incoming_frames_head) 1
-HERE??curr_timeval in sender.c: 1706180567542454
+HERE??inframe->ack_num: 127
+NONONOcurr_timeval in sender.c: 1706195134271907
+ll_get_length(host->incoming_frames_head) 2
+HERE??inframe->ack_num: 0
+HERE??inframe->ack_num: 1
+curr_timeval in sender.c: 1706195134271909
 incoming_frames_length in recvewfewfewfeweiver.c: 2
 helloinframe -> data:Msg3
 helloinframe -> seq_num:1
 helloabcdinframe -> data:Msg3
 Should have something here
+host ->NFE in receiver.c:1
 emptyCharArray:Msg3
 <RECV_0>:[Msg3]
-outgoing_frame -> ack_num:1
+specialhost -> NFE:2
+I want to see this!outgoing_frame -> ack_num:1
 incoming_frames_length in recvewfewfewfeweiver.c: 1
 helloinframe -> data:
 helloinframe -> seq_num:0
 ll_get_length(host->incoming_frames_head) 1
-HERE??curr_timeval in sender.c: 1706180567542678
+HERE??inframe->ack_num: 1
+curr_timeval in sender.c: 1706195134272517
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706180567641893
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-helloinframe -> data:Msg1
-helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706180567642473
+curr_timeval in sender.c: 1706195134370942
 Herethere
 BCGDDAA
 0
@@ -103,7 +97,16 @@ incoming_frames_length in recvewfewfewfeweiver.c: 1
 helloinframe -> data:Msg4
 helloinframe -> seq_num:0
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706180567662242
+curr_timeval in sender.c: 1706195134371690
+Herethere
+BCGDDAA
+0
+BCGDDAA
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+helloinframe -> data:Msg1
+helloinframe -> seq_num:0
+ll_get_length(host->incoming_frames_head) 0
+curr_timeval in sender.c: 1706195134391294
 Herethere
 BCGDDAA
 2
@@ -113,16 +116,7 @@ helloinframe -> data:Msg7
 helloinframe -> seq_num:2
 helloabcdinframe -> data:Msg7
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706180567741893
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-helloinframe -> data:Msg1
-helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706180567742741
+curr_timeval in sender.c: 1706195134470942
 Herethere
 BCGDDAA
 0
@@ -131,7 +125,16 @@ incoming_frames_length in recvewfewfewfeweiver.c: 1
 helloinframe -> data:Msg4
 helloinframe -> seq_num:0
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706180567762242
+curr_timeval in sender.c: 1706195134471690
+Herethere
+BCGDDAA
+0
+BCGDDAA
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+helloinframe -> data:Msg1
+helloinframe -> seq_num:0
+ll_get_length(host->incoming_frames_head) 0
+curr_timeval in sender.c: 1706195134491294
 Herethere
 BCGDDAA
 2
@@ -141,16 +144,7 @@ helloinframe -> data:Msg7
 helloinframe -> seq_num:2
 helloabcdinframe -> data:Msg7
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706180567841893
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-helloinframe -> data:Msg1
-helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706180567842741
+curr_timeval in sender.c: 1706195134570942
 Herethere
 BCGDDAA
 0
@@ -159,7 +153,16 @@ incoming_frames_length in recvewfewfewfeweiver.c: 1
 helloinframe -> data:Msg4
 helloinframe -> seq_num:0
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706180567862242
+curr_timeval in sender.c: 1706195134571690
+Herethere
+BCGDDAA
+0
+BCGDDAA
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+helloinframe -> data:Msg1
+helloinframe -> seq_num:0
+ll_get_length(host->incoming_frames_head) 0
+curr_timeval in sender.c: 1706195134591294
 Herethere
 BCGDDAA
 2
@@ -169,7 +172,16 @@ helloinframe -> data:Msg7
 helloinframe -> seq_num:2
 helloabcdinframe -> data:Msg7
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706180567941893
+curr_timeval in sender.c: 1706195134670942
+Herethere
+BCGDDAA
+0
+BCGDDAA
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+helloinframe -> data:Msg4
+helloinframe -> seq_num:0
+ll_get_length(host->incoming_frames_head) 0
+curr_timeval in sender.c: 1706195134671690
 Herethere
 BCGDDAA
 0
@@ -178,11 +190,12 @@ incoming_frames_length in recvewfewfewfeweiver.c: 1
 helloinframe -> data:Msg1
 helloinframe -> seq_num:0
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706180567942938
+curr_timeval in sender.c: 1706195134691294
 Herethere
 BCGDDAA
-0
+2
 BCGDDAA
 incoming_frames_length in recvewfewfewfeweiver.c: 1
-helloinframe -> data:Msg4
-helloinframe -> seq_num:0
+helloinframe -> data:Msg7
+helloinframe -> seq_num:2
+helloabcdinframe -> data:Msg7

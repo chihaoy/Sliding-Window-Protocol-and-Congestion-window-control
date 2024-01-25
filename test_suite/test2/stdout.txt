@@ -1,16 +1,18 @@
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706180567501357
+curr_timeval in sender.c: 1706195134213348
 outgoing_frame->seq_num: 0
 hellooutgoing_frame->data in sender.c: Hello World!
-host->send_window[i].frame->data in sender.c: Hello World!
-host->send_window[i].timeout in sender.c: 1706180567601357
+host->send_wincsacsadow[0].frame->data in sender.c: Hello World!
 incoming_frames_length in recvewfewfewfeweiver.c: 1
 helloinframe -> data:Hello World!
 helloinframe -> seq_num:0
 helloabcdinframe -> data:Hello World!
 Should have something here
+host ->NFE in receiver.c:0
 emptyCharArray:Hello World!
 <RECV_1>:[Hello World!]
-outgoing_frame -> ack_num:0
+specialhost -> NFE:1
+I want to see this!outgoing_frame -> ack_num:0
 ll_get_length(host->incoming_frames_head) 1
-HERE??curr_timeval in sender.c: 1706180567502278
+HERE??inframe->ack_num: 0
+curr_timeval in sender.c: 1706195134214522

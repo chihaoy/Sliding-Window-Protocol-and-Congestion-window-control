@@ -69,7 +69,9 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
         //print ll_get_length(host->incoming_frames_head)
         LLnode* ll_input_cmd_node = ll_pop_node(&host->incoming_frames_head);
         Frame* inframe = (Frame*) ll_input_cmd_node->value;
-        if(!swpInWindow(inframe->ack_num, host->LAR+1, host->LFS)){
+        //print inframe->ack_num
+        printf("inframe->ack_num: %d\n", inframe->ack_num);
+        if(!swpInWindow(inframe->ack_num, host->LAR + 1, host->LFS)){
             printf("NONONO");
             return;
         }
@@ -274,8 +276,8 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
             timeval_usecplus(next_timeout, TIMEOUT_INTERVAL_USEC + additional_ts);
             host->send_window[i].timeout = next_timeout;//(this is what I add)
             //print host->send_window[i].timeout
-            printf("host->send_window[i].frame->data in sender.c: %s\n", host->send_window[i].frame->data);
-            printf("host->send_window[i].timeout in sender.c: %ld\n", host->send_window[i].timeout->tv_usec + host->send_window[i].timeout->tv_sec * 1000000);
+            printf("host->send_wincsacsadow[%d].frame->data in sender.c: %s\n",i, host->send_window[i].frame->data);
+            //printf("host->send_window[i].timeout in sender.c: %ld\n", host->send_window[i].timeout->tv_usec + host->send_window[i].timeout->tv_sec * 1000000);
             additional_ts += 10000; //ADD ADDITIONAL 10ms
             
             //print host->send_window[i].timeout

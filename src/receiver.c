@@ -42,10 +42,13 @@ void handle_incoming_frames(Host* host) {
         memcpy(cop, inframe, sizeof(Frame));
         host -> receive_window[inframe -> seq_num % glb_sysconfig.window_size].frame = cop;
         printf("helloabcdinframe -> data:%s\n",host -> receive_window[inframe -> seq_num % glb_sysconfig.window_size].frame->data);
+        int pre_seq = -1;
         if (host -> NFE == inframe -> seq_num){
             printf("Should have something here\n");
-            while (host -> receive_window[host -> NFE].frame != NULL){//still should check the case for window_size of 8
-                strcat(host -> emptyCharArray, host -> receive_window[host -> NFE].frame -> data); // Copy inframe->data into temp
+            printf("host ->NFE in receiver.c:%d\n",host -> NFE);
+            pre_seq = inframe -> seq_num - 1;
+            while (host -> receive_window[(host -> NFE) % glb_sysconfig.window_size].frame != NULL && pre_seq < host -> receive_window[(host -> NFE) % glb_sysconfig.window_size].frame -> seq_num){//still should check the case for window_size of 8
+                strcat(host -> emptyCharArray, host -> receive_window[(host -> NFE) % glb_sysconfig.window_size].frame -> data); // Copy inframe->data into temp
                 printf("emptyCharArray:%s\n",host -> emptyCharArray);
                 if (inframe -> remaining_msg_bytes == 0){
                     char combinedString[(t + 1) * FRAME_PAYLOAD_SIZE];
@@ -58,14 +61,20 @@ void handle_incoming_frames(Host* host) {
                     host -> emptyCharArray[0] = '\0';
                 }
                 host -> NFE += 1;
+                printf("specialhost -> NFE:%d\n",host -> NFE);
+                pre_seq = inframe -> seq_num;
+                //printf("window_size%s",host -> receive_window[(host -> NFE) % glb_sysconfig.window_size].frame -> data);
             }
             //print host -> emptyCharArray to stderr
-            
+            printf("I want to see this!");
             Frame* outgoing_frame = (Frame*)malloc(sizeof(Frame));
             outgoing_frame->src_id = inframe->dst_id;
             outgoing_frame->dst_id = inframe->src_id;
             outgoing_frame->is_ack = 1;
             outgoing_frame->ack_num = host -> NFE - 1;
+            //print
+            //print outgoing_frame->ack_num
+
             ll_append_node(&host->outgoing_frames_head, outgoing_frame);
             printf("outgoing_frame -> ack_num:%d\n",outgoing_frame->ack_num);
         }
