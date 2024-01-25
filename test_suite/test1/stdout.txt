@@ -1,50 +1,118 @@
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706195134038842
-outgoing_frame->seq_num: 0
-hellooutgoing_frame->data in sender.c: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-host->send_wincsacsadow[0].frame->data in sender.c: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-outgoing_frame->seq_num: 1
-hellooutgoing_frame->data in sender.c: B
+curr_timeval in sender.c: 1706204083640575
+QAZoutgoing_frame->seq_num: 0
+QAZoutgoing_frame->data in sender.c: A
+QAZoutgoing_frame->src_id in sender.c: 0
+hellooutgoing_frame->data in sender.c: 0
+host->send_wincsacsadow[0].frame->data in sender.c: A
+QAZoutgoing_frame->seq_num: 1
+QAZoutgoing_frame->data in sender.c: B
+QAZoutgoing_frame->src_id in sender.c: 0
+hellooutgoing_frame->data in sender.c: 0
 host->send_wincsacsadow[1].frame->data in sender.c: B
 incoming_frames_length in recvewfewfewfeweiver.c: 1
-helloinframe -> data:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+helloinframe -> data:0
 helloinframe -> seq_num:0
-helloabcdinframe -> data:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+helloabcdinframe -> data:A
 Should have something here
 host ->NFE in receiver.c:0
-emptyCharArray:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-<RECV_1>:[AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]
+howareyouhost -> NFE in receiver.c:0
+emptyCharArray:A
+host -> receive_windo -> remain:0
+inframe -> remaining_msg_bytes in okk:0
+YAY
+<RECV_1>:[A]
 specialhost -> NFE:1
 I want to see this!outgoing_frame -> ack_num:0
 ll_get_length(host->incoming_frames_head) 1
 HERE??inframe->ack_num: 0
-curr_timeval in sender.c: 1706195134039286
-outgoing_frame->seq_num: 2
-hellooutgoing_frame->data in sender.c: C
+curr_timeval in sender.c: 1706204083642082
+QAZoutgoing_frame->seq_num: 2
+QAZoutgoing_frame->data in sender.c: C
+QAZoutgoing_frame->src_id in sender.c: 0
+hellooutgoing_frame->data in sender.c: 0
 host->send_wincsacsadow[0].frame->data in sender.c: C
 incoming_frames_length in recvewfewfewfeweiver.c: 1
-helloinframe -> data:C
+helloinframe -> data:0
 helloinframe -> seq_num:2
 helloabcdinframe -> data:C
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706195134148842
+curr_timeval in sender.c: 1706204083750575
 Herethere
 BCGDDAA
 1
 BCGDDAA
 incoming_frames_length in recvewfewfewfeweiver.c: 1
-helloinframe -> data:B
+helloinframe -> data:0
 helloinframe -> seq_num:1
 helloabcdinframe -> data:B
 Should have something here
 host ->NFE in receiver.c:1
+howareyouhost -> NFE in receiver.c:1
 emptyCharArray:B
+host -> receive_windo -> remain:0
+inframe -> remaining_msg_bytes in okk:0
+YAY
 <RECV_1>:[B]
 specialhost -> NFE:2
+howareyouhost -> NFE in receiver.c:2
 emptyCharArray:C
+host -> receive_windo -> remain:0
+inframe -> remaining_msg_bytes in okk:0
+YAY
 <RECV_1>:[C]
 specialhost -> NFE:3
 I want to see this!outgoing_frame -> ack_num:2
 ll_get_length(host->incoming_frames_head) 1
 HERE??inframe->ack_num: 2
-curr_timeval in sender.c: 1706195134149810
+curr_timeval in sender.c: 1706204083751370
+QAZoutgoing_frame->seq_num: 3
+QAZoutgoing_frame->data in sender.c: D
+QAZoutgoing_frame->src_id in sender.c: 0
+hellooutgoing_frame->data in sender.c: 0
+host->send_wincsacsadow[0].frame->data in sender.c: D
+QAZoutgoing_frame->seq_num: 4
+QAZoutgoing_frame->data in sender.c: E
+QAZoutgoing_frame->src_id in sender.c: 0
+hellooutgoing_frame->data in sender.c: 0
+host->send_wincsacsadow[1].frame->data in sender.c: E
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+helloinframe -> data:0
+helloinframe -> seq_num:3
+helloabcdinframe -> data:D
+Should have something here
+host ->NFE in receiver.c:3
+howareyouhost -> NFE in receiver.c:3
+emptyCharArray:D
+host -> receive_windo -> remain:0
+inframe -> remaining_msg_bytes in okk:0
+YAY
+<RECV_1>:[D]
+specialhost -> NFE:4
+I want to see this!outgoing_frame -> ack_num:3
+ll_get_length(host->incoming_frames_head) 1
+HERE??inframe->ack_num: 3
+curr_timeval in sender.c: 1706204083752084
+ll_get_length(host->incoming_frames_head) 0
+curr_timeval in sender.c: 1706204083870575
+Herethere
+BCGDDAA
+1
+BCGDDAA
+incoming_frames_length in recvewfewfewfeweiver.c: 1
+helloinframe -> data:0
+helloinframe -> seq_num:4
+helloabcdinframe -> data:E
+Should have something here
+host ->NFE in receiver.c:4
+howareyouhost -> NFE in receiver.c:4
+emptyCharArray:E
+host -> receive_windo -> remain:0
+inframe -> remaining_msg_bytes in okk:0
+YAY
+<RECV_1>:[E]
+specialhost -> NFE:5
+I want to see this!outgoing_frame -> ack_num:4
+ll_get_length(host->incoming_frames_head) 1
+HERE??inframe->ack_num: 4
+curr_timeval in sender.c: 1706204083871142

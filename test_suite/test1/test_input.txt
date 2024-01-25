@@ -1,4 +1,6 @@
-msg 0 1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+msg 0 1 A
 msg 0 1 B
 msg 0 1 C
+msg 0 1 D
+msg 0 1 E
 exit

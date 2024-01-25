@@ -134,6 +134,8 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
                 outgoing_frame->src_id = outgoing_cmd->src_id;
                 outgoing_frame->dst_id = outgoing_cmd->dst_id;
                 outgoing_frame->remaining_msg_bytes = max(msg_length - (i + 1)* FRAME_PAYLOAD_SIZE,0);
+                //print outgoing_frame->remaining_msg_bytes
+                printf("outgoing_frame->remaining_msg_bytes in handle_input_cmds in sender.c: %d\n", outgoing_frame->remaining_msg_bytes);
                 uint16_t numbytes = 0;
                 if (outgoing_frame->remaining_msg_bytes > 0) {
                     numbytes = FRAME_PAYLOAD_SIZE;
@@ -244,7 +246,9 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
             outgoing_frame->seq_num = host->LFS;
             outgoing_frame -> is_ack = 0;
             //print host -> outgoing_frames
-            printf("outgoing_frame->seq_num: %d\n", outgoing_frame->seq_num);
+            printf("QAZoutgoing_frame->seq_num: %d\n", outgoing_frame->seq_num);
+            printf("QAZoutgoing_frame->data in sender.c: %s\n", outgoing_frame->data);
+            printf("QAZoutgoing_frame->src_id in sender.c: %d\n", outgoing_frame->remaining_msg_bytes);
             char * outgoing_charbuf = convert_frame_to_char(outgoing_frame);
           //  printf("testing: %s\n", outgoing_frame -> data);
             Frame * cop = (Frame *) malloc (sizeof(Frame));
@@ -255,7 +259,7 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
          //   printf("qwerthost->send_window[i].frame->data in seawernder.c src_id: %d\n", cop -> src_id);
           //  printf("qwerthost->send_window[i].frame->data in seawernder.c dst_id: %d\n", cop -> dst_id);
             //print outgoing_frame->data
-            printf("hellooutgoing_frame->data in sender.c: %s\n", outgoing_frame->data);
+            printf("hellooutgoing_frame->data in sender.c: %i\n", outgoing_frame->remaining_msg_bytes);
             host->send_window[i].frame = cop;
             ll_append_node(&host->outgoing_frames_head, outgoing_charbuf); 
             //print host->send_window[i].frame

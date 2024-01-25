@@ -14,6 +14,7 @@ void init_host(Host* host, int id) {
     host->LFS = -1;
     host->LFR = 0;
     host->NFE = 0;
+    //host->crc = 0;
     host->input_cmdlist_head = NULL;
     host->incoming_frames_head = NULL; 
     host->buffered_outframes_head = NULL; 
@@ -27,6 +28,7 @@ void init_host(Host* host, int id) {
         host->receive_window[i].timeout = NULL;
     }
     memset(host->emptyCharArray, 0, sizeof(host->emptyCharArray));
+    host->emptyCharArray[0] = '\0';
     host->latest_timeout = malloc(sizeof(struct timeval));
     gettimeofday(host->latest_timeout, NULL);
     
