@@ -115,7 +115,7 @@ struct __attribute__((packed)) Frame_t {
     uint8_t is_ack;//adding this field 0 means data frame 1 means ack frame
     
     char data[FRAME_PAYLOAD_SIZE]; 
-    char crc;//adding for corruption check
+    uint8_t crc;//adding for corruption check
 };
 typedef struct Frame_t Frame; 
 
@@ -164,6 +164,7 @@ struct Host_t {
     int active;  
     int round_trip_num; 
     int csv_out; 
+    int wait;
     LLnode* input_cmdlist_head;
     LLnode* incoming_frames_head; 
     char emptyCharArray[65535];

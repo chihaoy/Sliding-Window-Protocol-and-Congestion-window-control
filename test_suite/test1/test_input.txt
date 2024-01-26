@@ -1,4 +1,4 @@
-msg 0 1 C
-msg 0 1 B
-msg 0 1 D
+msg 0 1 AIOHAOIH
+msg 0 2 ABCD
+msg 2 1 I love you
 exit

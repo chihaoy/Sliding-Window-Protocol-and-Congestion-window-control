@@ -227,17 +227,21 @@ void send_data_frames() {
 void send_ack_frames() {
     for (int i = 0; i < glb_num_hosts; i++) {
         Host* host = &glb_hosts_array[i]; 
+        //print ll_get_length(host->outgoing_frames_head)   
+        //printf("length of outgoing_frames_head in common:%d\n",ll_get_length(host->outgoing_frames_head));
         while (ll_get_length(host->outgoing_frames_head) > 0) {
             //print ll_get_length(host->outgoing_frames_head)
             
             LLnode* ll_outframe_node = ll_pop_node(&host->outgoing_frames_head);
+            
+            //print outgoing_frame->ack_num
             
             //print address of outgoing_frame_head
 
             
             Frame* outgoing_frame = ll_outframe_node->value;
             //print src_id of outgoing_frame
-           
+           printf("outgoing_frame->ack_num in send_ack_frames:%d\n",outgoing_frame->ack_num);
             //print string ok
             //printf("outgoing_frame->data: %s\n", outgoing_frame->src_id);
             frame_sanity_check(outgoing_frame); 
