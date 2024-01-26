@@ -1,34 +1,36 @@
+input_cmd_length in sender.c: 1
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209824350265
+curr_timeval in sender.c: 1706241470942081
+before host -> sendArray[outgoing_frame -> src_id].LFS:255
+after host -> sendArray[outgoing_frame -> src_id].LFS:0
 QAZoutgoing_frame->seq_num: 0
 QAZoutgoing_frame->data in sender.c: Hello World!
 QAZoutgoing_frame->src_id in sender.c: 0
+QAZoutgoing_frame->dst_id in sender.c: 1
 hellooutgoing_frame->data in sender.c: 0
 host->send_wincsacsadow[0].frame->data in sender.c: Hello World!
 incoming_frames_length in recvewfewfewfeweiver.c: 1
-CRC8 is not 0
-compute_crc8(inframe):141
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209824450265
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
 great
-helloinframe -> data:0
+helloinframe -> data:Hello World!
 helloinframe -> seq_num:0
-helloabcdinframe -> data:Hello World!
+host -> recvArray[inframe -> dst_id].NFE:0
+host -> recvArray[inframe -> dst_id].NFE + glb_sysconfig.window_size - 1:1
 Should have something here
-host ->NFE in receiver.c:0
-howareyouhost -> NFE in receiver.c:0
-emptyCharArray:Hello World!
-host -> receive_windo -> remain:0
-inframe -> remaining_msg_bytes in okk:0
+host -> emptyCharArray:Hello World!
+host -> recvArray[inframe->dst_id].receive_window[(host -> recvArray[inframe -> dst_id].NFE) glb_sysconfig.window_size].frame -> remaining_msg_bytes0
 YAY
 <RECV_1>:[Hello World!]
-specialhost -> NFE:1
-I want to see this!outgoing_frame -> ack_num:0
+HELLO
+BYE
+I want to see thisfwqdwd!qsdoutgoing_frame->src_id:1
+qsdoutgoing_frame->dst_id:0
+outgoing_frame -> ack_num:0
+length of outgoing_frames_head:1
 ll_get_length(host->incoming_frames_head) 1
 HERE??inframe->ack_num: 0
-curr_timeval in sender.c: 1706209824451210
+asdinframe -> src_id: 1
+256:
+255:
+inframe->ack_numwhatas: 0
+Correctwhat the hackzxcinframe -> dst_id: 0
+curr_timeval in sender.c: 1706241470942708

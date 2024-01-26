@@ -71,19 +71,30 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
         Frame* inframe = (Frame*) ll_input_cmd_node->value;
         //print inframe->ack_num
         printf("inframe->ack_num: %d\n", inframe->ack_num);
-        if(!swpInWindow(inframe->ack_num, host->LAR + 1, host->LFS)){
+        //print inframe -> src_id
+        printf("asdinframe -> src_id: %d\n", inframe -> src_id);
+        printf("%i:\n",host -> sendArray[inframe -> src_id].LAR + 1);
+        printf("%i:\n",host -> sendArray[inframe -> src_id].LFS);
+        
+        if(!swpInWindow(inframe->ack_num, host -> sendArray[inframe -> dst_id].LAR + 1, host -> sendArray[inframe -> dst_id].LFS)){
             printf("NONONO");
             return;
         }
-
+        //print host->send_window[i].frame->seq_num
+        printf("inframe->ack_numwhatas: %d\n", host->send_window[0].frame->seq_num);
         for (int i = 0; i < glb_sysconfig.window_size; i++){
+            
             if (host->send_window[i].frame != NULL && host->send_window[i].frame->seq_num <= inframe->ack_num && inframe -> is_ack == 1){
                 //free(host->send_window[(host -> LAR) % glb_sysconfig.window_size].frame);
+                printf("Correct");
                 host->send_window[i].frame = NULL;
                 host->send_window[i].timeout = NULL;
             }
         }
-        host -> LAR = inframe -> ack_num;
+        //print inframe -> dst_id
+        printf("what the hack");
+        printf("zxcinframe -> dst_id: %d\n", inframe -> dst_id);
+        host -> sendArray[inframe -> dst_id].LAR = inframe -> ack_num;
       //  printf("acdwe waht %d",k);
     }
     
@@ -104,6 +115,7 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
 
     int input_cmd_length = ll_get_length(host->input_cmdlist_head);
     while (input_cmd_length > 0) {
+        printf("input_cmd_length in sender.c: %d\n", input_cmd_length);
         // Pop a node off and update the input_cmd_length
         LLnode* ll_input_cmd_node = ll_pop_node(&host->input_cmdlist_head);
         input_cmd_length = ll_get_length(host->input_cmdlist_head);
@@ -242,13 +254,16 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
             Frame* outgoing_frame = ll_outframe_node->value; 
             
             //print outgoing_frame->data
-            host->LFS = host->LFS + 1;
-            outgoing_frame->seq_num = host->LFS;
+            printf("before host -> sendArray[outgoing_frame -> src_id].LFS:%i\n",host -> sendArray[outgoing_frame -> src_id].LFS);
+            host -> sendArray[outgoing_frame -> src_id].LFS = host -> sendArray[outgoing_frame -> src_id].LFS + 1;
+            printf("after host -> sendArray[outgoing_frame -> src_id].LFS:%i\n",host -> sendArray[outgoing_frame -> src_id].LFS);
+            outgoing_frame->seq_num = host->sendArray[outgoing_frame->src_id].LFS;
             outgoing_frame -> is_ack = 0;
             //print host -> outgoing_frames
             printf("QAZoutgoing_frame->seq_num: %d\n", outgoing_frame->seq_num);
             printf("QAZoutgoing_frame->data in sender.c: %s\n", outgoing_frame->data);
-            printf("QAZoutgoing_frame->src_id in sender.c: %d\n", outgoing_frame->remaining_msg_bytes);
+            printf("QAZoutgoing_frame->src_id in sender.c: %d\n", outgoing_frame->src_id);
+            printf("QAZoutgoing_frame->dst_id in sender.c: %d\n", outgoing_frame->dst_id);
             char * outgoing_charbuf = convert_frame_to_char(outgoing_frame);
           //  printf("testing: %s\n", outgoing_frame -> data);
           //use calloc to create cop

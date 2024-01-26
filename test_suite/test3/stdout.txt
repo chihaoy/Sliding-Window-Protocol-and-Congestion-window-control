@@ -1,525 +1,157 @@
+input_cmd_length in sender.c: 2
+input_cmd_length in sender.c: 1
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209824504598
+curr_timeval in sender.c: 1706241470980102
+before host -> sendArray[outgoing_frame -> src_id].LFS:255
+after host -> sendArray[outgoing_frame -> src_id].LFS:0
 QAZoutgoing_frame->seq_num: 0
-QAZoutgoing_frame->data in sender.c: Msg2
-QAZoutgoing_frame->src_id in sender.c: 0
+QAZoutgoing_frame->data in sender.c: Msg5
+QAZoutgoing_frame->src_id in sender.c: 3
+QAZoutgoing_frame->dst_id in sender.c: 0
 hellooutgoing_frame->data in sender.c: 0
-host->send_wincsacsadow[0].frame->data in sender.c: Msg2
+host->send_wincsacsadow[0].frame->data in sender.c: Msg5
+before host -> sendArray[outgoing_frame -> src_id].LFS:0
+after host -> sendArray[outgoing_frame -> src_id].LFS:1
 QAZoutgoing_frame->seq_num: 1
-QAZoutgoing_frame->data in sender.c: Msg3
-QAZoutgoing_frame->src_id in sender.c: 0
+QAZoutgoing_frame->data in sender.c: Msg6
+QAZoutgoing_frame->src_id in sender.c: 3
+QAZoutgoing_frame->dst_id in sender.c: 1
 hellooutgoing_frame->data in sender.c: 0
-host->send_wincsacsadow[1].frame->data in sender.c: Msg3
-QAZoutgoing_frame->seq_num: 2
-QAZoutgoing_frame->data in sender.c: Msg7
-QAZoutgoing_frame->src_id in sender.c: 0
-hellooutgoing_frame->data in sender.c: 0
-host->send_wincsacsadow[2].frame->data in sender.c: Msg7
+host->send_wincsacsadow[1].frame->data in sender.c: Msg6
+input_cmd_length in sender.c: 1
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209824505310
+curr_timeval in sender.c: 1706241470980623
+before host -> sendArray[outgoing_frame -> src_id].LFS:255
+after host -> sendArray[outgoing_frame -> src_id].LFS:0
 QAZoutgoing_frame->seq_num: 0
 QAZoutgoing_frame->data in sender.c: Msg1
 QAZoutgoing_frame->src_id in sender.c: 0
+QAZoutgoing_frame->dst_id in sender.c: 1
 hellooutgoing_frame->data in sender.c: 0
 host->send_wincsacsadow[0].frame->data in sender.c: Msg1
+input_cmd_length in sender.c: 3
+input_cmd_length in sender.c: 2
+input_cmd_length in sender.c: 1
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209824505315
+curr_timeval in sender.c: 1706241470980628
+before host -> sendArray[outgoing_frame -> src_id].LFS:255
+after host -> sendArray[outgoing_frame -> src_id].LFS:0
 QAZoutgoing_frame->seq_num: 0
-QAZoutgoing_frame->data in sender.c: Msg5
-QAZoutgoing_frame->src_id in sender.c: 0
+QAZoutgoing_frame->data in sender.c: Msg2
+QAZoutgoing_frame->src_id in sender.c: 1
+QAZoutgoing_frame->dst_id in sender.c: 0
 hellooutgoing_frame->data in sender.c: 0
-host->send_wincsacsadow[0].frame->data in sender.c: Msg5
+host->send_wincsacsadow[0].frame->data in sender.c: Msg2
+before host -> sendArray[outgoing_frame -> src_id].LFS:0
+after host -> sendArray[outgoing_frame -> src_id].LFS:1
 QAZoutgoing_frame->seq_num: 1
-QAZoutgoing_frame->data in sender.c: Msg6
-QAZoutgoing_frame->src_id in sender.c: 0
+QAZoutgoing_frame->data in sender.c: Msg3
+QAZoutgoing_frame->src_id in sender.c: 1
+QAZoutgoing_frame->dst_id in sender.c: 0
 hellooutgoing_frame->data in sender.c: 0
-host->send_wincsacsadow[1].frame->data in sender.c: Msg6
+host->send_wincsacsadow[1].frame->data in sender.c: Msg3
+before host -> sendArray[outgoing_frame -> src_id].LFS:1
+after host -> sendArray[outgoing_frame -> src_id].LFS:2
+QAZoutgoing_frame->seq_num: 2
+QAZoutgoing_frame->data in sender.c: Msg7
+QAZoutgoing_frame->src_id in sender.c: 1
+QAZoutgoing_frame->dst_id in sender.c: 3
+hellooutgoing_frame->data in sender.c: 0
+host->send_wincsacsadow[2].frame->data in sender.c: Msg7
+input_cmd_length in sender.c: 1
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209824505322
+curr_timeval in sender.c: 1706241470980639
+before host -> sendArray[outgoing_frame -> src_id].LFS:255
+after host -> sendArray[outgoing_frame -> src_id].LFS:0
 QAZoutgoing_frame->seq_num: 0
 QAZoutgoing_frame->data in sender.c: Msg4
-QAZoutgoing_frame->src_id in sender.c: 0
+QAZoutgoing_frame->src_id in sender.c: 2
+QAZoutgoing_frame->dst_id in sender.c: 0
 hellooutgoing_frame->data in sender.c: 0
 host->send_wincsacsadow[0].frame->data in sender.c: Msg4
-incoming_frames_length in recvewfewfewfeweiver.c: 4
-great
-helloinframe -> data:0
-helloinframe -> seq_num:0
-helloabcdinframe -> data:Msg5
-Should have something here
-host ->NFE in receiver.c:0
-howareyouhost -> NFE in receiver.c:0
-emptyCharArray:Msg5
-host -> receive_windo -> remain:0
-inframe -> remaining_msg_bytes in okk:0
-YAY
-<RECV_0>:[Msg5]
-specialhost -> NFE:1
-I want to see this!outgoing_frame -> ack_num:0
-incoming_frames_length in recvewfewfewfeweiver.c: 3
-great
-helloinframe -> data:0
-helloinframe -> seq_num:0
 incoming_frames_length in recvewfewfewfeweiver.c: 2
 great
-helloinframe -> data:0
+helloinframe -> data:Msg1
 helloinframe -> seq_num:0
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:1
-helloabcdinframe -> data:Msg3
+host -> recvArray[inframe -> dst_id].NFE:0
+host -> recvArray[inframe -> dst_id].NFE + glb_sysconfig.window_size - 1:3
 Should have something here
-host ->NFE in receiver.c:1
-howareyouhost -> NFE in receiver.c:1
-emptyCharArray:Msg3
-host -> receive_windo -> remain:0
-inframe -> remaining_msg_bytes in okk:0
-YAY
-<RECV_0>:[Msg3]
-specialhost -> NFE:2
-I want to see this!outgoing_frame -> ack_num:1
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:2
-helloabcdinframe -> data:Msg7
-incoming_frames_length in recvewfewfewfeweiver.c: 2
-great
-helloinframe -> data:0
-helloinframe -> seq_num:0
-helloabcdinframe -> data:Msg1
-Should have something here
-host ->NFE in receiver.c:0
-howareyouhost -> NFE in receiver.c:0
-emptyCharArray:Msg1
-host -> receive_windo -> remain:0
-inframe -> remaining_msg_bytes in okk:0
+host -> emptyCharArray:Msg1
+host -> recvArray[inframe->dst_id].receive_window[(host -> recvArray[inframe -> dst_id].NFE) glb_sysconfig.window_size].frame -> remaining_msg_bytes0
 YAY
 <RECV_1>:[Msg1]
-specialhost -> NFE:1
-I want to see this!outgoing_frame -> ack_num:0
+HELLO
+BYE
+I want to see thisfwqdwd!qsdoutgoing_frame->src_id:1
+qsdoutgoing_frame->dst_id:0
+outgoing_frame -> ack_num:0
+length of outgoing_frames_head:1
 incoming_frames_length in recvewfewfewfeweiver.c: 1
 great
-helloinframe -> data:0
+helloinframe -> data:Msg6
 helloinframe -> seq_num:1
-helloabcdinframe -> data:Msg6
+host -> recvArray[inframe -> dst_id].NFE:1
+host -> recvArray[inframe -> dst_id].NFE + glb_sysconfig.window_size - 1:4
 Should have something here
-host ->NFE in receiver.c:1
-howareyouhost -> NFE in receiver.c:1
-emptyCharArray:Msg6
-host -> receive_windo -> remain:0
-inframe -> remaining_msg_bytes in okk:0
+host -> emptyCharArray:Msg6
+host -> recvArray[inframe->dst_id].receive_window[(host -> recvArray[inframe -> dst_id].NFE) glb_sysconfig.window_size].frame -> remaining_msg_bytes0
 YAY
 <RECV_1>:[Msg6]
-specialhost -> NFE:2
-I want to see this!outgoing_frame -> ack_num:1
-ll_get_length(host->incoming_frames_head) 2
-HERE??inframe->ack_num: 0
-HERE??inframe->ack_num: 1
-curr_timeval in sender.c: 1706209824505741
-ll_get_length(host->incoming_frames_head) 1
-HERE??inframe->ack_num: 1
-curr_timeval in sender.c: 1706209824505742
-ll_get_length(host->incoming_frames_head) 1
-HERE??inframe->ack_num: 0
-curr_timeval in sender.c: 1706209824505743
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209824605322
-Herethere
-BCGDDAA
-0
-BCGDDAA
+HELLO
+BYE
+I want to see thisfwqdwd!qsdoutgoing_frame->src_id:1
+qsdoutgoing_frame->dst_id:3
+outgoing_frame -> ack_num:1
+length of outgoing_frames_head:2
 incoming_frames_length in recvewfewfewfeweiver.c: 1
 great
-helloinframe -> data:0
-helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209824624598
-Herethere
-BCGDDAA
-2
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
+helloinframe -> data:Msg7
 helloinframe -> seq_num:2
-helloabcdinframe -> data:Msg7
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209824705322
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
+host -> recvArray[inframe -> dst_id].NFE:0
+host -> recvArray[inframe -> dst_id].NFE + glb_sysconfig.window_size - 1:3
+incoming_frames_length in recvewfewfewfeweiver.c: 4
 great
-helloinframe -> data:0
+helloinframe -> data:Msg5
 helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209824724598
-Herethere
-BCGDDAA
-2
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
+host -> recvArray[inframe -> dst_id].NFE:0
+host -> recvArray[inframe -> dst_id].NFE + glb_sysconfig.window_size - 1:3
+Should have something here
+host -> emptyCharArray:Msg5
+host -> recvArray[inframe->dst_id].receive_window[(host -> recvArray[inframe -> dst_id].NFE) glb_sysconfig.window_size].frame -> remaining_msg_bytes0
+YAY
+<RECV_0>:[Msg5]
+HELLO
+BYE
+I want to see thisfwqdwd!qsdoutgoing_frame->src_id:0
+qsdoutgoing_frame->dst_id:3
+outgoing_frame -> ack_num:0
+length of outgoing_frames_head:1
+incoming_frames_length in recvewfewfewfeweiver.c: 3
 great
-helloinframe -> data:0
-helloinframe -> seq_num:2
-helloabcdinframe -> data:Msg7
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209824805322
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
+helloinframe -> data:Msg4
 helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209824824598
-Herethere
-BCGDDAA
-2
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
+host -> recvArray[inframe -> dst_id].NFE:1
+host -> recvArray[inframe -> dst_id].NFE + glb_sysconfig.window_size - 1:4
+incoming_frames_length in recvewfewfewfeweiver.c: 2
 great
-helloinframe -> data:0
-helloinframe -> seq_num:2
-helloabcdinframe -> data:Msg7
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209824905322
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
+helloinframe -> data:Msg2
 helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209824924598
-Herethere
-BCGDDAA
-2
-BCGDDAA
+host -> recvArray[inframe -> dst_id].NFE:1
+host -> recvArray[inframe -> dst_id].NFE + glb_sysconfig.window_size - 1:4
 incoming_frames_length in recvewfewfewfeweiver.c: 1
 great
-helloinframe -> data:0
-helloinframe -> seq_num:2
-helloabcdinframe -> data:Msg7
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209825005322
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209825024598
-Herethere
-BCGDDAA
-2
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:2
-helloabcdinframe -> data:Msg7
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209825105322
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209825124598
-Herethere
-BCGDDAA
-2
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:2
-helloabcdinframe -> data:Msg7
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209825205322
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209825224598
-Herethere
-BCGDDAA
-2
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:2
-helloabcdinframe -> data:Msg7
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209825305322
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209825324598
-Herethere
-BCGDDAA
-2
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:2
-helloabcdinframe -> data:Msg7
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209825405322
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209825424598
-Herethere
-BCGDDAA
-2
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:2
-helloabcdinframe -> data:Msg7
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209825505322
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209825524598
-Herethere
-BCGDDAA
-2
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:2
-helloabcdinframe -> data:Msg7
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209825605322
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209825624598
-Herethere
-BCGDDAA
-2
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:2
-helloabcdinframe -> data:Msg7
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209825705322
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209825724598
-Herethere
-BCGDDAA
-2
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:2
-helloabcdinframe -> data:Msg7
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209825805322
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209825824598
-Herethere
-BCGDDAA
-2
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:2
-helloabcdinframe -> data:Msg7
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209825905322
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209825924598
-Herethere
-BCGDDAA
-2
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:2
-helloabcdinframe -> data:Msg7
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209826005322
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209826024598
-Herethere
-BCGDDAA
-2
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:2
-helloabcdinframe -> data:Msg7
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209826105322
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209826124598
-Herethere
-BCGDDAA
-2
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:2
-helloabcdinframe -> data:Msg7
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209826205322
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209826224598
-Herethere
-BCGDDAA
-2
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:2
-helloabcdinframe -> data:Msg7
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209826305322
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209826324598
-Herethere
-BCGDDAA
-2
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:2
-helloabcdinframe -> data:Msg7
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209826405322
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:0
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209826424598
-Herethere
-BCGDDAA
-2
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:2
-helloabcdinframe -> data:Msg7
+helloinframe -> data:Msg3
+helloinframe -> seq_num:1
+host -> recvArray[inframe -> dst_id].NFE:1
+host -> recvArray[inframe -> dst_id].NFE + glb_sysconfig.window_size - 1:4
+Should have something here
+host -> emptyCharArray:Msg3
+host -> recvArray[inframe->dst_id].receive_window[(host -> recvArray[inframe -> dst_id].NFE) glb_sysconfig.window_size].frame -> remaining_msg_bytes0
+YAY
+<RECV_0>:[Msg3]
+HELLO
+BYE
+I want to see thisfwqdwd!qsdoutgoing_frame->src_id:0
+qsdoutgoing_frame->dst_id:1
+outgoing_frame -> ack_num:1
+length of outgoing_frames_head:2

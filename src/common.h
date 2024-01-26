@@ -137,9 +137,14 @@ struct receive_windows {
     uint8_t NFE; // next frame expected
     uint8_t LFR; // last frame recieved
     uint8_t LAF; // last acceptable frame
-    struct send_window_slot* sendQ;
+    struct send_window_slot* receive_window;
 };
 typedef struct receive_windows recvArray1;//size of 256
+struct send_windows {
+    uint8_t LAR; //last ack recieved
+    uint8_t LFS; //last frame sent
+};
+typedef struct send_windows sendArray1;//size of 256
 //Host data structure
 struct Host_t {
     /* DO NOT CHANGE:
@@ -162,19 +167,20 @@ struct Host_t {
     LLnode* input_cmdlist_head;
     LLnode* incoming_frames_head; 
     char emptyCharArray[65535];
-    uint8_t LAR; //last ack recieved
-    uint8_t LFS; //last frame sent
+    //uint8_t LAR; //last ack recieved
+   // uint8_t LFS; //last frame sent
     //as a receiver
-    uint8_t NFE; // next frame expected
-    uint8_t LFR; // last frame recieved
-    uint8_t LAF; // last acceptable frame
+   // uint8_t NFE; // next frame expected
+   // uint8_t LFR; // last frame recieved
+   // uint8_t LAF; // last acceptable frame
     LLnode* buffered_outframes_head; 
     LLnode* outgoing_frames_head;
     struct send_window_slot* send_window;
     struct timeval* latest_timeout; 
     recvArray1 recvArray[256];
+    sendArray1 sendArray[256];
     CongestionControl* cc; //PA1b ONLY
-    struct send_window_slot* receive_window;
+    //struct send_window_slot* receive_window;
 };
 typedef struct Host_t Host;
 

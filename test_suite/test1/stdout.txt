@@ -1,209 +1,55 @@
-<SEND_0>: sending messages of length greater than 56 is not implemented
-outgoing_frame->remaining_msg_bytes in handle_input_cmds in sender.c: 39
-outgoing_frame->data in handle_input_cmds: CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-outgoing_frame->remaining_msg_bytes in handle_input_cmds in sender.c: 0
-outgoing_frame->data in handle_input_cmds: CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+input_cmd_length in sender.c: 3
+input_cmd_length in sender.c: 2
+input_cmd_length in sender.c: 1
 ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209823556431
+curr_timeval in sender.c: 1706241470892301
+before host -> sendArray[outgoing_frame -> src_id].LFS:255
+after host -> sendArray[outgoing_frame -> src_id].LFS:0
 QAZoutgoing_frame->seq_num: 0
-QAZoutgoing_frame->data in sender.c: A
+QAZoutgoing_frame->data in sender.c: C
 QAZoutgoing_frame->src_id in sender.c: 0
+QAZoutgoing_frame->dst_id in sender.c: 1
 hellooutgoing_frame->data in sender.c: 0
-host->send_wincsacsadow[0].frame->data in sender.c: A
+host->send_wincsacsadow[0].frame->data in sender.c: C
+before host -> sendArray[outgoing_frame -> src_id].LFS:0
+after host -> sendArray[outgoing_frame -> src_id].LFS:1
 QAZoutgoing_frame->seq_num: 1
 QAZoutgoing_frame->data in sender.c: B
 QAZoutgoing_frame->src_id in sender.c: 0
+QAZoutgoing_frame->dst_id in sender.c: 1
 hellooutgoing_frame->data in sender.c: 0
 host->send_wincsacsadow[1].frame->data in sender.c: B
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-CRC8 is not 0
-compute_crc8(inframe):57
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209823656431
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
+incoming_frames_length in recvewfewfewfeweiver.c: 2
 great
-helloinframe -> data:0
+helloinframe -> data:C
 helloinframe -> seq_num:0
-helloabcdinframe -> data:A
+host -> recvArray[inframe -> dst_id].NFE:0
+host -> recvArray[inframe -> dst_id].NFE + glb_sysconfig.window_size - 1:1
 Should have something here
-host ->NFE in receiver.c:0
-howareyouhost -> NFE in receiver.c:0
-emptyCharArray:A
-host -> receive_windo -> remain:0
-inframe -> remaining_msg_bytes in okk:0
+host -> emptyCharArray:C
+host -> recvArray[inframe->dst_id].receive_window[(host -> recvArray[inframe -> dst_id].NFE) glb_sysconfig.window_size].frame -> remaining_msg_bytes0
 YAY
-<RECV_1>:[A]
-specialhost -> NFE:1
-I want to see this!outgoing_frame -> ack_num:0
-ll_get_length(host->incoming_frames_head) 1
-HERE??inframe->ack_num: 0
-curr_timeval in sender.c: 1706209823657135
-QAZoutgoing_frame->seq_num: 2
-QAZoutgoing_frame->data in sender.c: CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-QAZoutgoing_frame->src_id in sender.c: 39
-hellooutgoing_frame->data in sender.c: 39
-host->send_wincsacsadow[0].frame->data in sender.c: CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCB
+<RECV_1>:[C]
+HELLO
+BYE
+I want to see thisfwqdwd!qsdoutgoing_frame->src_id:1
+qsdoutgoing_frame->dst_id:0
+outgoing_frame -> ack_num:0
+length of outgoing_frames_head:1
 incoming_frames_length in recvewfewfewfeweiver.c: 1
 great
-helloinframe -> data:39
-helloinframe -> seq_num:2
-helloabcdinframe -> data:CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCB
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209823666431
-Herethere
-BCGDDAA
-1
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-CRC8 is not 0
-compute_crc8(inframe):68
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209823766431
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-CRC8 is not 0
-compute_crc8(inframe):10
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209823776431
-Herethere
-BCGDDAA
-1
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-CRC8 is not 0
-compute_crc8(inframe):15
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209823866431
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:39
-helloinframe -> seq_num:2
-helloabcdinframe -> data:CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCB
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209823876431
-Herethere
-BCGDDAA
-1
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-CRC8 is not 0
-compute_crc8(inframe):77
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209823966431
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-CRC8 is not 0
-compute_crc8(inframe):219
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209823976431
-Herethere
-BCGDDAA
-1
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-CRC8 is not 0
-compute_crc8(inframe):142
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209824066431
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:39
-helloinframe -> seq_num:2
-helloabcdinframe -> data:CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCB
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209824076431
-Herethere
-BCGDDAA
-1
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-CRC8 is not 0
-compute_crc8(inframe):43
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209824166431
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-CRC8 is not 0
-compute_crc8(inframe):114
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209824176431
-Herethere
-BCGDDAA
-1
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
+helloinframe -> data:B
 helloinframe -> seq_num:1
-helloabcdinframe -> data:B
+host -> recvArray[inframe -> dst_id].NFE:1
+host -> recvArray[inframe -> dst_id].NFE + glb_sysconfig.window_size - 1:2
 Should have something here
-host ->NFE in receiver.c:1
-howareyouhost -> NFE in receiver.c:1
-emptyCharArray:B
-host -> receive_windo -> remain:0
-inframe -> remaining_msg_bytes in okk:0
+host -> emptyCharArray:B
+host -> recvArray[inframe->dst_id].receive_window[(host -> recvArray[inframe -> dst_id].NFE) glb_sysconfig.window_size].frame -> remaining_msg_bytes0
 YAY
 <RECV_1>:[B]
-specialhost -> NFE:2
-howareyouhost -> NFE in receiver.c:2
-emptyCharArray:CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCB
-host -> receive_windo -> remain:39
-inframe -> remaining_msg_bytes in okk:0
-specialhost -> NFE:3
-I want to see this!outgoing_frame -> ack_num:2
-ll_get_length(host->incoming_frames_head) 1
-HERE??inframe->ack_num: 2
-curr_timeval in sender.c: 1706209824177030
-QAZoutgoing_frame->seq_num: 3
-QAZoutgoing_frame->data in sender.c: CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-QAZoutgoing_frame->src_id in sender.c: 0
-hellooutgoing_frame->data in sender.c: 0
-host->send_wincsacsadow[0].frame->data in sender.c: CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-CRC8 is not 0
-compute_crc8(inframe):129
-ll_get_length(host->incoming_frames_head) 0
-curr_timeval in sender.c: 1706209824286431
-Herethere
-BCGDDAA
-0
-BCGDDAA
-incoming_frames_length in recvewfewfewfeweiver.c: 1
-great
-helloinframe -> data:0
-helloinframe -> seq_num:3
-helloabcdinframe -> data:CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-Should have something here
-host ->NFE in receiver.c:3
-howareyouhost -> NFE in receiver.c:3
-emptyCharArray:CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-host -> receive_windo -> remain:0
-inframe -> remaining_msg_bytes in okk:0
-YAY
-<RECV_1>:[CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC]
-specialhost -> NFE:4
-I want to see this!outgoing_frame -> ack_num:3
-ll_get_length(host->incoming_frames_head) 1
-HERE??inframe->ack_num: 3
-curr_timeval in sender.c: 1706209824287257
+HELLO
+BYE
+I want to see thisfwqdwd!qsdoutgoing_frame->src_id:1
+qsdoutgoing_frame->dst_id:0
+outgoing_frame -> ack_num:1
+length of outgoing_frames_head:2
