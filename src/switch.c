@@ -241,7 +241,7 @@ void send_ack_frames() {
             
             Frame* outgoing_frame = ll_outframe_node->value;
             //print src_id of outgoing_frame
-           printf("outgoing_frame->ack_num in send_ack_frames:%d\n",outgoing_frame->ack_num);
+         //  printf("outgoing_frame->ack_num in send_ack_frames:%d\n",outgoing_frame->ack_num);
             //print string ok
             //printf("outgoing_frame->data: %s\n", outgoing_frame->src_id);
             frame_sanity_check(outgoing_frame); 

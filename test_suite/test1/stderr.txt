@@ -4,4 +4,11 @@ Available host id(s):
    host_id=0
    host_id=1
    host_id=2
+   host_id=3
+   host_id=4
+   host_id=5
+   host_id=6
+   host_id=7
+   host_id=8
+   host_id=9
 The program has been successfully closed.
