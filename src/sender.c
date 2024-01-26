@@ -64,7 +64,7 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
     //print
     printf("ll_get_length(host->incoming_frames_head) %d\n", ll_get_length(host->incoming_frames_head)); 
     while (ll_get_length(host->incoming_frames_head) != 0) {
-        printf("HERE??");
+        //Sprintf("HERE??");
         //print inframe->seq_num
         //print ll_get_length(host->incoming_frames_head)
         LLnode* ll_input_cmd_node = ll_pop_node(&host->incoming_frames_head);
