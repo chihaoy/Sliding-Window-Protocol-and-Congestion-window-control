@@ -22,6 +22,6 @@ void get_rand_seq(int, int*);
 void send_frame(Frame*, double);
 void send_data_frames(); 
 void send_ack_frames(); 
-
+void TESTING(Frame* outgoing_frame);
 
 #endif

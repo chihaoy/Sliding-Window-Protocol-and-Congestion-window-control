@@ -70,15 +70,15 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
         LLnode* ll_input_cmd_node = ll_pop_node(&host->incoming_frames_head);
         Frame* inframe = (Frame*) ll_input_cmd_node->value;
         //print inframe->ack_num
-       // printf("inframe->ack_num: %d\n", inframe->ack_num);
+      //  printf("inframe->ack_num: %d\n", inframe->ack_num);
         //print inframe -> src_id
        // printf("asdinframe -> src_id: %d\n", inframe -> src_id);
-       // printf("%i:\n",host -> sendArray[inframe -> dst_id].LAR + 1);
-       // printf("%i:\n",host -> sendArray[inframe -> dst_id].LFS);
+      //  printf("%i:\n",host -> sendArray[inframe -> dst_id].LAR + 1);
+      //  printf("%i:\n",host -> sendArray[inframe -> dst_id].LFS);
         
         if(!swpInWindow(inframe->ack_num, host -> sendArray[inframe -> src_id].LAR + 1, host -> sendArray[inframe -> src_id].LFS)){
            //printf("NONONO");
-            return;
+            continue;
         }
         //print host->send_window[i].frame->seq_num
         //printf("inframe->ack_numwhatas: %d\n", host->send_window[0].frame->seq_num);
@@ -88,15 +88,17 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
                 //free(host->send_window[(host -> LAR) % glb_sysconfig.window_size].frame);
                 //printf("Correct");
                 free(host->send_window[i].frame);
+                //print i
+                //printf("i: %d\n", i);
                 host->send_window[i].frame = NULL;
                 host->send_window[i].timeout = NULL;
             }
         }
         //print inframe -> dst_id
        // printf("what the hack");
-      //  printf("zxcinframe -> dst_id: %d\n", inframe -> dst_id);
-        host -> sendArray[inframe -> dst_id].LAR = inframe -> ack_num;
-      //  printf("acdwe waht %d",k);
+     //   printf("zxcinframe -> dst_id: %d\n", inframe -> dst_id);
+        host -> sendArray[inframe -> src_id].LAR = inframe -> ack_num;//maybe should be src_id
+        //printf("acdwe waht %d",k);
     }
     
     
@@ -148,7 +150,7 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
                 outgoing_frame->dst_id = outgoing_cmd->dst_id;
                 outgoing_frame->remaining_msg_bytes = max(msg_length - (i + 1)* FRAME_PAYLOAD_SIZE,0);
                 //print outgoing_frame->remaining_msg_bytes
-              //  printf("outgoing_frame->remaining_msg_bytes in handle_input_cmds in sender.c: %d\n", outgoing_frame->remaining_msg_bytes);
+              // printf("outgoing_frame->remaining_msg_bytes in handle_input_cmds in sender.c: %d\n", outgoing_frame->remaining_msg_bytes);
                 uint16_t numbytes = 0;
                 if (outgoing_frame->remaining_msg_bytes > 0) {
                     numbytes = FRAME_PAYLOAD_SIZE;
@@ -158,7 +160,7 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
               //  printf("outgoing_frame->remaining_msg_bytes in handle_input_cmds: %d\n", outgoing_frame->remaining_msg_bytes);
                 memcpy(outgoing_frame->data, outgoing_cmd->message + i * FRAME_PAYLOAD_SIZE, numbytes);
                 ll_append_node(&host->buffered_outframes_head, outgoing_frame);
-              //  printf("outgoing_frame->data in handle_input_cmds: %s\n", outgoing_frame->data);
+            //   printf("outgoing_frame->data in handle_input_cmds: %s\n", outgoing_frame->data);
                 
             } 
            //print ll_get_length(host->buffered_outframes_head)
@@ -192,10 +194,10 @@ void handle_timedout_frames(Host* host, struct timeval curr_timeval) {
    // printf("curr_timeval in sender.c: %ld\n", curr_timeval.tv_usec + curr_timeval.tv_sec * 1000000);
     for (int i = 0; i < glb_sysconfig.window_size; i++) {
         if (host->send_window[i].timeout != NULL && timeval_usecdiff(&curr_timeval, host->send_window[i].timeout) <= 0) {
-          //  printf("Here");
+         //   printf("Here");
             //print i
           //  printf("%d", i);
-          //  printf("there\n");
+        //    printf("there\n");
             host->send_window[i].timeout = NULL;
 
         }
@@ -215,14 +217,14 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
     
     for (int i = 0; i < glb_sysconfig.window_size; i++) {
         if (host->send_window[i].timeout == NULL && host->send_window[i].frame != NULL){
-         //   printf("BCGDDAA\n");
-         //   printf("%d\n",i);
-         //   printf("BCGDDAA\n");
-         //   printf("awfeqfwqdwqhost->send_window[i].frame->data in sender.c: %d\n", host->send_window[i].frame -> dst_id);
+          //  printf("BCGDDAA\n");
+          ///  printf("%d\n",i);
+          //  printf("BCGDDAA\n");
+         //  printf("awfeqfwqdwqhost->send_window[i].frame->data in sender.c: %d\n", host->send_window[i].frame -> dst_id);
          //   printf("awfeqfwqdwqhost->send_window[i].frame->data in sender.c: %d\n", host->send_window[i].frame -> src_id);
             //print send_window[i].frame->data
-          //  printf("acderoutgoing_frame->data in sender.c: %s\n", host -> send_window[i].frame->data);
-            //printf("host->send_window[i].frame->data in sender.c: %s\n", host->send_window[1].frame -> data);
+         //   printf("acderoutgoing_frame->data in sender.c: %s\n", host -> send_window[i].frame->data);
+          //  printf("host->send_window[i].frame->data in sender.c: %s\n", host->send_window[1].frame -> data);
             struct timeval* next_timeout = malloc(sizeof(struct timeval));
             memcpy(next_timeout, &curr_timeval, sizeof(struct timeval)); 
             timeval_usecplus(next_timeout, TIMEOUT_INTERVAL_USEC + additional_ts);
@@ -230,7 +232,7 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
             memset(cop, 0, sizeof(Frame));
             host->send_window[i].timeout = next_timeout;//(this is what I add)
             memcpy(cop, host->send_window[i].frame, sizeof(Frame));
-           // printf("resendhost->send_window[i].frame->data in sender.c: %s\n", host->send_window[i].frame->data);
+            //printf("resendhost->send_window[i].frame->data in sender.c: %s\n", host->send_window[i].frame->data);
             ll_append_node(&host->outgoing_frames_head, cop);
             additional_ts += 10000; //ADD ADDITIONAL 10ms
         }
@@ -271,61 +273,61 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
             Frame* outgoing_frame = ll_outframe_node->value; 
             if (ll_get_length(host->buffered_outframes_head)!=0){
                 Frame* check = ll_peek_node(host->buffered_outframes_head);
-                //print check->src_id
+               // print check->src_id
                 //print check->dst_id
-                //print check->data
+               // print check->data
               //  printf("check->data in sender.c: %s\n", check->data);
               //  printf("check->src_id in sender.c: %d\n", check->src_id);
-             //   printf("check->dst_id in sender.c: %d\n", check->dst_id);
+              //  printf("check->dst_id in sender.c: %d\n", check->dst_id);
                 if (check  -> dst_id != outgoing_frame -> dst_id && check -> src_id == outgoing_frame -> src_id) {
                     host -> wait = 1;
-                   // printf("kiop");
+                    printf("kiop");
                 }
             }
-            //print outgoing_frame->data
+           // print outgoing_frame->data
           //  printf("aqweroutgoing_frame->data in sender.c: %s\n", outgoing_frame->data);
-            //print outgoing_frame->data
-           // printf("before host -> sendArray[outgoing_frame -> src_id].LFS:%i\n",host -> sendArray[outgoing_frame -> dst_id].LFS);
+           // print outgoing_frame->data
+          //  printf("before host -> sendArray[outgoing_frame -> src_id].LFS:%i\n",host -> sendArray[outgoing_frame -> dst_id].LFS);
             host -> sendArray[outgoing_frame -> dst_id].LFS = host -> sendArray[outgoing_frame -> dst_id].LFS + 1;
             //print out_frame -> dst_id
            // printf("out_frame -> dst_id in sender.c: %d\n", outgoing_frame -> dst_id);
-           // printf("after host -> sendArray[outgoing_frame -> src_id].LFS:%i\n",host -> sendArray[outgoing_frame -> dst_id].LFS);
+          //  printf("after host -> sendArray[outgoing_frame -> src_id].LFS:%i\n",host -> sendArray[outgoing_frame -> dst_id].LFS);
             outgoing_frame->seq_num = host->sendArray[outgoing_frame->dst_id].LFS;
             outgoing_frame -> is_ack = 0;
             //print host -> outgoing_frames
-           // printf("QAZoutgoing_frame->seq_num: %d\n", outgoing_frame->seq_num);
-          //  printf("QAZoutgoing_frame->data in sender.c: %s\n", outgoing_frame->data);
+         //   printf("QAZoutgoing_frame->seq_num: %d\n", outgoing_frame->seq_num);
+         //   printf("QAZoutgoing_frame->data in sender.c: %s\n", outgoing_frame->data);
           //  printf("QAZoutgoing_frame->src_id in sender.c: %d\n", outgoing_frame->src_id);
-          //  printf("QAZoutgoing_frame->dst_id in sender.c: %d\n", outgoing_frame->dst_id);
-          //  printf("testing: %s\n", outgoing_frame -> data);
+         //   printf("QAZoutgoing_frame->dst_id in sender.c: %d\n", outgoing_frame->dst_id);
+         //   printf("testing: %s\n", outgoing_frame -> data);
           //use calloc to create cop
           
           Frame* cop = calloc(1, sizeof(Frame));
             //Frame * cop = (Frame *) malloc (sizeof(Frame));
-          //  printf("qwaaaerthost->send_window[i].frame->data in seawernder.c src_id: %d\n", outgoing_frame -> src_id);
-         //   printf("qwaaaerthost->send_window[i].frame->data in seawernder.c dst_id: %d\n", outgoing_frame -> dst_id);
+         //  printf("qwaaaerthost->send_window[i].frame->data in seawernder.c src_id: %d\n", outgoing_frame -> src_id);
+         //  printf("qwaaaerthost->send_window[i].frame->data in seawernder.c dst_id: %d\n", outgoing_frame -> dst_id);
             memcpy(cop, outgoing_frame, sizeof(Frame));
          //   printf("qwerthost->send_window[i].frame->data in seawernder.c src_id: %d\n", cop -> src_id);
-          //  printf("qwerthost->send_window[i].frame->data in seawernder.c dst_id: %d\n", cop -> dst_id);
+        //    printf("qwerthost->send_window[i].frame->data in seawernder.c dst_id: %d\n", cop -> dst_id);
             //print outgoing_frame->data
             host -> send_window[i].frame = cop;
             char* outgoing_charbuf = convert_frame_to_char(outgoing_frame);
             outgoing_frame -> crc = compute_crc8(outgoing_charbuf);
             outgoing_charbuf = convert_frame_to_char(outgoing_frame);
             host -> send_window[i].frame -> crc = outgoing_frame -> crc;
-           // printf("outgoing_charbuf in sender.c: %s\n", outgoing_frame);
+         //   printf("outgoing_charbuf in sender.c: %s\n", outgoing_frame);
             
 
             host->send_window[i].frame -> crc = outgoing_frame -> crc;
             ll_append_node(&host->outgoing_frames_head, outgoing_charbuf); 
             //set last element of outgoing_frame -> data to '\0'
             
-           // printf("outgoing_frame -> data in sender.c: %s\n", outgoing_frame -> data);
+          //  printf("outgoing_frame -> data in sender.c: %s\n", outgoing_frame -> data);
             //print outgoing_frame -> data
-            //printf("outgoing_frame -> data in sender.c: %s\n", outgoing_frame -> data[strlen(outgoing_frame -> data) - 1]);
-            //printf("outgoing_frame ->crc in sender.c: %d\n", outgoing_frame ->crc); 
+         //   printf("outgoing_frame -> data in sender.c: %s\n", outgoing_frame -> data[strlen(outgoing_frame -> data) - 1]);
+        //    printf("outgoing_frame ->crc in sender.c: %d\n", outgoing_frame ->crc); 
             //print outgoing_charbuf
-            //printf("outgoing_charbuf in sender.c: %s\n", outgoing_frame->data);
+         //   printf("outgoing_charbuf in sender.c: %s\n", outgoing_frame->data);
             //print host->send_window[i].frame
            
             

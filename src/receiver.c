@@ -33,23 +33,23 @@ void handle_incoming_frames(Host* host) {
         Frame* inframe = ll_inmsg_node->value;
         char* temp = convert_frame_to_char(inframe);
         if (compute_crc8(temp) != 0){
-          //  printf("CRC8 is not 0\n");
+         //   printf("CRC8 is not 0\n");
             //print compute_crc8(inframe)
-           // printf("compute_crc8(inframe):%d\n",compute_crc8(temp));
+         //   printf("compute_crc8(inframe):%d\n",compute_crc8(temp));
             continue;
         }
         else{
-           // printf("great\n");
+            printf("great\n");
         }
         //print inframe->seq_num to stderr
        // printf("helloinframe -> data:%s\n",inframe->data);
         //inframe -> data[strlen(inframe -> data) - 1] = '\0';
        // printf("helloinframe -> seq_num:%d\n",inframe->seq_num);
       //  printf("host -> recArray[inframe -> dst_id].NFE:%d\n",host -> recvArray[inframe -> src_id].NFE);
-      //  printf("host -> recArray[inframe -> dst_id].NFE + glb_sysconfig.window_size - 1:%d\n",host -> recvArray[inframe -> src_id].NFE + glb_sysconfig.window_size - 1);
+       // printf("host -> recArray[inframe -> dst_id].NFE + glb_sysconfig.window_size - 1:%d\n",host -> recvArray[inframe -> src_id].NFE + glb_sysconfig.window_size - 1);
         if (!swpInWindow(inframe -> seq_num,host -> recvArray[inframe -> src_id].NFE,host -> recvArray[inframe -> src_id].NFE + glb_sysconfig.window_size - 1)){
             //dasdsadwqdqwdw");
-            //printf("NBONNO");
+          //  printf("NBONNO");
             continue;
         }
         Frame * cop = (Frame *) malloc (sizeof(Frame));
@@ -74,7 +74,7 @@ void handle_incoming_frames(Host* host) {
                 if (host -> recvArray[inframe->src_id].receive_window[(host -> recvArray[inframe -> src_id].NFE) % glb_sysconfig.window_size].frame -> remaining_msg_bytes == 0){
                     char combinedString[65535];
                     
-                  //  printf("YAY\n");
+                   // printf("YAY\n");
                     memset(combinedString, 0, sizeof(combinedString));//so that no garbage character is present
                     //set combinesString to '\0'
                     combinedString[0] = '\0';
@@ -87,12 +87,12 @@ void handle_incoming_frames(Host* host) {
                     //memset(temp, 0, sizeof(temp));
                     host -> emptyCharArray[0] = '\0';
                 }
-              //  printf("HELLO\n");
+             //   printf("HELLO\n");
                 host -> recvArray[inframe -> src_id].NFE += 1;
 
                 //printf("specialhost -> NFE:%d\n",host -> NFE);
                 pre_seq = inframe -> seq_num;
-               // printf("BYE\n");
+            //    printf("BYE\n");
                 //printf("window_size%s",host -> receive_window[(host -> NFE) % glb_sysconfig.window_size].frame -> data);
             }
             //print host -> emptyCharArray to stderr
@@ -112,8 +112,7 @@ void handle_incoming_frames(Host* host) {
             ll_append_node(&host->outgoing_frames_head, outgoing_frame);
             //printf("outgoing_frame -> ack_num:%d\n",outgoing_frame->ack_num);
             //print length of outgoing_frames_head to stderr
-           // printf("length of outgoing_frames_head:%d\n",ll_get_length(host->outgoing_frames_head));    
-            break;
+           // printf("length of outgoing_frames_head:%d\n",ll_get_length(host->outgoing_frames_head));      
         }
        
     }
