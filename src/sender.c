@@ -69,6 +69,13 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
         //print ll_get_length(host->incoming_frames_head)
         LLnode* ll_input_cmd_node = ll_pop_node(&host->incoming_frames_head);
         Frame* inframe = (Frame*) ll_input_cmd_node->value;
+        if (compute_crc8(convert_frame_to_char(inframe)) != 0){
+           // printf("WHY");
+            continue;
+        }
+        else{
+           // printf("wow!");
+        }
         //print inframe->ack_num
       //  printf("inframe->ack_num: %d\n", inframe->ack_num);
         //print inframe -> src_id
@@ -338,7 +345,7 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
             
 
 
-            host->send_window[i].frame -> crc = outgoing_frame -> crc;
+            //host->send_window[i].frame -> crc = outgoing_frame -> crc;
             //printf("outgoing_frame in sender.c: %0.55s\n", outgoing_frame -> data);
             ll_append_node(&host->outgoing_frames_head, outgoing_charbuf); 
             //set last element of outgoing_frame -> data to '\0'

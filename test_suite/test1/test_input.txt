@@ -1,8 +1,2 @@
 msg 0 1 Hello World!
-msg 1 0 Love
-msg 2 1 like
-msg 0 2 wow  
-msg 0 2 ghf
-msg 0 3 lj
-msg 0 4 aqw
 exit
