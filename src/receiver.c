@@ -49,7 +49,12 @@ void handle_incoming_frames(Host* host) {
        // printf("host -> recArray[inframe -> dst_id].NFE + glb_sysconfig.window_size - 1:%d\n",host -> recvArray[inframe -> src_id].NFE + glb_sysconfig.window_size - 1);
         if (!swpInWindow(inframe -> seq_num ,host -> recvArray[inframe -> src_id].NFE,host -> recvArray[inframe -> src_id].NFE + glb_sysconfig.window_size - 1)){
             //dasdsadwqdqwdw");
-           
+            Frame* outgoing_frame = (Frame*)malloc(sizeof(Frame));
+            outgoing_frame->src_id = inframe->dst_id;
+            outgoing_frame->dst_id = inframe->src_id;
+            outgoing_frame->is_ack = 1;
+            outgoing_frame->ack_num = inframe->seq_num;
+            ll_append_node(&host->outgoing_frames_head, outgoing_frame);
             continue;
         }
         //printf("loveinframe -> data:%s\n",inframe -> data);
@@ -112,6 +117,8 @@ void handle_incoming_frames(Host* host) {
             outgoing_frame->src_id = inframe->dst_id;
             outgoing_frame->dst_id = inframe->src_id;
             outgoing_frame->is_ack = 1;
+            //Frame* outgoing_charbuf = convert_char_to_frame(host -> emptyCharArray);
+           
             //print inframe -> src_id to stderr
            // printf("qsdoutgoing_frame->src_id:%d\n",outgoing_frame->src_id);
             //print inframe -> dst_id to stderr
