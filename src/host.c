@@ -36,7 +36,9 @@ void init_host(Host* host, int id) {
             host -> recvArray[i].receive_window[j].timeout = NULL;
         }
     }
-    memset(host->emptyCharArray, 0, sizeof(host->emptyCharArray));
+    for (int i = 0; i < glb_num_hosts; i++) {
+        memset(host->recvArray[i].emptyCharArray, 0, sizeof(host->recvArray[i].emptyCharArray));
+    }
     
     host->latest_timeout = malloc(sizeof(struct timeval));
     gettimeofday(host->latest_timeout, NULL);

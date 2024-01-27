@@ -139,6 +139,7 @@ struct receive_windows {
     uint8_t LFR; // last frame recieved
     uint8_t LAF; // last acceptable frame
     struct send_window_slot* receive_window;
+    char emptyCharArray[65535];
 };
 typedef struct receive_windows recvArray1;//size of 256
 struct send_windows {
@@ -168,7 +169,6 @@ struct Host_t {
     int wait;
     LLnode* input_cmdlist_head;
     LLnode* incoming_frames_head; 
-    char emptyCharArray[65535];
     //uint8_t LAR; //last ack recieved
    // uint8_t LFS; //last frame sent
     //as a receiver

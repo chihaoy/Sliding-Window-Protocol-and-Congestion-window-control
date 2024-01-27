@@ -47,6 +47,7 @@ void handle_incoming_frames(Host* host) {
        // printf("helloinframe -> seq_num:%d\n",inframe->seq_num);
       //  printf("host -> recArray[inframe -> dst_id].NFE:%d\n",host -> recvArray[inframe -> src_id].NFE);
        // printf("host -> recArray[inframe -> dst_id].NFE + glb_sysconfig.window_size - 1:%d\n",host -> recvArray[inframe -> src_id].NFE + glb_sysconfig.window_size - 1);
+        uint8_t k1 = host -> recvArray[inframe -> src_id].NFE;
         if (!swpInWindow(inframe -> seq_num ,host -> recvArray[inframe -> src_id].NFE,host -> recvArray[inframe -> src_id].NFE + glb_sysconfig.window_size - 1)){
             //dasdsadwqdqwdw");
             //printf("HWLLO");
@@ -74,6 +75,7 @@ void handle_incoming_frames(Host* host) {
         memset(cop, 0, sizeof(Frame));
         memcpy(cop, inframe, sizeof(Frame));
         host -> recvArray[inframe -> src_id].receive_window[inframe -> seq_num % glb_sysconfig.window_size].frame = cop;
+        //printf("host -> recvArray[inframe -> src_id].receive_window[inframe -> seq_num % glb_sysconfig.window_size].frame -> data:%s\n",host -> recvArray[inframe -> src_id].receive_window[inframe -> seq_num % glb_sysconfig.window_size].frame -> data);
         //printf("whathelloabcdinframe -> data:%s\n",host -> recvArray[inframe -> src_id].receive_window[inframe -> seq_num % glb_sysconfig.window_size].frame->data);
        // printf("helloabcdinframe -> data:%s\n",host -> recvArray[inframe -> seq_num % glb_sysconfig.window_size].frame->data);
         int pre_seq = -1;
@@ -86,7 +88,9 @@ void handle_incoming_frames(Host* host) {
                 //print inframe->len
                 //print inframe->starting_index
                 Frame* temp = host -> recvArray[inframe -> src_id].receive_window[(host ->recvArray[inframe -> src_id].NFE) % glb_sysconfig.window_size].frame;
-                memcpy(host -> emptyCharArray + temp->starting_index, temp -> data,temp -> len); // Copy inframe->data into temp
+                memcpy(host -> recvArray[inframe -> src_id].emptyCharArray + temp->starting_index, temp -> data,temp -> len); // Copy inframe->data into temp
+                //print host -> emptyCharArray to stderr
+                //printf("<RdwqdwqwdECV_%d>:[%s]\n", host->id, host -> recvArray[inframe -> src_id].emptyCharArray);
                 //print host -> emptyCharArray to stderr
                 //print host -> emptyCharArray to stderr
                // printf("<Rr32r32ECV_%d>:[%s]\n", host->id, host -> emptyCharArray);
@@ -103,15 +107,16 @@ void handle_incoming_frames(Host* host) {
                     memset(combinedString, 0, sizeof(combinedString));//so that no garbage character is present
                     //set combinesString to '\0'
                     combinedString[0] = '\0';
+
                                         //strcat(combinedString, host -> recvArray[1].sendQ[0].frame -> data);
                     //strcat(combinedString, host -> emptyCharArray);
-                    strcpy(combinedString, host -> emptyCharArray);
+                    strcpy(combinedString, host -> recvArray[inframe -> src_id].emptyCharArray);
                     //print outgoing_frame->src_id and outgoing_frame->dst_id to stderr
                     //combinedString[strlen(combinedString)] = '\0';
                     printf("<RECV_%d>:[%s]\n", host->id, combinedString);
 
                     //memset(temp, 0, sizeof(temp));
-                    host -> emptyCharArray[0] = '\0';
+                    host -> recvArray[inframe -> src_id].emptyCharArray[0] = '\0';
                 }
              //   printf("HELLO\n");
                 host -> recvArray[inframe -> src_id].NFE += 1;

@@ -151,10 +151,12 @@ int check_input() {
                 // the right range
                 if (sender_id >= glb_num_hosts ||
                     sender_id < 0) {
+                    
                     fprintf(stderr, "Sender id is invalid\n");
                 }
                 if (receiver_id >= glb_num_hosts ||
                     receiver_id < 0) {
+                    printf("receiver_id: %d\n", receiver_id);
                     fprintf(stderr, "Receiver id is invalid\n");
                 }
 

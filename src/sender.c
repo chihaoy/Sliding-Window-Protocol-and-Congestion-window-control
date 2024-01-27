@@ -82,7 +82,8 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
        // printf("asdinframe -> src_id: %d\n", inframe -> src_id);
       //  printf("%i:\n",host -> sendArray[inframe -> dst_id].LAR + 1);
       //  printf("%i:\n",host -> sendArray[inframe -> dst_id].LFS);
-        
+        uint8_t k1 = host -> sendArray[inframe -> src_id].LAR + 1;
+        uint8_t k2 = host -> sendArray[inframe -> src_id].LFS;
         if(!swpInWindow(inframe->ack_num, host -> sendArray[inframe -> src_id].LAR + 1, host -> sendArray[inframe -> src_id].LFS)){
            //printf("NONONO");
             continue;
@@ -177,7 +178,7 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
                 //printf("wha1inframe -> len:%d\n",outgoing_frame -> len);
                // printf("wha1inframe -> starting_index:%d\n",outgoing_frame -> starting_index);
                 ll_append_node(&host->buffered_outframes_head, outgoing_frame);
-            //   printf("outgoing_frame->data in handle_input_cmds: %s\n", outgoing_frame->data);
+            //printf("outgoing_frame->data in handle_input_cmds: %s\n", outgoing_frame->data);
                 
             } 
            //print ll_get_length(host->buffered_outframes_head)
@@ -342,9 +343,9 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
             //print outgoing_frame
             
             host -> send_window[i].frame -> crc = outgoing_frame -> crc;
-         //   printf("outgoing_charbuf in sender.c: %s\n", outgoing_frame);
+            //printf("outgoing_charbuf in sender.c: %s\n", host -> send_window[i].frame->data);
             
-
+            
 
             //host->send_window[i].frame -> crc = outgoing_frame -> crc;
             //printf("outgoing_frame in sender.c: %0.55s\n", outgoing_frame -> data);

@@ -51,7 +51,7 @@ function run_unordered_test() {
 }
 
 #Test 1
-run_ordered_test 1 basic.cfg
+run_unordered_test 1 basic.cfg
 
 #Test 2
 #Advanced Testing: Checking corruption
