@@ -1,7 +1,2 @@
-msg 0 1 I
-msg 0 1 love 
-msg 2 1 you
-msg 9 1 XU
-msg 1 9 Yun
-msg 2 0 Ou
+msg 0 1 Hello World!
 exit

@@ -31,47 +31,57 @@ void handle_incoming_frames(Host* host) {
 
         //print incoming_frames_length to stederr
         Frame* inframe = ll_inmsg_node->value;
+        //print inframe -> data
+        //printf("<wowRECV_%d>:[%s]\n", host->id, inframe->data);
         char* temp = convert_frame_to_char(inframe);
         if (compute_crc8(temp) != 0){
+            return;
+        }
          //   printf("CRC8 is not 0\n");
             //print compute_crc8(inframe)
          //   printf("compute_crc8(inframe):%d\n",compute_crc8(temp));
-            continue;
-        }
-        else{
-            printf("great\n");
-        }
+            
         //print inframe->seq_num to stderr
        // printf("helloinframe -> data:%s\n",inframe->data);
         //inframe -> data[strlen(inframe -> data) - 1] = '\0';
        // printf("helloinframe -> seq_num:%d\n",inframe->seq_num);
       //  printf("host -> recArray[inframe -> dst_id].NFE:%d\n",host -> recvArray[inframe -> src_id].NFE);
        // printf("host -> recArray[inframe -> dst_id].NFE + glb_sysconfig.window_size - 1:%d\n",host -> recvArray[inframe -> src_id].NFE + glb_sysconfig.window_size - 1);
-        if (!swpInWindow(inframe -> seq_num,host -> recvArray[inframe -> src_id].NFE,host -> recvArray[inframe -> src_id].NFE + glb_sysconfig.window_size - 1)){
+        if (!swpInWindow(inframe -> seq_num ,host -> recvArray[inframe -> src_id].NFE,host -> recvArray[inframe -> src_id].NFE + glb_sysconfig.window_size - 1)){
             //dasdsadwqdqwdw");
-          //  printf("NBONNO");
+           
             continue;
         }
+        //printf("loveinframe -> data:%s\n",inframe -> data);
+        //printf("loveinframe -> len:%d\n",inframe -> len);
+        //printf("loveinframe -> starting_index:%d\n",inframe -> starting_index);
         Frame * cop = (Frame *) malloc (sizeof(Frame));
         memset(cop, 0, sizeof(Frame));
         memcpy(cop, inframe, sizeof(Frame));
         host -> recvArray[inframe -> src_id].receive_window[inframe -> seq_num % glb_sysconfig.window_size].frame = cop;
+        //printf("whathelloabcdinframe -> data:%s\n",host -> recvArray[inframe -> src_id].receive_window[inframe -> seq_num % glb_sysconfig.window_size].frame->data);
        // printf("helloabcdinframe -> data:%s\n",host -> recvArray[inframe -> seq_num % glb_sysconfig.window_size].frame->data);
         int pre_seq = -1;
         if (host -> recvArray[inframe -> src_id].NFE == inframe -> seq_num){
            // printf("Should have something here\n");
             //printf("host ->NFE in receiver.c:%d\n",host -> NFE);
-            pre_seq = inframe -> seq_num - 1;
+            pre_seq = inframe -> seq_num - 1; 
             while (host -> recvArray[inframe -> src_id].receive_window[(host ->recvArray[inframe -> src_id].NFE) % glb_sysconfig.window_size].frame != NULL && pre_seq < host -> recvArray[inframe->src_id].receive_window[(host->recvArray[inframe -> src_id].NFE) % glb_sysconfig.window_size].frame -> seq_num){//still should check the case for window_size of 8
-                strcat(host -> emptyCharArray, host -> recvArray[inframe -> src_id].receive_window[(host -> recvArray[inframe -> src_id].NFE) % glb_sysconfig.window_size].frame -> data); // Copy inframe->data into temp
-                
+                //print inframe->data
+                //print inframe->len
+                //print inframe->starting_index
+                Frame* temp = host -> recvArray[inframe -> src_id].receive_window[(host ->recvArray[inframe -> src_id].NFE) % glb_sysconfig.window_size].frame;
+                memcpy(host -> emptyCharArray + temp->starting_index, temp -> data,temp -> len); // Copy inframe->data into temp
+                //print host -> emptyCharArray to stderr
+                //print host -> emptyCharArray to stderr
+               // printf("<Rr32r32ECV_%d>:[%s]\n", host->id, host -> emptyCharArray);
                 //printf("howareyouhost -> NFE in receiver.c:%d\n",host -> NFE);
                // printf("emptyCharArray:%s\n",host -> emptyCharArray);
                 //printf("host -> receive_windo -> remain:%i\n",host -> receive_window[(host -> NFE) % glb_sysconfig.window_size].frame -> remaining_msg_bytes);
                 //print inframe->remaining_msg_bytes to stderr
               //  printf("host -> emptyCharArray:%s\n",host -> emptyCharArray);
               //  printf("host -> recArray[inframe->dst_id].receive_window[(host -> recArray[inframe -> dst_id].NFE) glb_sysconfig.window_size].frame -> remaining_msg_bytes%d\n",host -> recvArray[inframe->src_id].receive_window[(host -> recvArray[inframe -> src_id].NFE) % glb_sysconfig.window_size].frame -> remaining_msg_bytes);
-                if (host -> recvArray[inframe->src_id].receive_window[(host -> recvArray[inframe -> src_id].NFE) % glb_sysconfig.window_size].frame -> remaining_msg_bytes == 0){
+                if (temp -> remaining_msg_bytes == 0){
                     char combinedString[65535];
                     
                    // printf("YAY\n");
@@ -79,7 +89,8 @@ void handle_incoming_frames(Host* host) {
                     //set combinesString to '\0'
                     combinedString[0] = '\0';
                                         //strcat(combinedString, host -> recvArray[1].sendQ[0].frame -> data);
-                    strcat(combinedString, host -> emptyCharArray);
+                    //strcat(combinedString, host -> emptyCharArray);
+                    strcpy(combinedString, host -> emptyCharArray);
                     //print outgoing_frame->src_id and outgoing_frame->dst_id to stderr
                     //combinedString[strlen(combinedString)] = '\0';
                     printf("<RECV_%d>:[%s]\n", host->id, combinedString);

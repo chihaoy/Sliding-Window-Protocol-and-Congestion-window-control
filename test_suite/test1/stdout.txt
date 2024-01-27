@@ -1,12 +1,1 @@
-kiopgreat
-<RECV_9>:[Yun]
-great
-<RECV_1>:[you]
-great
-<RECV_0>:[Ou]
-great
-<RECV_1>:[XU]
-great
-<RECV_1>:[I]
-great
-<RECV_1>:[love ]
+<RECV_1>:[Hello World!]

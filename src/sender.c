@@ -143,22 +143,32 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
 
             int num_frames = ceil((double)msg_length / FRAME_PAYLOAD_SIZE);
             //print num_frames
+            //print num_frames
+           // printf("num_frames in sender.c: %d\n", num_frames);
+
             for (int i = 0; i < num_frames; i++) {
                 Frame* outgoing_frame = calloc(1,sizeof(Frame));
                 assert(outgoing_frame);
                 outgoing_frame->src_id = outgoing_cmd->src_id;
                 outgoing_frame->dst_id = outgoing_cmd->dst_id;
                 outgoing_frame->remaining_msg_bytes = max(msg_length - (i + 1)* FRAME_PAYLOAD_SIZE,0);
+                
                 //print outgoing_frame->remaining_msg_bytes
               // printf("outgoing_frame->remaining_msg_bytes in handle_input_cmds in sender.c: %d\n", outgoing_frame->remaining_msg_bytes);
-                uint16_t numbytes = 0;
+                uint8_t numbytes = 0;
                 if (outgoing_frame->remaining_msg_bytes > 0) {
                     numbytes = FRAME_PAYLOAD_SIZE;
                 } else {
                     numbytes = msg_length - i * FRAME_PAYLOAD_SIZE;
                 }
+                outgoing_frame->starting_index = i * FRAME_PAYLOAD_SIZE;
+                outgoing_frame->len = numbytes;
+               
               //  printf("outgoing_frame->remaining_msg_bytes in handle_input_cmds: %d\n", outgoing_frame->remaining_msg_bytes);
                 memcpy(outgoing_frame->data, outgoing_cmd->message + i * FRAME_PAYLOAD_SIZE, numbytes);
+               // printf("whainframe -> data:%s\n",outgoing_frame -> data);
+                //printf("wha1inframe -> len:%d\n",outgoing_frame -> len);
+               // printf("wha1inframe -> starting_index:%d\n",outgoing_frame -> starting_index);
                 ll_append_node(&host->buffered_outframes_head, outgoing_frame);
             //   printf("outgoing_frame->data in handle_input_cmds: %s\n", outgoing_frame->data);
                 
@@ -173,6 +183,12 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
             outgoing_frame->remaining_msg_bytes = 0;
             outgoing_frame->src_id = outgoing_cmd->src_id;
             outgoing_frame->dst_id = outgoing_cmd->dst_id;
+            outgoing_frame->starting_index = 0;
+            outgoing_frame->len = msg_length;
+            //print outgoing_frame->len
+           // printf("love1inframe -> data:%s\n",outgoing_frame -> data);
+           // printf("love1inframe -> len:%d\n",outgoing_frame -> len);
+           // printf("love1inframe -> starting_index:%d\n",outgoing_frame -> starting_index);
             // At this point, we don't need the outgoing_cmd
             free(outgoing_cmd->message);
             free(outgoing_cmd);
@@ -281,7 +297,7 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
               //  printf("check->dst_id in sender.c: %d\n", check->dst_id);
                 if (check  -> dst_id != outgoing_frame -> dst_id && check -> src_id == outgoing_frame -> src_id) {
                     host -> wait = 1;
-                    printf("kiop");
+                    //printf("kiop");
                 }
             }
            // print outgoing_frame->data
@@ -312,13 +328,18 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
             //print outgoing_frame->data
             host -> send_window[i].frame = cop;
             char* outgoing_charbuf = convert_frame_to_char(outgoing_frame);
+            //printf("outgoing_frame in sender.c: %s\n", outgoing_frame -> data);
             outgoing_frame -> crc = compute_crc8(outgoing_charbuf);
             outgoing_charbuf = convert_frame_to_char(outgoing_frame);
+            //print outgoing_frame
+            
             host -> send_window[i].frame -> crc = outgoing_frame -> crc;
          //   printf("outgoing_charbuf in sender.c: %s\n", outgoing_frame);
             
 
+
             host->send_window[i].frame -> crc = outgoing_frame -> crc;
+            //printf("outgoing_frame in sender.c: %0.55s\n", outgoing_frame -> data);
             ll_append_node(&host->outgoing_frames_head, outgoing_charbuf); 
             //set last element of outgoing_frame -> data to '\0'
             
