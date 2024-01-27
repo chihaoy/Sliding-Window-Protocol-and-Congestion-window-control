@@ -60,6 +60,7 @@ void handle_incoming_frames(Host* host) {
             outgoing_frame->seq_num = 0;
             outgoing_frame->remaining_msg_bytes = 0;
             outgoing_frame->ack_num = inframe -> seq_num;
+            outgoing_frame->crc = 0;
             char *outgoing_charbuf = convert_char_to_frame(outgoing_frame);
             outgoing_frame -> crc = compute_crc8(outgoing_charbuf);
             outgoing_charbuf = convert_frame_to_char(outgoing_frame);
@@ -132,6 +133,8 @@ void handle_incoming_frames(Host* host) {
             outgoing_frame->seq_num = 0;
             outgoing_frame->remaining_msg_bytes = 0;
             //Frame* outgoing_charbuf = convert_char_to_frame(host -> emptyCharArray);
+            //printf("Current message of the host: %s\n", host -> emptyCharArray);
+            //printf("hello\n");
            
             //print inframe -> src_id to stderr
            // printf("qsdoutgoing_frame->src_id:%d\n",outgoing_frame->src_id);
@@ -140,6 +143,7 @@ void handle_incoming_frames(Host* host) {
             outgoing_frame->ack_num = (host -> recvArray[inframe -> src_id].NFE) - 1;
             //print
             //print outgoing_frame->ack_num
+            outgoing_frame->crc = 0;
             char* outgoing_charbuf = convert_char_to_frame(outgoing_frame);
             outgoing_frame -> crc = compute_crc8(outgoing_charbuf);
             outgoing_charbuf = convert_frame_to_char(outgoing_frame);

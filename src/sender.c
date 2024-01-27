@@ -334,6 +334,7 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
         //    printf("qwerthost->send_window[i].frame->data in seawernder.c dst_id: %d\n", cop -> dst_id);
             //print outgoing_frame->data
             host -> send_window[i].frame = cop;
+            outgoing_frame->crc = 0;
             char* outgoing_charbuf = convert_frame_to_char(outgoing_frame);
             //printf("outgoing_frame in sender.c: %s\n", outgoing_frame -> data);
             outgoing_frame -> crc = compute_crc8(outgoing_charbuf);
