@@ -106,12 +106,12 @@ struct __attribute__((packed)) Frame_t {
 
         5) data (you can change payload size)
     */   
-    uint8_t len;
-    uint16_t starting_index;
     uint16_t remaining_msg_bytes; 
     uint8_t dst_id; 
     uint8_t src_id; 
     uint8_t seq_num; 
+    uint8_t len;
+    uint16_t starting_index;
     uint8_t ack_num;
     uint8_t is_ack;//adding this field 0 means data frame 1 means ack frame
     
