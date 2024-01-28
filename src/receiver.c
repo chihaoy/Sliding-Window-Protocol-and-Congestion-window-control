@@ -48,7 +48,10 @@ void handle_incoming_frames(Host* host) {
       //  printf("host -> recArray[inframe -> dst_id].NFE:%d\n",host -> recvArray[inframe -> src_id].NFE);
        // printf("host -> recArray[inframe -> dst_id].NFE + glb_sysconfig.window_size - 1:%d\n",host -> recvArray[inframe -> src_id].NFE + glb_sysconfig.window_size - 1);
         uint8_t k1 = host -> recvArray[inframe -> src_id].NFE;
-        if (!swpInWindow(inframe -> seq_num ,host -> recvArray[inframe -> src_id].NFE,host -> recvArray[inframe -> src_id].NFE + glb_sysconfig.window_size - 1)){
+        if (inframe -> is_ack == 1){
+            continue;
+        }
+        if (seq_num_diff(k1,inframe->seq_num) >= glb_sysconfig.window_size || seq_num_diff(k1,inframe->seq_num) < 0){
             //dasdsadwqdqwdw");
             //printf("HWLLO");
             Frame* outgoing_frame = (Frame*)malloc(sizeof(Frame));
@@ -60,7 +63,7 @@ void handle_incoming_frames(Host* host) {
             outgoing_frame->starting_index = 0;
             outgoing_frame->seq_num = 0;
             outgoing_frame->remaining_msg_bytes = 0;
-            outgoing_frame->ack_num = inframe -> seq_num;
+            outgoing_frame->ack_num = (host -> recvArray[inframe -> src_id].NFE) - 1;
             outgoing_frame->crc = 0;
             char *outgoing_charbuf = convert_char_to_frame(outgoing_frame);
             outgoing_frame -> crc = compute_crc8(outgoing_charbuf);
@@ -89,6 +92,9 @@ void handle_incoming_frames(Host* host) {
                 //print inframe->starting_index
                 Frame* temp = host -> recvArray[inframe -> src_id].receive_window[(host ->recvArray[inframe -> src_id].NFE) % glb_sysconfig.window_size].frame;
                 memcpy(host -> recvArray[inframe -> src_id].emptyCharArray + temp->starting_index, temp -> data,temp -> len); // Copy inframe->data into temp
+                host -> recvArray[inframe -> src_id].receive_window[(host ->recvArray[inframe -> src_id].NFE) % glb_sysconfig.window_size].frame = NULL;
+                //print host -> emptyCharArray to stderr
+                //printf("<nio_%d>:[%s]\n", host->id, host -> recvArray[inframe -> src_id].emptyCharArray);
                 //print host -> emptyCharArray to stderr
                 //printf("<RdwqdwqwdECV_%d>:[%s]\n", host->id, host -> recvArray[inframe -> src_id].emptyCharArray);
                 //print host -> emptyCharArray to stderr
@@ -107,6 +113,7 @@ void handle_incoming_frames(Host* host) {
                     memset(combinedString, 0, sizeof(combinedString));//so that no garbage character is present
                     //set combinesString to '\0'
                     combinedString[0] = '\0';
+
 
                                         //strcat(combinedString, host -> recvArray[1].sendQ[0].frame -> data);
                     //strcat(combinedString, host -> emptyCharArray);

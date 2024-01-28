@@ -84,7 +84,7 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
       //  printf("%i:\n",host -> sendArray[inframe -> dst_id].LFS);
         uint8_t k1 = host -> sendArray[inframe -> src_id].LAR + 1;
         uint8_t k2 = host -> sendArray[inframe -> src_id].LFS;
-        if(!swpInWindow(inframe->ack_num, host -> sendArray[inframe -> src_id].LAR + 1, host -> sendArray[inframe -> src_id].LFS)){
+        if(abs(seq_num_diff(inframe->ack_num,k1)+abs(seq_num_diff(inframe->ack_num,k2)) >  abs(seq_num_diff(k1,k2)))){
            //printf("NONONO");
             continue;
         }
@@ -92,7 +92,7 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
         //printf("inframe->ack_numwhatas: %d\n", host->send_window[0].frame->seq_num);
         for (int i = 0; i < glb_sysconfig.window_size; i++){
             
-            if (host->send_window[i].frame != NULL && host->send_window[i].frame->seq_num <= inframe->ack_num && inframe -> is_ack == 1){
+            if (host->send_window[i].frame != NULL && seq_num_diff(host->send_window[i].frame -> seq_num,inframe -> ack_num) >= 0 && inframe -> is_ack == 1){
                 //free(host->send_window[(host -> LAR) % glb_sysconfig.window_size].frame);
                 //printf("Correct");
                 free(host->send_window[i].frame);
