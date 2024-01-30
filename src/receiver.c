@@ -91,6 +91,7 @@ void handle_incoming_frames(Host* host) {
                 //print inframe->len
                 //print inframe->starting_index
                 Frame* temp = host -> recvArray[inframe -> src_id].receive_window[(host ->recvArray[inframe -> src_id].NFE) % glb_sysconfig.window_size].frame;
+                host -> recvArray[inframe -> src_id].emptyCharArray = (char *)realloc(host -> recvArray[inframe -> src_id].emptyCharArray, (temp->starting_index + temp -> len) * sizeof(char));
                 memcpy(host -> recvArray[inframe -> src_id].emptyCharArray + temp->starting_index, temp -> data,temp -> len); // Copy inframe->data into temp
                 host -> recvArray[inframe -> src_id].receive_window[(host ->recvArray[inframe -> src_id].NFE) % glb_sysconfig.window_size].frame = NULL;
                 //print host -> emptyCharArray to stderr

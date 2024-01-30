@@ -37,7 +37,7 @@ void init_host(Host* host, int id) {
         }
     }
     for (int i = 0; i < glb_num_hosts; i++) {
-        memset(host->recvArray[i].emptyCharArray, 0, sizeof(host->recvArray[i].emptyCharArray));
+        host->recvArray[i].emptyCharArray = NULL;
     }
     
     host->latest_timeout = malloc(sizeof(struct timeval));
