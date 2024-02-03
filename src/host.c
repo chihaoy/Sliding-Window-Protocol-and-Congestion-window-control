@@ -11,6 +11,7 @@ void init_host(Host* host, int id) {
     host->round_trip_num = 0; 
     host->csv_out = 0; 
     host->wait = 0;
+    host->c = 0;
     //host->LAR = -1;
     //host->LFS = -1;
     //host->LFR = 0;

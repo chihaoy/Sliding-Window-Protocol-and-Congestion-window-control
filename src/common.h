@@ -167,6 +167,7 @@ struct Host_t {
     int round_trip_num; 
     int csv_out; 
     int wait;
+    int c;
     LLnode* input_cmdlist_head;
     LLnode* incoming_frames_head; 
     //uint8_t LAR; //last ack recieved

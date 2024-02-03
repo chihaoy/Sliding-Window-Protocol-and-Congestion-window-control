@@ -177,6 +177,12 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
                // printf("whainframe -> data:%s\n",outgoing_frame -> data);
                 //printf("wha1inframe -> len:%d\n",outgoing_frame -> len);
                // printf("wha1inframe -> starting_index:%d\n",outgoing_frame -> starting_index);
+               host -> sendArray[outgoing_frame -> dst_id].LFS = host -> sendArray[outgoing_frame -> dst_id].LFS + 1;
+            //print out_frame -> dst_id
+           // printf("out_frame -> dst_id in sender.c: %d\n", outgoing_frame -> dst_id);
+          //  printf("after host -> sendArray[outgoing_frame -> src_id].LFS:%i\n",host -> sendArray[outgoing_frame -> dst_id].LFS);
+            outgoing_frame->seq_num = host->sendArray[outgoing_frame->dst_id].LFS;
+            outgoing_frame -> is_ack = 0;
                 ll_append_node(&host->buffered_outframes_head, outgoing_frame);
             //printf("outgoing_frame->data in handle_input_cmds: %s\n", outgoing_frame->data);
                 
@@ -200,7 +206,12 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
             // At this point, we don't need the outgoing_cmd
             free(outgoing_cmd->message);
             free(outgoing_cmd);
-            
+            host -> sendArray[outgoing_frame -> dst_id].LFS = host -> sendArray[outgoing_frame -> dst_id].LFS + 1;
+            //print out_frame -> dst_id
+           // printf("out_frame -> dst_id in sender.c: %d\n", outgoing_frame -> dst_id);
+          //  printf("after host -> sendArray[outgoing_frame -> src_id].LFS:%i\n",host -> sendArray[outgoing_frame -> dst_id].LFS);
+            outgoing_frame->seq_num = host->sendArray[outgoing_frame->dst_id].LFS;
+            outgoing_frame -> is_ack = 0;
             
             ll_append_node(&host->buffered_outframes_head, outgoing_frame);
             
@@ -312,12 +323,6 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
           //  printf("aqweroutgoing_frame->data in sender.c: %s\n", outgoing_frame->data);
            // print outgoing_frame->data
           //  printf("before host -> sendArray[outgoing_frame -> src_id].LFS:%i\n",host -> sendArray[outgoing_frame -> dst_id].LFS);
-            host -> sendArray[outgoing_frame -> dst_id].LFS = host -> sendArray[outgoing_frame -> dst_id].LFS + 1;
-            //print out_frame -> dst_id
-           // printf("out_frame -> dst_id in sender.c: %d\n", outgoing_frame -> dst_id);
-          //  printf("after host -> sendArray[outgoing_frame -> src_id].LFS:%i\n",host -> sendArray[outgoing_frame -> dst_id].LFS);
-            outgoing_frame->seq_num = host->sendArray[outgoing_frame->dst_id].LFS;
-            outgoing_frame -> is_ack = 0;
             //print host -> outgoing_frames
          //   printf("QAZoutgoing_frame->seq_num: %d\n", outgoing_frame->seq_num);
          //   printf("QAZoutgoing_frame->data in sender.c: %s\n", outgoing_frame->data);
