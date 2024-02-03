@@ -64,7 +64,7 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
     //print
    // printf("ll_get_length(host->incoming_frames_head) %d\n", ll_get_length(host->incoming_frames_head)); 
     while (ll_get_length(host->incoming_frames_head) != 0) {
-        //Sprintf("HERE??");
+        //printf("HERE??");
         //print inframe->seq_num
         //print ll_get_length(host->incoming_frames_head)
         LLnode* ll_input_cmd_node = ll_pop_node(&host->incoming_frames_head);
@@ -106,6 +106,11 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
        // printf("what the hack");
      //   printf("zxcinframe -> dst_id: %d\n", inframe -> dst_id);
         host -> sendArray[inframe -> src_id].LAR = inframe -> ack_num;//maybe should be src_id
+        host -> cc[inframe -> src_id].cwnd = host -> cc[inframe -> src_id].cwnd + 1;
+        //print host -> cc -> cwnd
+        //printf("host -> cc -> cwnd in sender.c: %f\n", host -> cc -> cwnd);
+        //print host -> sendArray[inframe -> src_id].LAR
+       // printf("host -> sendArray[inframe -> src_id].LAR in sender.c: %d\n", inframe -> ack_num);
         //printf("acdwe waht %d",k);
     }
     
@@ -185,7 +190,7 @@ void handle_input_cmds(Host* host, struct timeval curr_timeval) {
             outgoing_frame -> is_ack = 0;
                 ll_append_node(&host->buffered_outframes_head, outgoing_frame);
             //printf("outgoing_frame->data in handle_input_cmds: %s\n", outgoing_frame->data);
-                
+               // printf("pmace holder");
             } 
            //print ll_get_length(host->buffered_outframes_head)
            
@@ -292,13 +297,15 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
                 
             }
         }
-    }
+    }   
+    host -> c = 0;
+   
   //  printf("ll_get_length(host->buffered_outframes_head) in sender.c: %d\n", ll_get_length(host->buffered_outframes_head));
     for (int i = 0; i < glb_sysconfig.window_size && ll_get_length(host->buffered_outframes_head) > 0; i++) {
         //printf("i: %d\n", i);
         if (host->send_window[i].frame == NULL) {
             //print i   
-            if (host -> wait == 1){
+            if (host -> wait == 1 || host -> c == 1){
                 break;
             }
             //print ll_get_length(host->buffered_outframes_head)
@@ -308,12 +315,29 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
             Frame* outgoing_frame = ll_outframe_node->value; 
             if (ll_get_length(host->buffered_outframes_head)!=0){
                 Frame* check = ll_peek_node(host->buffered_outframes_head);
+                //print check -> seq_num
+                //print outgoing_frame -> seq_num
+               // printf("check->seq_num in sender.c: %d\n", check->seq_num);
+              //  printf("outgoing_frame->seq_num in sender.c: %d\n", outgoing_frame->seq_num);   
+                //print host-> cc -> cwnd
+               // printf("avdhost -> cc -> cwnd in sender.c: %f\n", host -> cc -> cwnd);
+              //  printf("avdll_get_length(host->buffered_outframes_head) in sender.c: %d\n", ll_get_length(host->buffered_outframes_head));
+                //print
                // print check->src_id
                 //print check->dst_id
                // print check->data
               //  printf("check->data in sender.c: %s\n", check->data);
               //  printf("check->src_id in sender.c: %d\n", check->src_id);
               //  printf("check->dst_id in sender.c: %d\n", check->dst_id);
+                //print host->sendArray[outgoing_frame -> src_id].LAR
+                //printf("host->sendArray[outgoing_frame -> src_id].LAR in sender.c: %d\n", host -> sendArray[outgoing_frame -> dst_id].LAR);
+                if (seq_num_diff(host -> sendArray[outgoing_frame -> dst_id].LAR,check->seq_num) > 0 && seq_num_diff(check->seq_num,host -> sendArray[outgoing_frame -> dst_id].LAR + host -> cc[outgoing_frame -> dst_id].cwnd) >= 0){
+                    host -> c = 0;
+                }
+                else{
+                    host -> c = 1;
+                   // printf("no\n");
+                }
                 if (check  -> dst_id != outgoing_frame -> dst_id && check -> src_id == outgoing_frame -> src_id) {
                     host -> wait = 1;
                     //printf("kiop");
@@ -457,13 +481,16 @@ void run_senders() {
         if (incoming_frames_cmds || reached_timeout) {
             host->round_trip_num += 1; 
             host->csv_out = 1; 
-            
+            //printf("enter handle input cmds\n");
             // Implement this
             handle_input_cmds(host, curr_timeval); 
+            //printf("enter handle_incoming_acks\n");
             // Implement this
             handle_incoming_acks(host, curr_timeval);
+           // printf("enter handle timedout frames\n");
             // Implement this
             handle_timedout_frames(host, curr_timeval);
+           // printf("enter handle_outgoing_acks\n");
             // Implement this
             handle_outgoing_frames(host, curr_timeval); 
         }
