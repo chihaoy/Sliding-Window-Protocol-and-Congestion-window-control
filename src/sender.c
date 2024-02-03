@@ -62,8 +62,9 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
     //prit tac->seq_num
 
     //print
-   // printf("ll_get_length(host->incoming_frames_head) %d\n", ll_get_length(host->incoming_frames_head)); 
+   // printf("ll_get_length(host->incoming_frames_head) %d\n", ll_get_length(host->incoming_frames_head));
     while (ll_get_length(host->incoming_frames_head) != 0) {
+        
         //printf("HERE??");
         //print inframe->seq_num
         //print ll_get_length(host->incoming_frames_head)
@@ -82,12 +83,22 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
        // printf("asdinframe -> src_id: %d\n", inframe -> src_id);
       //  printf("%i:\n",host -> sendArray[inframe -> dst_id].LAR + 1);
       //  printf("%i:\n",host -> sendArray[inframe -> dst_id].LFS);
-        uint8_t k1 = host -> sendArray[inframe -> src_id].LAR + 1;
+        uint8_t k1 = host -> sendArray[inframe -> src_id].LAR;
         uint8_t k2 = host -> sendArray[inframe -> src_id].LFS;
+        //print inframe -> seq_num
+        
         if(abs(seq_num_diff(inframe->ack_num,k1)+abs(seq_num_diff(inframe->ack_num,k2)) >  abs(seq_num_diff(k1,k2)))){
            //printf("NONONO");
             continue;
         }
+        //printf("inframe -> seq_num: %d\n", inframe -> ack_num);
+        //print sendArray[inframe -> src_id].LAR
+        //printf("sendArray[inframe -> src_id].LAR: %d\n", host -> sendArray[inframe -> src_id].LAR);
+        if (inframe -> ack_num == host -> sendArray[inframe -> src_id].LAR){
+            num_dup_acks_for_this_rtt[inframe -> src_id] += 1;
+        }
+        num_acks_received[inframe -> src_id] += 1;
+        //print inframe -> ack_num
         //print host->send_window[i].frame->seq_num
         //printf("inframe->ack_numwhatas: %d\n", host->send_window[0].frame->seq_num);
         for (int i = 0; i < glb_sysconfig.window_size; i++){
@@ -106,7 +117,12 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
        // printf("what the hack");
      //   printf("zxcinframe -> dst_id: %d\n", inframe -> dst_id);
         host -> sendArray[inframe -> src_id].LAR = inframe -> ack_num;//maybe should be src_id
-        host -> cc[inframe -> src_id].cwnd = host -> cc[inframe -> src_id].cwnd + 1;
+        if (host -> cc[inframe -> src_id].cwnd <= host -> cc[inframe -> src_id].ssthresh){
+            host -> cc[inframe -> src_id].cwnd = host -> cc[inframe -> src_id].cwnd + 1;
+        }
+        else{
+            host -> cc[inframe -> src_id].cwnd = host -> cc[inframe -> src_id].cwnd + 1 / host -> cc[inframe -> src_id].cwnd;
+        }
         //print host -> cc -> cwnd
         //printf("host -> cc -> cwnd in sender.c: %f\n", host -> cc -> cwnd);
         //print host -> sendArray[inframe -> src_id].LAR

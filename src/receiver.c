@@ -134,6 +134,27 @@ void handle_incoming_frames(Host* host) {
             //print length of outgoing_frames_head to stderr
            // printf("length of outgoing_frames_head:%d\n",ll_get_length(host->outgoing_frames_head));      
         }
+        else{
+            Frame* outgoing_frame = (Frame*)malloc(sizeof(Frame));
+            outgoing_frame->src_id = inframe->dst_id;
+            outgoing_frame->dst_id = inframe->src_id;
+            outgoing_frame->is_ack = 1;
+            outgoing_frame->data[0] = '\0';
+            outgoing_frame->len = 0;
+            outgoing_frame->starting_index = 0;
+            outgoing_frame->seq_num = 0;
+            outgoing_frame->remaining_msg_bytes = 0;
+            outgoing_frame->ack_num = (host -> recvArray[inframe -> src_id].NFE) - 1;
+            outgoing_frame->crc = 0;
+            char* outgoing_charbuf = convert_char_to_frame(outgoing_frame);
+            outgoing_frame -> crc = compute_crc8(outgoing_charbuf);
+            outgoing_charbuf = convert_frame_to_char(outgoing_frame);
+            //print outgoing_frame -> ack_num to stderr
+            ll_append_node(&host->outgoing_frames_head, outgoing_frame);
+            ///printf("outgoing_frame -> ack_num:%d\n",outgoing_frame->ack_num);
+            pre_seq = inframe -> seq_num;
+
+        }
        
     }
     
