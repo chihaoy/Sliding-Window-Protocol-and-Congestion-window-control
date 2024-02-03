@@ -97,6 +97,18 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
         if (inframe -> ack_num == host -> sendArray[inframe -> src_id].LAR){
             num_dup_acks_for_this_rtt[inframe -> src_id] += 1;
         }
+        if (num_dup_acks_for_this_rtt[inframe -> src_id] == 3){
+            //print host -> cc[inframe -> src_id].cwnd
+            printf("host -> cc[inframe -> src_id].cwnd in sender.c: %f\n", host -> cc[inframe -> src_id].cwnd);
+            host -> cc[inframe -> src_id].ssthresh = host -> cc[inframe -> src_id].cwnd / 2;
+            host -> cc[inframe -> src_id].cwnd = host -> cc[inframe -> src_id].ssthresh + 3;
+        }
+        if (num_dup_acks_for_this_rtt[inframe -> src_id] == 4){
+            host -> cc[inframe -> src_id].state = cc_FRFT;
+        }
+        if (num_dup_acks_for_this_rtt[inframe -> src_id] > 3){
+            host -> cc[inframe -> src_id].cwnd += 1;
+        }
         num_acks_received[inframe -> src_id] += 1;
         //print inframe -> ack_num
         //print host->send_window[i].frame->seq_num
@@ -116,13 +128,16 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
         //print inframe -> dst_id
        // printf("what the hack");
      //   printf("zxcinframe -> dst_id: %d\n", inframe -> dst_id);
-        host -> sendArray[inframe -> src_id].LAR = inframe -> ack_num;//maybe should be src_id
         if (host -> cc[inframe -> src_id].cwnd <= host -> cc[inframe -> src_id].ssthresh){
             host -> cc[inframe -> src_id].cwnd = host -> cc[inframe -> src_id].cwnd + 1;
         }
         else{
-            host -> cc[inframe -> src_id].cwnd = host -> cc[inframe -> src_id].cwnd + 1 / host -> cc[inframe -> src_id].cwnd;
+            if (inframe -> ack_num > host -> sendArray[inframe -> src_id].LAR){
+                host -> cc[inframe -> src_id].cwnd = host -> cc[inframe -> src_id].cwnd + 1 / host -> cc[inframe -> src_id].cwnd;
+                host -> cc[inframe -> src_id].state = cc_AIMD;
+            }
         }
+        host -> sendArray[inframe -> src_id].LAR = inframe -> ack_num;//maybe should be src_id
         //print host -> cc -> cwnd
         //printf("host -> cc -> cwnd in sender.c: %f\n", host -> cc -> cwnd);
         //print host -> sendArray[inframe -> src_id].LAR
