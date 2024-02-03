@@ -107,8 +107,6 @@ void handle_incoming_frames(Host* host) {
                     host -> recvArray[inframe -> src_id].emptyCharArray[0] = '\0';
                 }
              //   printf("HELLO\n");
-                
-                host -> recvArray[inframe -> src_id].NFE += 1;
                 Frame* outgoing_frame = (Frame*)malloc(sizeof(Frame));
                 outgoing_frame->src_id = inframe->dst_id;
                 outgoing_frame->dst_id = inframe->src_id;
@@ -118,41 +116,18 @@ void handle_incoming_frames(Host* host) {
                 outgoing_frame->starting_index = 0;
                 outgoing_frame->seq_num = 0;
                 outgoing_frame->remaining_msg_bytes = 0;
-                outgoing_frame->ack_num = (host -> recvArray[inframe -> src_id].NFE) - 1;
+                outgoing_frame->ack_num = (host -> recvArray[inframe -> src_id].NFE);
                 outgoing_frame->crc = 0;
                 char* outgoing_charbuf = convert_char_to_frame(outgoing_frame);
                 outgoing_frame -> crc = compute_crc8(outgoing_charbuf);
                 outgoing_charbuf = convert_frame_to_char(outgoing_frame);
                 ll_append_node(&host->outgoing_frames_head, outgoing_frame);
                 pre_seq = inframe -> seq_num;
+                host -> recvArray[inframe -> src_id].NFE += 1;
+                
             }
             //print host -> emptyCharArray to stderr
-          //  printf("I want to see thisfwqdwd!");
-            Frame* outgoing_frame = (Frame*)malloc(sizeof(Frame));
-            outgoing_frame->src_id = inframe->dst_id;
-            outgoing_frame->dst_id = inframe->src_id;
-            outgoing_frame->is_ack = 1;
-            outgoing_frame->data[0] = '\0';
-            outgoing_frame->len = 0;
-            outgoing_frame->starting_index = 0;
-            outgoing_frame->seq_num = 0;
-            outgoing_frame->remaining_msg_bytes = 0;
-            //Frame* outgoing_charbuf = convert_char_to_frame(host -> emptyCharArray);
-            //printf("Current message of the host: %s\n", host -> emptyCharArray);
-            //printf("hello\n");
-           
-            //print inframe -> src_id to stderr
-           // printf("qsdoutgoing_frame->src_id:%d\n",outgoing_frame->src_id);
-            //print inframe -> dst_id to stderr
-           // printf("qsdoutgoing_frame->dst_id:%d\n",outgoing_frame->dst_id);
-            outgoing_frame->ack_num = (host -> recvArray[inframe -> src_id].NFE) - 1;
-            //print
-            //print outgoing_frame->ack_num
-            outgoing_frame->crc = 0;
-            char* outgoing_charbuf = convert_char_to_frame(outgoing_frame);
-            outgoing_frame -> crc = compute_crc8(outgoing_charbuf);
-            outgoing_charbuf = convert_frame_to_char(outgoing_frame);
-            ll_append_node(&host->outgoing_frames_head, outgoing_frame);
+        
 
 
             //printf("outgoing_frame -> ack_num:%d\n",outgoing_frame->ack_num);
