@@ -97,55 +97,34 @@ void handle_incoming_frames(Host* host) {
               
                 if (temp -> remaining_msg_bytes == 0){
                     char combinedString[65535];
-                    
-                   // printf("YAY\n");
                     memset(combinedString, 0, sizeof(combinedString));//so that no garbage character is present
                     //set combinesString to '\0'
                     combinedString[0] = '\0';
-
-
-                                        //strcat(combinedString, host -> recvArray[1].sendQ[0].frame -> data);
-                    //strcat(combinedString, host -> emptyCharArray);
                     strcpy(combinedString, host -> recvArray[inframe -> src_id].emptyCharArray);
-                    //print outgoing_frame->src_id and outgoing_frame->dst_id to stderr
-                    //combinedString[strlen(combinedString)] = '\0';
                     printf("<RECV_%d>:[%s]\n", host->id, combinedString);
 
                     //memset(temp, 0, sizeof(temp));
                     host -> recvArray[inframe -> src_id].emptyCharArray[0] = '\0';
                 }
              //   printf("HELLO\n");
-             Frame* outgoing_frame = (Frame*)malloc(sizeof(Frame));
-            outgoing_frame->src_id = inframe->dst_id;
-            outgoing_frame->dst_id = inframe->src_id;
-            outgoing_frame->is_ack = 1;
-            outgoing_frame->data[0] = '\0';
-            outgoing_frame->len = 0;
-            outgoing_frame->starting_index = 0;
-            outgoing_frame->seq_num = 0;
-            outgoing_frame->remaining_msg_bytes = 0;
-            //Frame* outgoing_charbuf = convert_char_to_frame(host -> emptyCharArray);
-            //printf("Current message of the host: %s\n", host -> emptyCharArray);
-            //printf("hello\n");
-           
-            //print inframe -> src_id to stderr
-           // printf("qsdoutgoing_frame->src_id:%d\n",outgoing_frame->src_id);
-            //print inframe -> dst_id to stderr
-           // printf("qsdoutgoing_frame->dst_id:%d\n",outgoing_frame->dst_id);
-            outgoing_frame->ack_num = (host -> recvArray[inframe -> src_id].NFE) - 1;
-            //print
-            //print outgoing_frame->ack_num
-            outgoing_frame->crc = 0;
-            char* outgoing_charbuf = convert_char_to_frame(outgoing_frame);
-            outgoing_frame -> crc = compute_crc8(outgoing_charbuf);
-            outgoing_charbuf = convert_frame_to_char(outgoing_frame);
-            ll_append_node(&host->outgoing_frames_head, outgoing_frame);
+                
                 host -> recvArray[inframe -> src_id].NFE += 1;
-
-                //printf("specialhost -> NFE:%d\n",host -> NFE);
+                Frame* outgoing_frame = (Frame*)malloc(sizeof(Frame));
+                outgoing_frame->src_id = inframe->dst_id;
+                outgoing_frame->dst_id = inframe->src_id;
+                outgoing_frame->is_ack = 1;
+                outgoing_frame->data[0] = '\0';
+                outgoing_frame->len = 0;
+                outgoing_frame->starting_index = 0;
+                outgoing_frame->seq_num = 0;
+                outgoing_frame->remaining_msg_bytes = 0;
+                outgoing_frame->ack_num = (host -> recvArray[inframe -> src_id].NFE) - 1;
+                outgoing_frame->crc = 0;
+                char* outgoing_charbuf = convert_char_to_frame(outgoing_frame);
+                outgoing_frame -> crc = compute_crc8(outgoing_charbuf);
+                outgoing_charbuf = convert_frame_to_char(outgoing_frame);
+                ll_append_node(&host->outgoing_frames_head, outgoing_frame);
                 pre_seq = inframe -> seq_num;
-            //    printf("BYE\n");
-                //printf("window_size%s",host -> receive_window[(host -> NFE) % glb_sysconfig.window_size].frame -> data);
             }
             //print host -> emptyCharArray to stderr
           //  printf("I want to see thisfwqdwd!");
