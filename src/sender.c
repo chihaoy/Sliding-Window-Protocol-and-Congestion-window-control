@@ -99,7 +99,7 @@ void handle_incoming_acks(Host* host, struct timeval curr_timeval) {
         }
         if (num_dup_acks_for_this_rtt[inframe -> src_id] == 3){
             //print host -> cc[inframe -> src_id].cwnd
-            printf("host -> cc[inframe -> src_id].cwnd in sender.c: %f\n", host -> cc[inframe -> src_id].cwnd);
+            //printf("host -> cc[inframe -> src_id].cwnd in sender.c: %f\n", host -> cc[inframe -> src_id].cwnd);
             host -> cc[inframe -> src_id].ssthresh = host -> cc[inframe -> src_id].cwnd / 2;
             host -> cc[inframe -> src_id].cwnd = host -> cc[inframe -> src_id].ssthresh + 3;
         }
@@ -283,7 +283,24 @@ void handle_outgoing_frames(Host* host, struct timeval curr_timeval) {
     if (timeval_usecdiff(&curr_timeval, host->latest_timeout) > 0) {
         memcpy(&curr_timeval, host->latest_timeout, sizeof(struct timeval)); 
     }
-
+    for (int i = 0; i < glb_sysconfig.window_size; i++){
+        if (host->send_window[i].frame != NULL && host -> send_window[i].frame -> seq_num == host -> sendArray[host -> send_window[i].frame -> dst_id].LAR + 1 ){
+            if (host -> cc[host -> send_window[i].frame -> dst_id].state == cc_FRFT){
+                host -> cc[host -> send_window[i].frame -> dst_id].cwnd = host -> cc[host -> send_window[i].frame -> dst_id].ssthresh;
+                struct timeval* next_timeout = malloc(sizeof(struct timeval));
+                memcpy(next_timeout, &curr_timeval, sizeof(struct timeval)); 
+                timeval_usecplus(next_timeout, TIMEOUT_INTERVAL_USEC + additional_ts);
+                Frame * cop = calloc (1,sizeof(Frame));
+                memset(cop, 0, sizeof(Frame));
+                host->send_window[i].timeout = next_timeout;//(this is what I add)
+                memcpy(cop, host->send_window[i].frame, sizeof(Frame));
+            //printf("resendhost->send_window[i].frame->data in sender.c: %s\n", host->send_window[i].frame->data);
+                ll_append_node(&host->outgoing_frames_head, cop);
+                additional_ts += 10000; //ADD ADDITIONAL 10ms
+            }
+            
+        }
+    }
     //TODO: Send out the frames that have timed out(i.e. timeout = NULL)
     
     for (int i = 0; i < glb_sysconfig.window_size; i++) {

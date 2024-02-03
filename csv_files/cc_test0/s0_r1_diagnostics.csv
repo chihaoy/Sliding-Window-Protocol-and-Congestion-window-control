@@ -4,12 +4,8 @@ rtt,acks_received,dup_acks,state,cwnd,ssthresh,frames_sent,frames_dropped,frames
 3,2,0,Slow Start,4.000000,8.000000,4,0,4,0
 4,4,0,Slow Start,8.000000,8.000000,8,4,8,0
 5,4,0,AIMD,9.329317,8.000000,4,0,8,0
-6,4,4,Fast Recovery & Fast Retransmit,8.664658,4.664658,0,0,8,0
-7,0,0,Fast Recovery & Fast Retransmit,8.664658,4.664658,1,0,8,0
-8,1,0,AIMD,8.780070,4.664658,0,0,7,0
-9,0,0,AIMD,8.780070,4.664658,1,0,7,0
-10,1,0,AIMD,8.893964,4.664658,0,0,6,0
-11,0,0,AIMD,8.893964,4.664658,1,0,6,0
-12,1,0,AIMD,9.006400,4.664658,0,0,5,0
-13,0,0,AIMD,9.006400,4.664658,1,0,5,0
-14,5,0,AIMD,9.548509,4.664658,0,0,0,0
+6,4,4,Fast Recovery & Fast Retransmit,4.664658,4.664658,1,0,8,0
+7,1,0,Fast Recovery & Fast Retransmit,4.664658,4.664658,1,0,7,0
+8,1,0,Fast Recovery & Fast Retransmit,4.664658,4.664658,1,0,6,0
+9,1,0,Fast Recovery & Fast Retransmit,4.664658,4.664658,1,0,5,0
+10,5,0,AIMD,6.340559,4.664658,0,0,0,0
